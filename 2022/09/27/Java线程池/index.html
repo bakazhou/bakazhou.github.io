@@ -13,26 +13,19 @@
 <meta property="og:site_name" content="Bakazhou Blog">
 <meta property="og:description" content="线程池简介线程池（Thread Pool）是一种基于池化思想管理线程的工具，经常出现在多线程服务器中，如MySQL。线程过多会带来额外的开销，其中包括创建销毁线程的开销、调度线程的开销等等，同时也降低了计算机的整体性能。线程池维护多个线程，等待监督管理者分配可并发执行的任务。这种做法，一方面避免了处理任务时创建销毁线程开销的代价，另一方面避免了线程数量膨胀导致的过分调度问题，保证了对内核的充分利用">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/imgs/CachedThreadPool.png">
-<meta property="og:image" content="http://example.com/imgs/cached.png">
-<meta property="og:image" content="http://example.com/imgs/FixedThreadPool.png">
-<meta property="og:image" content="http://example.com/imgs/fixed.png">
-<meta property="og:image" content="http://example.com/imgs/SingleThreadPool.png">
-<meta property="og:image" content="http://example.com/imgs/single.png">
-<meta property="og:image" content="http://example.com/imgs/ScheduledThreadPool.png">
-<meta property="og:image" content="http://example.com/imgs/ThreadPoolExecutor%20Design.png">
-<meta property="og:image" content="http://example.com/imgs/ThreadPoolExecutorWork.png">
-<meta property="og:image" content="http://example.com/imgs/Life%20Cycle.png">
-<meta property="og:image" content="http://example.com/imgs/lifer.png">
-<meta property="og:image" content="http://example.com/imgs/taskC.png">
-<meta property="og:image" content="http://example.com/imgs/taskStorage.png">
-<meta property="og:image" content="http://example.com/imgs/getTask.png">
-<meta property="og:image" content="http://example.com/imgs/ThreadReject.png">
+<meta property="og:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/CachedThreadPool.png">
+<meta property="og:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/cached.png">
+<meta property="og:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/FixedThreadPool.png">
+<meta property="og:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/fixed.png">
+<meta property="og:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/SingleThreadPool.png">
+<meta property="og:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/single.png">
+<meta property="og:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/ThreadReject.png">
+<meta property="og:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/workQueue.png">
 <meta property="article:published_time" content="2022-09-26T18:16:25.000Z">
-<meta property="article:modified_time" content="2022-09-26T09:00:26.688Z">
+<meta property="article:modified_time" content="2022-09-27T01:39:34.630Z">
 <meta property="article:author" content="Bakazhou">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/imgs/CachedThreadPool.png">
+<meta name="twitter:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/CachedThreadPool.png">
   
     <link rel="alternate" href="/atom.xml" title="Bakazhou Blog" type="application/atom+xml">
   
@@ -183,8 +176,8 @@
                                   threadFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="池模型"><a href="#池模型" class="headerlink" title="池模型"></a>池模型</h3><p><img src="/imgs/CachedThreadPool.png"></p>
-<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>如池模型图中所示，在CachedThreadPool内部维护了一个SynchronousQueue用于管理任务，当第一个事件提交到线程池中时，因为池中没有可以调用的线程，所以会创建出一个新的线程thread1为task1服务，同时如果第二个task2进行了事件提交，但是thread1还在服务于task1，那么就会再次启动一个新线程thread2服务于task2，task3亦是如此，若task3事件耗时较短，thread3空闲了出来，在60s的最长空闲时间过后，thread3会被销毁,在这60s内，如果有新事件交付给线程池，那么新事件便由thread3执行。<br><img src="/imgs/cached.png"></p>
+<h3 id="池模型"><a href="#池模型" class="headerlink" title="池模型"></a>池模型</h3><p><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/CachedThreadPool.png"></p>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>如池模型图中所示，在CachedThreadPool内部维护了一个SynchronousQueue用于管理任务，当第一个事件提交到线程池中时，因为池中没有可以调用的线程，所以会创建出一个新的线程thread1为task1服务，同时如果第二个task2进行了事件提交，但是thread1还在服务于task1，那么就会再次启动一个新线程thread2服务于task2，task3亦是如此，若task3事件耗时较短，thread3空闲了出来，在60s的最长空闲时间过后，thread3会被销毁,在这60s内，如果有新事件交付给线程池，那么新事件便由thread3执行。<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/cached.png"></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>从工作流程可以看出，CachedThreadPool只适合处理<strong>大量短生命周期的异步事件</strong>，因为在其接收到事件时会即时进行处理，而不会阻塞，但是因为SynchronousQueue是无数量限制的任务队列，当用同一时间大量事件并发时，会产生性能压力的问题，占用大量的系统资源，当提交处理的任务不应该等待并且需要在提交后立即处理时，CachedThreadPool很有用。</p>
 <h2 id="FixedThreadPool"><a href="#FixedThreadPool" class="headerlink" title="FixedThreadPool"></a>FixedThreadPool</h2><h3 id="基本案例-1"><a href="#基本案例-1" class="headerlink" title="基本案例"></a>基本案例</h3><p>以下案例主要验证了固定大小的线程池的工作流程，设置线程池的最大线程数量3，即三条线程为此线程池服务，可以注意输出的线程池大小，以及每条服务的线程id</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FixedThreadPoolUsage</span> <span class="token punctuation">&#123;</span>
@@ -247,8 +240,8 @@
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">(</span>nThreads<span class="token punctuation">,</span> nThreads<span class="token punctuation">,</span><span class="token number">0L</span><span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span><span class="token constant">MILLISECONDS</span><span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">LinkedBlockingQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Runnable</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>threadFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="池模型-1"><a href="#池模型-1" class="headerlink" title="池模型"></a>池模型</h3><p><img src="/imgs/FixedThreadPool.png"></p>
-<h3 id="工作流程-1"><a href="#工作流程-1" class="headerlink" title="工作流程"></a>工作流程</h3><p>FixedThreadPool会复用固定数量的线程处理一个共享的无边界队列。最多有nThreads个线程会处于活动状态执行任务。如果当所有线程都是活动时，有多的任务被提交过来，那么它会一致在队列中等待直到有线程可用。如果任何线程在执行过程中因为错误而中止，新的线程会替代它的位置来执行后续的任务。所有线程都会一直存于线程池中，直到执行ExecutorService.shutdown()关闭线程池。<br><img src="/imgs/fixed.png"></p>
+<h3 id="池模型-1"><a href="#池模型-1" class="headerlink" title="池模型"></a>池模型</h3><p><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/FixedThreadPool.png"></p>
+<h3 id="工作流程-1"><a href="#工作流程-1" class="headerlink" title="工作流程"></a>工作流程</h3><p>FixedThreadPool会复用固定数量的线程处理一个共享的无边界队列。最多有nThreads个线程会处于活动状态执行任务。如果当所有线程都是活动时，有多的任务被提交过来，那么它会一致在队列中等待直到有线程可用。如果任何线程在执行过程中因为错误而中止，新的线程会替代它的位置来执行后续的任务。所有线程都会一直存于线程池中，直到执行ExecutorService.shutdown()关闭线程池。<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/fixed.png"></p>
 <h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>从工作流程可以看出，FixedThreadPool适用于处理<strong>少量短生命周期的异步事件</strong>，首先是因为当事件较多且线程池中线程最大数量较小时，较多的线程会被阻塞，效率较低，其次如果线程已经全部处于工作中，且每个线程中的任务所需的处理时间都比较长，那么新的事件就需要等待很长时间，才能被处理，严重影响服务性能。</p>
 <h2 id="SingleThreadPool"><a href="#SingleThreadPool" class="headerlink" title="SingleThreadPool"></a>SingleThreadPool</h2><h3 id="基本案例-2"><a href="#基本案例-2" class="headerlink" title="基本案例"></a>基本案例</h3><p>以下案例主要验证了SingleThreadPool的单例模式，线程池的线程数量是否为1</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SingleThreadPoolUsage</span> <span class="token punctuation">&#123;</span>
@@ -310,8 +303,8 @@
 <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">ExecutorService</span> <span class="token function">newSingleThreadExecutor</span><span class="token punctuation">(</span><span class="token class-name">ThreadFactory</span> threadFactory<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">FinalizableDelegatedExecutorService</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0L</span><span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span><span class="token constant">MILLISECONDS</span><span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">LinkedBlockingQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Runnable</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>threadFactory<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="池模型-2"><a href="#池模型-2" class="headerlink" title="池模型"></a>池模型</h3><p><img src="/imgs/SingleThreadPool.png"></p>
-<h3 id="工作流程-2"><a href="#工作流程-2" class="headerlink" title="工作流程"></a>工作流程</h3><p>SingleThreadPool会在底层维护一条线程，且最多只有一条线程处于活动状态执行任务，当任务被提交时，如果当前线程空闲，那么交由该线程执行此任务，如果线程繁忙，那么任务会进入LinkedBlockingQueue中，待线程空闲后，再交付给线程处理，线程会一直存在于线程池中直到线程池关闭。<br><img src="/imgs/single.png"></p>
+<h3 id="池模型-2"><a href="#池模型-2" class="headerlink" title="池模型"></a>池模型</h3><p><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/SingleThreadPool.png"></p>
+<h3 id="工作流程-2"><a href="#工作流程-2" class="headerlink" title="工作流程"></a>工作流程</h3><p>SingleThreadPool会在底层维护一条线程，且最多只有一条线程处于活动状态执行任务，当任务被提交时，如果当前线程空闲，那么交由该线程执行此任务，如果线程繁忙，那么任务会进入LinkedBlockingQueue中，待线程空闲后，再交付给线程处理，线程会一直存在于线程池中直到线程池关闭。<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/single.png"></p>
 <h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p>从工作流程中可以看出，SingleThreadPool只适合于单机模式下使用，因为其内部只有一条线程进行任务处理，导致其效率会非常低，在日常开发中使用较少。</p>
 <h2 id="ScheduledThreadPool"><a href="#ScheduledThreadPool" class="headerlink" title="ScheduledThreadPool"></a>ScheduledThreadPool</h2><h3 id="基础案例"><a href="#基础案例" class="headerlink" title="基础案例"></a>基础案例</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ScheduledThreadPoolUsage</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
@@ -354,83 +347,109 @@
 <span class="token class-name">Thread</span> pool size is<span class="token operator">:</span><span class="token number">3</span>
 <span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
 <span class="token class-name">Now</span> time is<span class="token operator">:</span><span class="token number">2022</span><span class="token operator">-</span><span class="token number">09</span><span class="token operator">-</span><span class="token number">26</span><span class="token constant">T15</span><span class="token operator">:</span><span class="token number">09</span><span class="token operator">:</span><span class="token number">54.236475</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="实现源码-3"><a href="#实现源码-3" class="headerlink" title="实现源码"></a>实现源码</h3><pre><code class="java">    public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) &#123;
-        return new ScheduledThreadPoolExecutor(corePoolSize);
-    &#125;
-    public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize, ThreadFactory threadFactory) &#123;
-            return new ScheduledThreadPoolExecutor(corePoolSize, threadFactory);
-    &#125;
-</code></pre>
-<h3 id="池模型-3"><a href="#池模型-3" class="headerlink" title="池模型"></a>池模型</h3><p><img src="/imgs/ScheduledThreadPool.png"></p>
-<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p>从工作流程中可以看出，ScheduledThreadPool适用于需要单个后台线程执行周期任务，同时需要保证任务顺序执行的应用场景。</p>
-<h2 id="差异"><a href="#差异" class="headerlink" title="差异"></a>差异</h2><table>
-<thead>
-<tr>
-<th>类别</th>
-<th>最大线程数量</th>
-<th>线程是否会被销毁</th>
-<th>是否阻塞</th>
-<th>任务队列</th>
-<th>队列大小</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CachedThreadPool</td>
-<td>Inter.MAX_VALUE</td>
-<td>是，超过60s的空闲线程会被销毁</td>
-<td>否，有新任务且无空闲线程则开新线程，有空闲线程则用空闲线程</td>
-<td>SynchronousQueue</td>
-<td>无限制</td>
-</tr>
-<tr>
-<td>FixedThreadPool</td>
-<td>nThread(初始化时可自己指定)</td>
-<td>否，线程池中一直存在nThread条线程</td>
-<td>是，如果有新任务且无空闲线程，那么任务进入队列等待，直到有空闲线程</td>
-<td>LinkedBlockingQueue</td>
-<td>无限制</td>
-</tr>
-<tr>
-<td>SingleThreadPool</td>
-<td>1</td>
-<td>否，线程池中一直存在1条线程</td>
-<td>是，如果有新任务且无空闲线程，那么任务进入队列等待，直到线程空闲，依次处理</td>
-<td>LinkedBlockingQueue</td>
-<td>无限制</td>
-</tr>
-<tr>
-<td>ScheduledThreadPool</td>
-<td>coreSize(初始化时可自己指定)</td>
-<td>否，线程池中会一直存在coreSize条线程</td>
-<td>是</td>
-<td>DelayedWorkQueue</td>
-<td>无限制</td>
-</tr>
-</tbody></table>
-<h2 id="ThreadPoolExecutor自定义线程池"><a href="#ThreadPoolExecutor自定义线程池" class="headerlink" title="ThreadPoolExecutor自定义线程池"></a>ThreadPoolExecutor自定义线程池</h2><h3 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h3><p>以上四种线程池都是基于ThreadPoolExecutor实现，下面将介绍ThreadPoolExecutor的基本组成。<br><img src="/imgs/ThreadPoolExecutor%20Design.png"></p>
-<h3 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h3><p>线程池在内部实际上构建了一个生产者消费者模型，将线程和任务两者解耦，并不直接关联，从而良好的缓冲任务，复用线程。线程池的运行主要分成两部分：任务管理、线程管理。任务管理部分充当生产者的角色，当任务提交后，线程池会判断该任务后续的流转：<br>（1）直接申请线程执行该任务；<br>（2）缓冲到队列中等待线程执行；<br>（3）拒绝该任务。线程管理部分是消费者，它们被统一维护在线程池内，根据任务请求进行线程的分配，当线程执行完任务后则会继续获取新的任务去执行，最终当线程获取不到任务的时候，线程就会被回收。<br><img src="/imgs/ThreadPoolExecutorWork.png"></p>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>线程池的生命周期一共有五种状态<br><img src="/imgs/Life%20Cycle.png"><br>状态转换如下图所示<br><img src="/imgs/lifer.png"></p>
-<table>
-<thead>
-<tr>
-<th>shutdown()</th>
-<th>调用shutdown方法后，线程池会进入SHUTDOWN状态,不再接收新任务，但是会将未处理完毕任务处理完成</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>shutdownNow()</td>
-<td>调用shutdownNow()方法后，线程池会进入STOP状态，不再接收新任务，同时会中断正在处理任务中的线程</td>
-</tr>
-</tbody></table>
-<h3 id="任务执行机制"><a href="#任务执行机制" class="headerlink" title="任务执行机制"></a>任务执行机制</h3><h4 id="任务提交"><a href="#任务提交" class="headerlink" title="任务提交"></a>任务提交</h4><p>当有新任务提交后，会进行以下步骤<br>1.检查线程池状态，如果线程池状态不为RUNNING，则此任务会被直接拒绝。<br>2.如果workerCount &lt; corePoolSize，则创建并启动一个线程来执行新提交的任务。<br>3.如果workerCount &gt;&#x3D; corePoolSize，且线程池内的阻塞队列未满，则将任务添加到该阻塞队列中。<br>4.如果workerCount &gt;&#x3D; corePoolSize &amp;&amp; workerCount &lt; maximumPoolSize，且线程池内的阻塞队列已满，则创建并启动一个线程来执行新提交的任务。<br>5.如果workerCount &gt;&#x3D; maximumPoolSize，并且线程池内的阻塞队列已满, 则根据拒绝策略来处理该任务, 默认的处理方式是直接抛异常。<br><img src="/imgs/taskC.png"></p>
-<h4 id="任务缓冲"><a href="#任务缓冲" class="headerlink" title="任务缓冲"></a>任务缓冲</h4><p>任务缓冲在线程池中是通过阻塞队列实现的，其核心思想即将任务存储在一个队列中缓存起来，如果当前池中有空闲线程，则调用线程从队列中取出任务进行处理，如此将线程与任务分开。同时不一样的队列，也可以实现不一样的任务存取策略。<br><img src="/imgs/taskStorage.png"></p>
-<h4 id="任务申请"><a href="#任务申请" class="headerlink" title="任务申请"></a>任务申请</h4><p>一个任务被消费有两种方式，第一种是直接创建一个新的线程处理，第二种是池中的线程从缓冲队列中获取任务并消费，如此反复。<br>当线程空闲时需要不断尝试从任务的缓冲队列中获取新的任务消费，这个过程由getTask方法实现，其流程如下图所示<br><img src="/imgs/getTask.png"><br>在ThreadPoolExecutor中有一条Worker线程会不断的尝试获取新的任务，如果worker接收不到任务后，就会开始进入被回收的流程。</p>
-<h4 id="任务拒绝"><a href="#任务拒绝" class="headerlink" title="任务拒绝"></a>任务拒绝</h4><p>当线程池的任务缓存队列已满，且线程池中的线程数量已经达到设置的最大数量，无法满足处理新任务的条件时，需要执行拒绝策略，这是对线程池的一种保护。目前JDK提供了四种线程的拒绝策略，如下所示<br><img src="/imgs/ThreadReject.png"></p>
+<h3 id="实现源码-3"><a href="#实现源码-3" class="headerlink" title="实现源码"></a>实现源码</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">ScheduledExecutorService</span> <span class="token function">newScheduledThreadPool</span><span class="token punctuation">(</span><span class="token keyword">int</span> corePoolSize<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ScheduledThreadPoolExecutor</span><span class="token punctuation">(</span>corePoolSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">ScheduledExecutorService</span> <span class="token function">newScheduledThreadPool</span><span class="token punctuation">(</span><span class="token keyword">int</span> corePoolSize<span class="token punctuation">,</span> <span class="token class-name">ThreadFactory</span> threadFactory<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ScheduledThreadPoolExecutor</span><span class="token punctuation">(</span>corePoolSize<span class="token punctuation">,</span> threadFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+```         
+### 池模型
+<span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
+https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>logobakazhou<span class="token punctuation">.</span>oss<span class="token operator">-</span>cn<span class="token operator">-</span>hangzhou<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span><span class="token number">2022</span><span class="token operator">/</span><span class="token number">09</span><span class="token operator">/</span><span class="token number">27</span><span class="token operator">/</span>imgs<span class="token operator">/</span><span class="token class-name">ScheduledThreadPool</span><span class="token punctuation">.</span>png<span class="token punctuation">)</span>
+### 总结
+从工作流程中可以看出，<span class="token class-name">ScheduledThreadPool</span>适用于需要单个后台线程执行周期任务，同时需要保证任务顺序执行的应用场景。
+
+
+
+  
+## 差异
+<span class="token operator">|</span> 类别 <span class="token operator">|</span> 最大线程数量              <span class="token operator">|</span> 线程是否会被销毁               <span class="token operator">|</span> 是否阻塞                                  <span class="token operator">|</span> 任务队列 <span class="token operator">|</span> 队列大小 <span class="token operator">|</span>
+<span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token class-name">CachedThreadPool</span> <span class="token operator">|</span> <span class="token class-name">Inter</span><span class="token punctuation">.</span><span class="token constant">MAX_VALUE</span>     <span class="token operator">|</span> 是，超过<span class="token number">60</span>s的空闲线程会被销毁       <span class="token operator">|</span> 否，有新任务且无空闲线程则开新线程，有空闲线程则用空闲线程         <span class="token operator">|</span>  <span class="token class-name">SynchronousQueue</span>    <span class="token operator">|</span> 无限制  <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token class-name">FixedThreadPool</span> <span class="token operator">|</span> <span class="token function">nThread</span><span class="token punctuation">(</span>初始化时可自己指定<span class="token punctuation">)</span>  <span class="token operator">|</span> 否，线程池中一直存在nThread条线程   <span class="token operator">|</span> 是，如果有新任务且无空闲线程，那么任务进入队列等待，直到有空闲线程     <span class="token operator">|</span><span class="token class-name">LinkedBlockingQueue</span>      <span class="token operator">|</span> 无限制  <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token class-name">SingleThreadPool</span> <span class="token operator">|</span> <span class="token number">1</span>                   <span class="token operator">|</span> 否，线程池中一直存在<span class="token number">1</span>条线程         <span class="token operator">|</span> 是，如果有新任务且无空闲线程，那么任务进入队列等待，直到线程空闲，依次处理 <span class="token operator">|</span> <span class="token class-name">LinkedBlockingQueue</span>     <span class="token operator">|</span> 无限制  <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token class-name">ScheduledThreadPool</span>  <span class="token operator">|</span> <span class="token function">coreSize</span><span class="token punctuation">(</span>初始化时可自己指定<span class="token punctuation">)</span> <span class="token operator">|</span> 否，线程池中会一直存在coreSize条线程 <span class="token operator">|</span> 是                                     <span class="token operator">|</span> <span class="token class-name">DelayedWorkQueue</span>     <span class="token operator">|</span> 无限制  <span class="token operator">|</span>
+
+
+## <span class="token class-name">ThreadPoolExecutor</span>自定义线程池
+### 类结构
+以上四种线程池都是基于<span class="token class-name">ThreadPoolExecutor</span>实现，下面将介绍<span class="token class-name">ThreadPoolExecutor</span>的基本组成。
+<span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
+https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>logobakazhou<span class="token punctuation">.</span>oss<span class="token operator">-</span>cn<span class="token operator">-</span>hangzhou<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span><span class="token number">2022</span><span class="token operator">/</span><span class="token number">09</span><span class="token operator">/</span><span class="token number">27</span><span class="token operator">/</span>imgs<span class="token operator">/</span><span class="token class-name">ThreadPoolExecutor</span><span class="token operator">%</span><span class="token number">20D</span>esign<span class="token punctuation">.</span>png<span class="token punctuation">)</span>
+### 运行机制
+线程池在内部实际上构建了一个生产者消费者模型，将线程和任务两者解耦，并不直接关联，从而良好的缓冲任务，复用线程。线程池的运行主要分成两部分：任务管理、线程管理。任务管理部分充当生产者的角色，当任务提交后，线程池会判断该任务后续的流转：  
+（<span class="token number">1</span>）直接申请线程执行该任务；  
+（<span class="token number">2</span>）缓冲到队列中等待线程执行；  
+（<span class="token number">3</span>）拒绝该任务。线程管理部分是消费者，它们被统一维护在线程池内，根据任务请求进行线程的分配，当线程执行完任务后则会继续获取新的任务去执行，最终当线程获取不到任务的时候，线程就会被回收。
+<span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
+https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>logobakazhou<span class="token punctuation">.</span>oss<span class="token operator">-</span>cn<span class="token operator">-</span>hangzhou<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span><span class="token number">2022</span><span class="token operator">/</span><span class="token number">09</span><span class="token operator">/</span><span class="token number">27</span><span class="token operator">/</span>imgs<span class="token operator">/</span><span class="token class-name">ThreadPoolExecutorWork</span><span class="token punctuation">.</span>png<span class="token punctuation">)</span>
+### 生命周期
+线程池的生命周期一共有五种状态
+<span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
+https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>logobakazhou<span class="token punctuation">.</span>oss<span class="token operator">-</span>cn<span class="token operator">-</span>hangzhou<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span><span class="token number">2022</span><span class="token operator">/</span><span class="token number">09</span><span class="token operator">/</span><span class="token number">27</span><span class="token operator">/</span>imgs<span class="token operator">/</span><span class="token class-name">Life</span><span class="token operator">%</span><span class="token number">20</span>Cycle<span class="token punctuation">.</span>png<span class="token punctuation">)</span>
+状态转换如下图所示
+<span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
+https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>logobakazhou<span class="token punctuation">.</span>oss<span class="token operator">-</span>cn<span class="token operator">-</span>hangzhou<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span><span class="token number">2022</span><span class="token operator">/</span><span class="token number">09</span><span class="token operator">/</span><span class="token number">27</span><span class="token operator">/</span>imgs<span class="token operator">/</span>lifer<span class="token punctuation">.</span>png<span class="token punctuation">)</span>
+
+<span class="token operator">|</span> 方法            <span class="token operator">|</span> 流程                                                      <span class="token operator">|</span>
+<span class="token operator">|</span><span class="token operator">:</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token function">shutdownNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">|</span> 调用<span class="token function">shutdownNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>方法后，线程池会进入<span class="token constant">STOP</span>状态，不再接收新任务，同时会中断正在处理任务中的线程 <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token operator">|</span> 调用shutdown方法后，线程池会进入<span class="token constant">SHUTDOWN</span>状态<span class="token punctuation">,</span>不再接收新任务，但是会将未处理完毕任务处理完成  <span class="token operator">|</span>
+
+### 任务执行机制
+#### 任务提交
+当有新任务提交后，会进行以下步骤  
+<span class="token number">1.</span>检查线程池状态，如果线程池状态不为<span class="token constant">RUNNING</span>，则此任务会被直接拒绝。  
+<span class="token number">2.</span>如果workerCount <span class="token operator">&lt;</span> corePoolSize，则创建并启动一个线程来执行新提交的任务。  
+<span class="token number">3.</span>如果workerCount <span class="token operator">>=</span> corePoolSize，且线程池内的阻塞队列未满，则将任务添加到该阻塞队列中。  
+<span class="token number">4.</span>如果workerCount <span class="token operator">>=</span> corePoolSize <span class="token operator">&amp;&amp;</span> workerCount <span class="token operator">&lt;</span> maximumPoolSize，且线程池内的阻塞队列已满，则创建并启动一个线程来执行新提交的任务。  
+<span class="token number">5.</span>如果workerCount <span class="token operator">>=</span> maximumPoolSize，并且线程池内的阻塞队列已满<span class="token punctuation">,</span> 则根据拒绝策略来处理该任务<span class="token punctuation">,</span> 默认的处理方式是直接抛异常。
+<span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
+https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>logobakazhou<span class="token punctuation">.</span>oss<span class="token operator">-</span>cn<span class="token operator">-</span>hangzhou<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span><span class="token number">2022</span><span class="token operator">/</span><span class="token number">09</span><span class="token operator">/</span><span class="token number">27</span><span class="token operator">/</span>imgs<span class="token operator">/</span>taskC<span class="token punctuation">.</span>png<span class="token punctuation">)</span>
+
+#### 任务缓冲
+任务缓冲在线程池中是通过阻塞队列实现的，其核心思想即将任务存储在一个队列中缓存起来，如果当前池中有空闲线程，则调用线程从队列中取出任务进行处理，如此将线程与任务分开。同时不一样的队列，也可以实现不一样的任务存取策略。
+<span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
+https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>logobakazhou<span class="token punctuation">.</span>oss<span class="token operator">-</span>cn<span class="token operator">-</span>hangzhou<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span><span class="token number">2022</span><span class="token operator">/</span><span class="token number">09</span><span class="token operator">/</span><span class="token number">27</span><span class="token operator">/</span>imgs<span class="token operator">/</span>taskStorage<span class="token punctuation">.</span>png<span class="token punctuation">)</span>
+
+#### 任务申请
+一个任务被消费有两种方式，第一种是直接创建一个新的线程处理，第二种是池中的线程从缓冲队列中获取任务并消费，如此反复。  
+当线程空闲时需要不断尝试从任务的缓冲队列中获取新的任务消费，这个过程由getTask方法实现，其流程如下图所示
+<span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
+https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>logobakazhou<span class="token punctuation">.</span>oss<span class="token operator">-</span>cn<span class="token operator">-</span>hangzhou<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span><span class="token number">2022</span><span class="token operator">/</span><span class="token number">09</span><span class="token operator">/</span><span class="token number">27</span><span class="token operator">/</span>imgs<span class="token operator">/</span>getTask<span class="token punctuation">.</span>png<span class="token punctuation">)</span>
+在<span class="token class-name">ThreadPoolExecutor</span>类中每条线程都有一个<span class="token class-name">Worker</span>会不断的尝试获取新的任务，如果worker接收不到任务后，就会开始进入被回收的流程。
+```java
+    <span class="token comment">/**
+     * Set containing all worker threads in pool. Accessed only when
+     * holding mainLock.
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Worker</span><span class="token punctuation">></span></span> workers <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="任务拒绝"><a href="#任务拒绝" class="headerlink" title="任务拒绝"></a>任务拒绝</h4><p>当线程池的任务缓存队列已满，且线程池中的线程数量已经达到设置的最大数量，无法满足处理新任务的条件时，需要执行拒绝策略，这是对线程池的一种保护。目前JDK提供了四种线程的拒绝策略，如下所示<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/ThreadReject.png"></p>
+<h3 id="任务调度管理机制"><a href="#任务调度管理机制" class="headerlink" title="任务调度管理机制"></a>任务调度管理机制</h3><p>线程池内的线程管理通过池内的工作线程Worker实现，其中有两个重要成员变量</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">Worker</span>
+        <span class="token keyword">extends</span> <span class="token class-name">AbstractQueuedSynchronizer</span>
+        <span class="token keyword">implements</span> <span class="token class-name">Runnable</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/**
+     * This class will never be serialized, but we provide a
+     * serialVersionUID to suppress a javac warning.
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token number">6138294804551838833L</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/** Thread this worker is running in.  Null if factory fails. */</span>
+    <span class="token comment">//Worker持有的线程，用来消费任务</span>
+    <span class="token keyword">final</span> <span class="token class-name">Thread</span> thread<span class="token punctuation">;</span>
+    <span class="token comment">/** Initial task to run.  Possibly null. */</span>
+    <span class="token comment">//接收任务的变量，从任务缓冲队列中获取任务</span>
+    <span class="token class-name">Runnable</span> firstTask<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>thread是通过ThreadFactory创建的线程，用于执行消费任务<br>firstTask为需要消费的第一个任务，如果firstTask不为null，那么直接执行此任务并创建核心线程，如果firstTask为null，说明当前线程已经空闲，需要从任务缓冲队列中获取新的任务<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/workQueue.png"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/09/27/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-id="cl8ijmtlx0000r1u59w7rda5s" data-title="Java线程池" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/09/27/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-id="cl8jj6psu000085u58u8qaylg" data-title="Java线程池" class="article-share-link">Share</a>
       
       
       
