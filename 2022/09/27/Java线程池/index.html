@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://p0.meituan.net/travelcube/90ea093549782945f2c968403fdc39d415386.png">
 <meta property="og:image" content="https://p0.meituan.net/travelcube/879edb4f06043d76cea27a3ff358cb1d45243.png">
 <meta property="article:published_time" content="2022-09-26T18:16:25.000Z">
-<meta property="article:modified_time" content="2022-09-27T02:28:47.863Z">
+<meta property="article:modified_time" content="2022-09-27T03:12:05.625Z">
 <meta property="article:author" content="Bakazhou">
 <meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary_large_image">
@@ -238,7 +238,7 @@
         
         
         
-          102 mins
+          104 mins
         
       </span>
     
@@ -366,7 +366,9 @@
 </tbody></table>
 <h2 id="ThreadPoolExecutor自定义线程池"><a href="#ThreadPoolExecutor自定义线程池" class="headerlink" title="ThreadPoolExecutor自定义线程池"></a>ThreadPoolExecutor自定义线程池</h2><h3 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h3><p>以上四种线程池都是基于ThreadPoolExecutor实现，下面将介绍ThreadPoolExecutor的基本组成。<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/ThreadPoolExecutor%20Design.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h3><p>线程池在内部实际上构建了一个生产者消费者模型，将线程和任务两者解耦，并不直接关联，从而良好的缓冲任务，复用线程。线程池的运行主要分成两部分：任务管理、线程管理。任务管理部分充当生产者的角色，当任务提交后，线程池会判断该任务后续的流转：<br>（1）直接申请线程执行该任务；<br>（2）缓冲到队列中等待线程执行；<br>（3）拒绝该任务。线程管理部分是消费者，它们被统一维护在线程池内，根据任务请求进行线程的分配，当线程执行完任务后则会继续获取新的任务去执行，最终当线程获取不到任务的时候，线程就会被回收。<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/ThreadPoolExecutorWork.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>线程池的生命周期一共有五种状态<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/Life%20Cycle.png" srcset="/img/loading.gif" lazyload><br>状态转换如下图所示<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/lifer.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>线程池的生命周期一共有五种状态</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">RUNNING</span>    <span class="hljs-operator">=</span> -<span class="hljs-number">1</span> &lt;&lt; COUNT_BITS;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">SHUTDOWN</span>   <span class="hljs-operator">=</span>  <span class="hljs-number">0</span> &lt;&lt; COUNT_BITS;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">STOP</span>       <span class="hljs-operator">=</span>  <span class="hljs-number">1</span> &lt;&lt; COUNT_BITS;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">TIDYING</span>    <span class="hljs-operator">=</span>  <span class="hljs-number">2</span> &lt;&lt; COUNT_BITS;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">TERMINATED</span> <span class="hljs-operator">=</span>  <span class="hljs-number">3</span> &lt;&lt; COUNT_BITS;<br></code></pre></td></tr></table></figure>
+<p><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/Life%20Cycle.png" srcset="/img/loading.gif" lazyload><br>状态转换如下图所示<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/lifer.png" srcset="/img/loading.gif" lazyload></p>
 <table>
 <thead>
 <tr>
