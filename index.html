@@ -83,6 +83,10 @@
   <time class="dt-published" datetime="2022-09-26T18:16:25.000Z" itemprop="datePublished">2022-09-26</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">Java多线程</a>►<a class="article-category-link" href="/categories/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">线程池</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -407,8 +411,8 @@
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Worker</span><span class="token punctuation">></span></span> workers <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="任务拒绝"><a href="#任务拒绝" class="headerlink" title="任务拒绝"></a>任务拒绝</h4><p>当线程池的任务缓存队列已满，且线程池中的线程数量已经达到设置的最大数量，无法满足处理新任务的条件时，需要执行拒绝策略，这是对线程池的一种保护。目前JDK提供了四种线程的拒绝策略，如下所示<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/ThreadReject.png"></p>
-<h3 id="任务调度管理机制"><a href="#任务调度管理机制" class="headerlink" title="任务调度管理机制"></a>任务调度管理机制</h3><p>线程池内的线程管理通过池内的工作线程Worker实现，其中有两个重要成员变量</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">Worker</span>
+<h3 id="任务调度-Worker-管理机制"><a href="#任务调度-Worker-管理机制" class="headerlink" title="任务调度(Worker)管理机制"></a>任务调度(Worker)管理机制</h3><p>线程池内的线程管理通过池内的工作线程Worker实现，其中有两个重要成员变量</p>
+<h4 id="Worker实现"><a href="#Worker实现" class="headerlink" title="Worker实现"></a>Worker实现</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">Worker</span>
         <span class="token keyword">extends</span> <span class="token class-name">AbstractQueuedSynchronizer</span>
         <span class="token keyword">implements</span> <span class="token class-name">Runnable</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">/**
@@ -425,14 +429,29 @@
     <span class="token class-name">Runnable</span> firstTask<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>thread是通过ThreadFactory创建的线程，用于执行消费任务<br>firstTask为需要消费的第一个任务，如果firstTask不为null，那么直接执行此任务并创建核心线程，如果firstTask为null，说明当前线程已经空闲，需要从任务缓冲队列中获取新的任务<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/workQueue.png"></p>
+<h4 id="addWorker-增加worker线程"><a href="#addWorker-增加worker线程" class="headerlink" title="addWorker 增加worker线程"></a>addWorker 增加worker线程</h4><p>增加线程是通过线程池中的addWorker方法，该方法的功能就是增加一个线程，该方法不考虑线程池是在哪个阶段增加的该线程，这个分配线程的策略是在上个步骤完成的，该步骤仅仅完成增加线程，并使它运行，最后返回是否成功这个结果。addWorker方法有两个参数：firstTask、core。firstTask参数用于指定新增的线程执行的第一个任务，该参数可以为空；core参数为true表示在新增线程时会判断当前活动线程数是否少于corePoolSize，false表示新增线程前需要判断当前活动线程数是否少于maximumPoolSize，其执行流程如下图所示：<br><img src="https://p0.meituan.net/travelcube/49527b1bb385f0f43529e57b614f59ae145454.png"></p>
+<h4 id="processWorkerExit-回收worker线程"><a href="#processWorkerExit-回收worker线程" class="headerlink" title="processWorkerExit 回收worker线程"></a>processWorkerExit 回收worker线程</h4><p>线程池中线程的销毁依赖JVM自动的回收，线程池做的工作是根据当前线程池的状态维护一定数量的线程引用，防止这部分线程被JVM回收，当线程池决定哪些线程需要回收时，只需要将其引用消除即可。Worker被创建出来后，就会不断地进行轮询，然后获取任务去执行，核心线程可以无限等待获取任务，非核心线程要限时获取任务。当Worker无法获取到任务，也就是获取的任务为空时，循环会结束，Worker会主动消除自身在线程池内的引用。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//尝试从workQueue中获取任务，一旦获取到任务就进入while循环体内，如果两种方式都获取不到任务，说明线程已经进入空闲状态，进入判断是否需要回收的流程</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>task <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">||</span> <span class="token punctuation">(</span>task <span class="token operator">=</span> <span class="token function">getTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//进入while内代表已经获取到任务，开始执行任务</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//两种方式都已经获取不到任务，进入回收流程</span>
+  <span class="token function">processWorkerExit</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span> completedAbruptly<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获取不到任务时，主动回收自己</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>线程销毁的流程如图所示<br><img src="https://p0.meituan.net/travelcube/90ea093549782945f2c968403fdc39d415386.png"><br>在processWorkerExit中，将线程引用移出线程池就已经结束了线程销毁的部分。但由于引起线程销毁的可能性有很多，线程池还要判断是什么引发了这次销毁，是否要改变线程池的现阶段状态，是否要根据新状态，重新分配线程。</p>
+<h4 id="run-worker线程执行任务"><a href="#run-worker线程执行任务" class="headerlink" title="run worker线程执行任务"></a>run worker线程执行任务</h4><p>1.while循环不断地通过getTask()方法获取任务。 2.getTask()方法从阻塞队列中取任务。 3.如果线程池正在停止，那么要保证当前线程是中断状态，否则要保证当前线程不是中断状态。 4.执行任务。 5.如果getTask结果为null则跳出循环，执行processWorkerExit()方法，销毁线程。<br>执行流程如下图所示：<br><img src="https://p0.meituan.net/travelcube/879edb4f06043d76cea27a3ff358cb1d45243.png"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/09/27/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-id="cl8jjhqgk0000e2u5445e5yem" data-title="Java线程池" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/09/27/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-id="cl8jky5ba0002tku50ezqbc8e" data-title="Java线程池" class="article-share-link">Share</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
+
     </footer>
   </div>
   
@@ -468,7 +487,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/09/27/Netty%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%AB/" data-id="cl8jjhqgn0002e2u5d8uk81sj" data-title="Netty为什么快?" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/09/27/Netty%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%AB/" data-id="cl8jky5bb0003tku52feqd6lu" data-title="Netty为什么快?" class="article-share-link">Share</a>
       
       
       
@@ -486,6 +505,10 @@
   <time class="dt-published" datetime="2022-09-23T22:51:34.000Z" itemprop="datePublished">2022-09-23</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">Java网络编程</a>►<a class="article-category-link" href="/categories/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Netty/">Netty</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -1864,10 +1887,12 @@ TianLe Zhou\r\n<span aria-hidden="true" class="line-numbers-rows"><span></span><
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/09/24/Netty%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="cl8jjhqgo0003e2u5ftag6hb9" data-title="Netty网络编程" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/09/24/Netty%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="cl8jky5bd0007tku55pujbgde" data-title="Netty网络编程" class="article-share-link">Share</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li></ul>
+
     </footer>
   </div>
   
@@ -1882,6 +1907,10 @@ TianLe Zhou\r\n<span aria-hidden="true" class="line-numbers-rows"><span></span><
   <time class="dt-published" datetime="2022-09-23T22:47:49.000Z" itemprop="datePublished">2022-09-23</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">Java网络编程</a>►<a class="article-category-link" href="/categories/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Nio/">Nio</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -2890,10 +2919,12 @@ socket<span class="token punctuation">.</span><span class="token function">getOu
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/09/24/NIO%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" data-id="cl8jjhqgm0001e2u5clkb4gaz" data-title="NIO网络通信" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/09/24/NIO%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" data-id="cl8jky5bc0006tku53kq3f8ry" data-title="NIO网络通信" class="article-share-link">Share</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nio/" rel="tag">Nio</a></li></ul>
+
     </footer>
   </div>
   
@@ -2909,12 +2940,33 @@ socket<span class="token punctuation">.</span><span class="token function">getOu
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">Java多线程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">线程池</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">Java网络编程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Netty/">Netty</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Nio/">Nio</a></li></ul></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nio/" rel="tag">Nio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/Nio/" style="font-size: 10px;">Nio</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
