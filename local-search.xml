@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>线程池模型</title>
+    <link href="/2022/09/28/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A8%A1%E5%9E%8B/"/>
+    <url>/2022/09/28/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A8%A1%E5%9E%8B/</url>
+    
+    <content type="html"><![CDATA[<h2 id="整体模型"><a href="#整体模型" class="headerlink" title="整体模型"></a>整体模型</h2><h2 id="工作模型"><a href="#工作模型" class="headerlink" title="工作模型"></a>工作模型</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java多线程</category>
+      
+      <category>线程池</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>线程池模型</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Java线程池</title>
     <link href="/2022/09/27/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
     <url>/2022/09/27/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0/</url>
