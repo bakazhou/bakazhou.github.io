@@ -16,28 +16,23 @@
   <meta name="author" content="Bakazhou">
   <meta name="keywords" content="">
   
-    <meta name="description" content="传统阻塞IO服务模型模型特点  采用阻塞IO模型获取输入的数据 每个链接都由一个独立的线程服务，处理其IO操作  存在的问题    当并发数较高时，会在一时间创建大量的线程，会占用大量的系统资源，同时线程的创建和关闭也会造成系统资源的损耗 当链接创建后，如果线程没有数据可以进行read操作，那么线程就会阻塞，浪费线程资源  Reactor模式针对于传统IO服务模型的两大缺点，先驱者们提出了一个解决">
+    <meta name="description" content="线程池在内部实际上构建了一个生产者消费者模型，将线程和任务两者解耦，并不直接关联，从而良好的缓冲任务，复用线程。线程池的运行主要分成两部分：任务管理、线程管理。任务管理部分充当生产者的角色，当任务提交后，线程池会判断该任务后续的流转：（1）直接申请线程执行该任务；（2）缓冲到队列中等待线程执行；（3）拒绝该任务。线程管理部分是消费者，它们被统一维护在线程池内，根据任务请求进行线程的分配，当线程执行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Reactor(反应堆)&#x2F;Dispatcher(适配器)模式">
-<meta property="og:url" content="http://example.com/2022/10/12/Reactor-%E5%8F%8D%E5%BA%94%E5%A0%86-Dispatcher-%E5%88%86%E5%8F%91%E8%80%85-%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="生产者消费者模型-线程池">
+<meta property="og:url" content="http://example.com/2022/10/12/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B-%E7%BA%BF%E7%A8%8B%E6%B1%A0/index.html">
 <meta property="og:site_name" content="Bakazhou Blog">
-<meta property="og:description" content="传统阻塞IO服务模型模型特点  采用阻塞IO模型获取输入的数据 每个链接都由一个独立的线程服务，处理其IO操作  存在的问题    当并发数较高时，会在一时间创建大量的线程，会占用大量的系统资源，同时线程的创建和关闭也会造成系统资源的损耗 当链接创建后，如果线程没有数据可以进行read操作，那么线程就会阻塞，浪费线程资源  Reactor模式针对于传统IO服务模型的两大缺点，先驱者们提出了一个解决">
+<meta property="og:description" content="线程池在内部实际上构建了一个生产者消费者模型，将线程和任务两者解耦，并不直接关联，从而良好的缓冲任务，复用线程。线程池的运行主要分成两部分：任务管理、线程管理。任务管理部分充当生产者的角色，当任务提交后，线程池会判断该任务后续的流转：（1）直接申请线程执行该任务；（2）缓冲到队列中等待线程执行；（3）拒绝该任务。线程管理部分是消费者，它们被统一维护在线程池内，根据任务请求进行线程的分配，当线程执行">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s1.ax1x.com/2022/10/11/xNkPit.md.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/10/11/xNkiJP.md.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/10/11/xNk8QU.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/10/11/xNEGVJ.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/10/11/xNmJOK.png">
-<meta property="article:published_time" content="2022-10-11T18:21:57.000Z">
-<meta property="article:modified_time" content="2022-10-11T07:28:26.074Z">
+<meta property="og:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/ThreadPoolExecutorWork.png">
+<meta property="article:published_time" content="2022-10-11T23:36:45.000Z">
+<meta property="article:modified_time" content="2022-10-11T07:37:31.015Z">
 <meta property="article:author" content="Bakazhou">
-<meta property="article:tag" content="反应堆&#x2F;适配器模式">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2022/10/11/xNkPit.md.png">
+<meta name="twitter:image" content="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/ThreadPoolExecutorWork.png">
   
   
   
-  <title>Reactor(反应堆)/Dispatcher(适配器)模式 - Bakazhou Blog</title>
+  <title>生产者消费者模型-线程池 - Bakazhou Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Reactor(反应堆)/Dispatcher(适配器)模式"></span>
+            <span id="subtitle" data-typed-text="生产者消费者模型-线程池"></span>
           
         </div>
 
@@ -201,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-11 10:21" pubdate>
-          October 11, 2022 am
+        <time datetime="2022-10-11 15:36" pubdate>
+          October 11, 2022 pm
         </time>
       </span>
     
@@ -213,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          241 words
         
       </span>
     
@@ -224,7 +219,7 @@
         
         
         
-          10 mins
+          3 mins
         
       </span>
     
@@ -262,56 +257,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Reactor(反应堆)/Dispatcher(适配器)模式</h1>
+            <h1 style="display: none">生产者消费者模型-线程池</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="传统阻塞IO服务模型"><a href="#传统阻塞IO服务模型" class="headerlink" title="传统阻塞IO服务模型"></a>传统阻塞IO服务模型</h2><p><strong>模型特点</strong><br><a target="_blank" rel="noopener" href="https://imgse.com/i/xNkPit"><img src="https://s1.ax1x.com/2022/10/11/xNkPit.md.png" srcset="/img/loading.gif" lazyload alt="xNkPit.md.png"></a></p>
-<ul>
-<li>采用阻塞IO模型获取输入的数据</li>
-<li>每个链接都由一个独立的线程服务，处理其IO操作</li>
-</ul>
-<p><strong>存在的问题</strong>  </p>
-<ul>
-<li>当并发数较高时，会在一时间创建大量的线程，会占用大量的系统资源，同时线程的创建和关闭也会造成系统资源的损耗</li>
-<li>当链接创建后，如果线程没有数据可以进行read操作，那么线程就会阻塞，浪费线程资源</li>
-</ul>
-<h2 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h2><p>针对于传统IO服务模型的两大缺点，先驱者们提出了一个解决方案，分别是以下两点  </p>
-<ul>
-<li>多个链接共用一个阻塞的对象，也就是Reactor，当没有新数据需要进行read处理时，只阻塞Reactor这一个线程，当接收到新数据后，Reactor线程不再阻塞，接收数据后，再分发给处理线程进行数据处理</li>
-<li>基于线程池复用线程资源，不再为每个链接单独的创建线程，而是将业务处理的任务交付给线程池进行处理，具体哪条线程执行任务由线程池决定，一条线程可以处理多个链接上的任务</li>
-</ul>
-<h3 id="总体设计理念"><a href="#总体设计理念" class="headerlink" title="总体设计理念"></a>总体设计理念</h3><p><a target="_blank" rel="noopener" href="https://imgse.com/i/xNkiJP"><img src="https://s1.ax1x.com/2022/10/11/xNkiJP.md.png" srcset="/img/loading.gif" lazyload alt="xNkiJP.md.png"></a><br><strong>核心组成</strong>  </p>
-<ul>
-<li>Reactor:Reactor由一个单独的线程运行，主要负责监听和分发事件，不进行具体的业务处理，即上图的EventDispatch</li>
-<li>Handler:负责处理具体的业务逻辑IO操作，即上图的EventHandler</li>
-</ul>
-<h3 id="单Reactor单线程"><a href="#单Reactor单线程" class="headerlink" title="单Reactor单线程"></a>单Reactor单线程</h3><p><a target="_blank" rel="noopener" href="https://imgse.com/i/xNk8QU"><img src="https://s1.ax1x.com/2022/10/11/xNk8QU.png" srcset="/img/loading.gif" lazyload alt="xNk8QU.png"></a>  </p>
-<ul>
-<li>如果是建立连接请求事件，则由 Acceptor 通过 Accept 处理连接请求，然后创建一个 Handler 对象处理连接完成后的后续业务处理</li>
-<li>如果不是建立连接事件，则 Reactor 会分发调用连接对应的 Handler 来响应 ,Handler 会完成 Read→业务处理→Send 的完整业务流程</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li>性能问题，只有一个线程，无法完全发挥多核 CPU 的性能。Handler 在处理某个连接上的业务时，整个进程无法处理其他连接事件，很容易导致性能瓶颈</li>
-<li>可靠性问题，线程意外终止，或者进入死循环，会导致整个系统通信模块不可用，不能接收和处理外部消息</li>
-</ul>
-<h3 id="单Reactor多线程"><a href="#单Reactor多线程" class="headerlink" title="单Reactor多线程"></a>单Reactor多线程</h3><p><a target="_blank" rel="noopener" href="https://imgse.com/i/xNEGVJ"><img src="https://s1.ax1x.com/2022/10/11/xNEGVJ.png" srcset="/img/loading.gif" lazyload alt="xNEGVJ.png"></a><br><strong>优点</strong> </p>
-<ul>
-<li>可以充分的利用多核cpu 的处理能力</li>
-</ul>
-<p><strong>缺点</strong> </p>
-<ul>
-<li>多线程数据共享和访问比较复杂， reactor 处理所有的事件的监听和响应，在单线程运行， 在高并发场景容易出现性能瓶颈.</li>
-</ul>
-<h3 id="主从Reactor模型-Netty采用此模型"><a href="#主从Reactor模型-Netty采用此模型" class="headerlink" title="主从Reactor模型(Netty采用此模型)"></a>主从Reactor模型(Netty采用此模型)</h3><p><a target="_blank" rel="noopener" href="https://imgse.com/i/xNmJOK"><img src="https://s1.ax1x.com/2022/10/11/xNmJOK.png" srcset="/img/loading.gif" lazyload alt="xNmJOK.png"></a><br><strong>优点</strong>  </p>
-<ul>
-<li>职责明确,父线程只负责接收请求，业务逻辑全部交由子线程处理</li>
-<li>充分利用多核CPU的性能，利用了线程池的思想复用线程资源，避免了线程创建销毁而造成的资源额外开销</li>
-<li>引入了流水线的工作模式，业务逻辑顺序变得清晰</li>
-<li>MainReactor因为可以将处理连接请求的任务交付给一个EventLoopGroup处理，不再是一个阻塞的单线程，这就解决了单Reactor多线程模式下，Reactor只有单线程而造成的性能瓶颈问题，从而真正可以应付高并发的场景</li>
-</ul>
+                <p>线程池在内部实际上构建了一个生产者消费者模型，将线程和任务两者解耦，并不直接关联，从而良好的缓冲任务，复用线程。线程池的运行主要分成两部分：任务管理、线程管理。任务管理部分充当生产者的角色，当任务提交后，线程池会判断该任务后续的流转：<br>（1）直接申请线程执行该任务；<br>（2）缓冲到队列中等待线程执行；<br>（3）拒绝该任务。线程管理部分是消费者，它们被统一维护在线程池内，根据任务请求进行线程的分配，当线程执行完任务后则会继续获取新的任务去执行，最终当线程获取不到任务的时候，线程就会被回收。<br><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/ThreadPoolExecutorWork.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -320,34 +271,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%8F%8D%E5%BA%94%E5%A0%86-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">#反应堆/适配器模式</a>
-      
-    </div>
   
 </div>
 
@@ -357,8 +280,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Reactor(反应堆)/Dispatcher(适配器)模式</div>
-      <div>http://example.com/2022/10/12/Reactor-反应堆-Dispatcher-分发者-模式/</div>
+      <div>生产者消费者模型-线程池</div>
+      <div>http://example.com/2022/10/12/生产者消费者模型-线程池/</div>
     </div>
     <div class="license-meta">
       
@@ -402,18 +325,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/12/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B-%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="生产者消费者模型-线程池">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">生产者消费者模型-线程池</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/10/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8F%82%E6%95%B0%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E5%8F%8A%E5%91%8A%E8%AD%A6%E7%BB%84%E4%BB%B6/" title="线程池参数动态配置及告警组件">
-                        <span class="hidden-mobile">线程池参数动态配置及告警组件</span>
+                      <a href="/2022/10/12/Reactor-%E5%8F%8D%E5%BA%94%E5%A0%86-Dispatcher-%E5%88%86%E5%8F%91%E8%80%85-%E6%A8%A1%E5%BC%8F/" title="Reactor(反应堆)/Dispatcher(适配器)模式">
+                        <span class="hidden-mobile">Reactor(反应堆)/Dispatcher(适配器)模式</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
