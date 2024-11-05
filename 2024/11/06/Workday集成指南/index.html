@@ -1,0 +1,952 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Bakazhou">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Workday集成指南前言近期因为项目需要，需要学习探索Workday系统的集成相关知识，因此有了此文。在此之前，对于Workday的了解仅限于它是全球最大的云HCM解决方案供应商之一，也是我司的供应商之一。对它的接触也仅限于入职阶段上传过一些必须资料而已。因此，此文更多的是基于自己的理解和实践，记录了探索Workday集成的一些过程和心得。 Workday集成概述集成类型总览Workday提供了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Workday集成指南">
+<meta property="og:url" content="http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Bakazhou Blog">
+<meta property="og:description" content="Workday集成指南前言近期因为项目需要，需要学习探索Workday系统的集成相关知识，因此有了此文。在此之前，对于Workday的了解仅限于它是全球最大的云HCM解决方案供应商之一，也是我司的供应商之一。对它的接触也仅限于入职阶段上传过一些必须资料而已。因此，此文更多的是基于自己的理解和实践，记录了探索Workday集成的一些过程和心得。 Workday集成概述集成类型总览Workday提供了">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/G7ZMBQ2IhtpJmWe.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/F1frpYM8XHoTA3m.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/7CaRJFxusoABMLN.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/C3FoGlXN6spSZdQ.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/SpFyXtHevEn67oO.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/8DPRt3aHoZucnfU.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/JqXRlWehympj9Po.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/MND2Wkh8BclLnpd.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/lZnc8hSMBJrkO4u.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/aUfKJlAkBnEd71p.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/IoBNtbyHSXG7dkE.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/NElhaTFKXWSy5DH.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/kMmQWdIZbAgKVnL.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/MOdt87N4Ggcjpf9.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/4XLEuaK5nOdVvqs.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/IhDWtlmeo9CuNyc.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/6kDVWdtxsZI72gf.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/7i93jmUSGIBDTky.png">
+<meta property="article:published_time" content="2024-11-06T00:46:32.000Z">
+<meta property="article:modified_time" content="2024-11-05T08:50:12.840Z">
+<meta property="article:author" content="Bakazhou">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png">
+  
+  
+  
+  <title>Workday集成指南 - Bakazhou Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Bakazhou blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Workday集成指南"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-05 16:46" pubdate>
+          November 5, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          20k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          163 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Workday集成指南</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Workday集成指南"><a href="#Workday集成指南" class="headerlink" title="Workday集成指南"></a>Workday集成指南</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近期因为项目需要，需要学习探索Workday系统的集成相关知识，因此有了此文。在此之前，对于Workday的了解仅限于它是全球最大的云HCM解决方案供应商之一，也是我司的供应商之一。对它的接触也仅限于入职阶段上传过一些必须资料而已。因此，此文更多的是基于自己的理解和实践，记录了探索Workday集成的一些过程和心得。</p>
+<h2 id="Workday集成概述"><a href="#Workday集成概述" class="headerlink" title="Workday集成概述"></a>Workday集成概述</h2><h3 id="集成类型总览"><a href="#集成类型总览" class="headerlink" title="集成类型总览"></a>集成类型总览</h3><p>Workday提供了多种集成方式，主要可以分为以下几类：</p>
+<h4 id="1-Inbound-Integration（数据导入）"><a href="#1-Inbound-Integration（数据导入）" class="headerlink" title="1. Inbound Integration（数据导入）"></a>1. Inbound Integration（数据导入）</h4><p>将外部数据导入Workday，如批量导入员工数据、更新组织结构等。主要通过EIB或Web Service实现，需要严格的数据验证。</p>
+<h4 id="2-Outbound-Integration（数据导出）"><a href="#2-Outbound-Integration（数据导出）" class="headerlink" title="2. Outbound Integration（数据导出）"></a>2. Outbound Integration（数据导出）</h4><p>从Workday导出数据到外部系统，常用于员工信息同步、财务数据导出等。可以使用RaaS（Report as a Service）实现，支持灵活的数据格式和过滤条件。</p>
+<h4 id="3-Real-time-Integration（实时集成）"><a href="#3-Real-time-Integration（实时集成）" class="headerlink" title="3. Real-time Integration（实时集成）"></a>3. Real-time Integration（实时集成）</h4><p>通过Web Service或REST API实现系统间的实时数据交换，适用于员工状态同步、实时审批等场景。需要考虑性能和系统可用性。</p>
+<h4 id="4-Scheduled-Integration（定时集成）"><a href="#4-Scheduled-Integration（定时集成）" class="headerlink" title="4. Scheduled Integration（定时集成）"></a>4. Scheduled Integration（定时集成）</h4><p>按计划执行的定期集成任务，适合处理大量数据，如每日数据同步、定期报表生成等。资源消耗可控，维护成本较低。此类型集成可以在外部系统执行定时任务实现，也可以在Workday中通过Integration System实现。Integration System目前正处于探索阶段。</p>
+<h4 id="5-Event-driven-Integration（事件驱动）"><a href="#5-Event-driven-Integration（事件驱动）" class="headerlink" title="5. Event-driven Integration（事件驱动）"></a>5. Event-driven Integration（事件驱动）</h4><p>基于特定业务事件触发的集成，如员工入职&#x2F;离职处理、组织变更通知等。支持复杂业务流程，需要配置事件订阅。与定时集成一样可以通过Integration System实现，目前正在探索阶段。</p>
+<h3 id="本文内容概要"><a href="#本文内容概要" class="headerlink" title="本文内容概要"></a>本文内容概要</h3><p>本文将重点介绍Inbound Integration和Outbound Integration两种集成方式。主要内容包括：</p>
+<ul>
+<li><p>Workday核心组件介绍</p>
+<ul>
+<li>Security Group</li>
+<li>Integration System User</li>
+<li>API Client</li>
+<li>Report</li>
+</ul>
+</li>
+<li><p>集成任务实践</p>
+<ul>
+<li>Report as a Service集成</li>
+<li>Web Service集成</li>
+</ul>
+</li>
+</ul>
+<h2 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h2><h3 id="Security-Group"><a href="#Security-Group" class="headerlink" title="Security Group"></a>Security Group</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>Security Group（安全组）是Workday中权限管理的核心组件，它是一个用户集合，用于管理对Workday租户中可保护项目的访问权限。通过安全组，管理员可以集中管理和分配用户权限，实现对系统资源的精确控制。</p>
+<h4 id="功能和用途"><a href="#功能和用途" class="headerlink" title="功能和用途"></a>功能和用途</h4><p>安全组在Workday系统中主要提供以下功能：</p>
+<ol>
+<li><p><strong>权限集中管理</strong></p>
+<ul>
+<li>统一管理用户和角色的权限</li>
+<li>支持批量分配和撤销权限</li>
+<li>可以包含用户、角色和其他安全组</li>
+</ul>
+</li>
+<li><p><strong>访问控制</strong></p>
+<ul>
+<li>控制对业务对象的访问权限</li>
+<li>管理功能和操作的使用权限</li>
+<li>限制数据查看和修改范围</li>
+</ul>
+</li>
+<li><p><strong>系统集成授权</strong></p>
+<ul>
+<li>为集成系统提供必要的访问权限</li>
+<li>控制外部系统的接口调用权限</li>
+<li>管理API和Web Service的访问范围</li>
+</ul>
+</li>
+</ol>
+<h4 id="创建步骤"><a href="#创建步骤" class="headerlink" title="创建步骤"></a>创建步骤</h4><p>使用下列Task在Workday创建Security Group</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Create Security Group<br></code></pre></td></tr></table></figure>
+<p>因为在我们的场景中，Security Group 需要用于集成，因此选择类型为<em><strong>Integration System Security Group (Unconstrained)<em><strong>，安全组名称按需求填写即可，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png" srcset="/img/loading.gif" lazyload alt="alt text"><br>信息填写完毕后，点击</strong></em>OK</strong></em>按钮即可。<br>完成上述步骤后，便拥有了一个用于进行集成任务的Security Group名为<em><strong>Tianle_ISSG</strong></em>。</p>
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ol>
+<li>Security Group Concepts: <a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/dan1370797393239.html">https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/dan1370797393239.html</a></li>
+<li>Security Group Types: <a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/gyz1563919157019.html?toc=2.1.6">https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/gyz1563919157019.html?toc=2.1.6</a></li>
+</ol>
+<h3 id="Integration-System-User"><a href="#Integration-System-User" class="headerlink" title="Integration System User"></a>Integration System User</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>Integration System User (ISU) 是Workday中专门用于系统集成的特殊用户类型。与普通用户不同，ISU主要用于系统间的自动化交互，而不是人工操作。ISU在Workday集成架构中扮演着重要角色，它作为连接Workday与外部系统的桥梁，确保系统间的安全通信。</p>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>ISU主要应用于以下场景：</p>
+<ol>
+<li>Web Service集成（包括但不限于REST、SOAP、XML等）</li>
+<li>Enterprise Interface Builder (EIB)导入&#x2F;导出</li>
+<li>报表自服务</li>
+<li>数据同步、数据处理</li>
+</ol>
+<h4 id="创建步骤-1"><a href="#创建步骤-1" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
+<li><p>使用下列Task在Workday创建Security Group：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Create Integration System User<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>填写基本信息：</p>
+<ul>
+<li>用户名: 遵循命名规范</li>
+<li>密码: 符合安全策略</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://s2.loli.net/2024/11/05/G7ZMBQ2IhtpJmWe.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>信息填写完毕后，点击<em><strong>OK</strong></em>按钮即可。</p>
+<p>完成上述步骤后，便拥有了一个用于进行集成任务的ISU名为<em><strong>ISU_Tianle</strong></em>。</p>
+<h3 id="API-Client"><a href="#API-Client" class="headerlink" title="API Client"></a>API Client</h3><h4 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h4><p>API Client是Workday中用于管理和控制API访问的重要组件。它作为应用程序与Workday API之间的接口，负责处理认证和授权。API Client通过JWT (JSON Web Token)等机制确保API调用的安全性。</p>
+<h4 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h4><p>API Client主要应用于以下场景：</p>
+<ol>
+<li>外部应用程序访问Workday API</li>
+<li>系统集成开发</li>
+<li>自动化流程实现</li>
+<li>数据同步与交换</li>
+</ol>
+<h4 id="创建步骤-2"><a href="#创建步骤-2" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
+<li>使用下列Task在Workday创建API Client：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Create API Client<br></code></pre></td></tr></table></figure></li>
+<li>填写基本信息：<ul>
+<li>客户端名称: 遵循命名规范</li>
+<li>认证方式: 选择JWT Bearer Grant</li>
+<li>X509证书: 上传生成的public_cert.pem文件(详见下方Notes)</li>
+<li>允许集成消息: 勾选</li>
+<li>授予管理员同意: 勾选</li>
+<li>Scope(Fucntion Areas): 选择必要的Fuction Area(<strong>Tenant Non-Configurable</strong>是必选项)<br><img src="https://s2.loli.net/2024/11/05/F1frpYM8XHoTA3m.png" srcset="/img/loading.gif" lazyload alt="alt text"></li>
+</ul>
+</li>
+</ol>
+<p>Notes(Important):</p>
+<ol>
+<li>在创建API Client时，需要生成一个x509证书，生成方法如下：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">openssl req -x509 -newkey rsa:2048 -keyout private_key.pem -out public_cert.pem -days 365<br>openssl rsa -in private_key.pem -pubout -out public_key.pem<br>openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in private_key.pem -out private_key_pkcs8.pem <br></code></pre></td></tr></table></figure></li>
+<li>生成证书后，将public_cert.pem的值填入Workday中。<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cat public_cert.pem<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>信息填写完毕后，点击<em><strong>OK</strong></em>按钮即可。</p>
+<p>完成上述步骤后，便拥有了一个用于进行集成任务的API Client名为<em><strong>Tianle_Client</strong></em>。</p>
+<h4 id="参考文档-1"><a href="#参考文档-1" class="headerlink" title="参考文档"></a>参考文档</h4><p>API Client Registration: <a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/authentication/oauth/dan1370797831458.html">https://doc.workday.com/admin-guide/en-us/authentication-and-security/authentication/oauth/dan1370797831458.html</a></p>
+<h3 id="Report"><a href="#Report" class="headerlink" title="Report"></a>Report</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>Report是Workday平台中的核心功能之一，它提供了强大的数据处理和报表生成能力。通过Report，用户可以将分散的数据整合成有价值的数据集合，为决策提供数据支持。它不仅支持基础的数据提取功能，还能够处理复杂的业务场景，包括但不限于：</p>
+<ul>
+<li>自定义报表设计：支持灵活的字段选择</li>
+<li>多数据源整合：可以从多个数据源中提取和关联数据</li>
+<li>高级计算功能：支持复杂的数据计算和统计分析(Calculated Fields)</li>
+<li>动态参数配置：允许用户设置动态过滤条件</li>
+<li>格式化输出：支持多种输出格式，如Excel、PDF等</li>
+<li>Web Service集成：可作为数据服务供其他系统调用</li>
+</ul>
+<p>作为Workday平台中不可或缺的数据管理工具，Report为企业提供了全方位的数据可视化和分析能力。<br>Report主要应用于以下业务场景：</p>
+<ol>
+<li>数据分析和报表生成</li>
+<li>系统集成数据源</li>
+<li>业务监控和决策支持</li>
+<li>合规性报告生成</li>
+</ol>
+<h4 id="创建步骤-3"><a href="#创建步骤-3" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
+<li>使用下列Task在Workday创建Report：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Create Custom Report<br></code></pre></td></tr></table></figure></li>
+<li>填写基本信息：<ul>
+<li>报表名称: 遵循命名规范</li>
+<li>报表类型: 选择Advanced</li>
+<li>启用Web Service: 勾选</li>
+<li>优化性能: 勾选<br><img src="https://s2.loli.net/2024/11/05/7CaRJFxusoABMLN.png" srcset="/img/loading.gif" lazyload alt="alt text"></li>
+</ul>
+</li>
+</ol>
+<p>信息填写完毕后，点击<em><strong>OK</strong></em>按钮即可。</p>
+<p>完成上述步骤后，便拥有了一个用于进行集成任务的Report名为<em><strong>Tianle_Test_Report</strong></em>。</p>
+<h2 id="集成任务场景"><a href="#集成任务场景" class="headerlink" title="集成任务场景"></a>集成任务场景</h2><h3 id="Report-as-a-Service-RaaS-集成"><a href="#Report-as-a-Service-RaaS-集成" class="headerlink" title="Report as a Service(RaaS)集成"></a>Report as a Service(RaaS)集成</h3><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>Report as a Service(RaaS)是Workday提供的一项重要集成服务，允许通过API调用获取报表数据。</p>
+<h4 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h4><ol>
+<li>已创建Integration System User (<em><strong>ISU_Tianle</strong></em>)</li>
+<li>已配置API Client(<em><strong>Tianle_Client</strong></em>)</li>
+<li>已创建自定义报表并启用Web Service功能(<em><strong>Tianle_Test_Report</strong></em>)</li>
+<li>创建集成任务所需的Security Group(<em><strong>Tianle_ISSG</strong></em>)</li>
+</ol>
+<h4 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h4><ol>
+<li>配置Report的报表内容</li>
+</ol>
+<p><img src="https://s2.loli.net/2024/11/05/C3FoGlXN6spSZdQ.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<ol start="2">
+<li>确定Report中字段所需的Domain policy(以Employee Type为例)</li>
+</ol>
+<p>点击<em><strong>Employee Type</strong></em>段，在弹出的窗口中点击<em><strong>See in New type</strong></em><br><img src="https://s2.loli.net/2024/11/05/SpFyXtHevEn67oO.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>点击下图中的<em><strong>View security</strong></em>按钮<br><img src="https://s2.loli.net/2024/11/05/8DPRt3aHoZucnfU.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>下图表格中的<em><strong>Domain Security</strong></em>即为Employee Type字段所需的Domain policy<br><img src="https://s2.loli.net/2024/11/05/JqXRlWehympj9Po.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<ol start="3">
+<li>授予Security Group相关资源的访问权限</li>
+</ol>
+<p>在完成第二步之后可以得到，Tianle_Test_Report所包含的三个字段Employee ID、Employee Type、Employee Name，他们分别对应的Domain policy都包含<em><strong>Worker Data: Current Staffing Information</strong></em>，因此需要将<em><strong>Tianle_ISSG</strong></em>授予<em><strong>Worker Data: Current Staffing Information</strong></em>的权限。</p>
+<p>运行下列Task在Workday中授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Worker Data: Current Staffing Information</strong></em>的权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Maintain Permissions for Security Group<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2024/11/05/MND2Wkh8BclLnpd.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p><img src="https://s2.loli.net/2024/11/05/lZnc8hSMBJrkO4u.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>遵循权限最小原则，仅授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Worker Data: Current Staffing Information</strong></em>的View only权限。</p>
+<p>Important Notes:<br>设置完成后需要执行<em><strong>Activate Pending Security Policy Changes</strong></em>任务，激活安全策略变更。</p>
+<ol start="4">
+<li>添加ISU到Security Group</li>
+</ol>
+<p>运行下列Task在Workday中将<em><strong>ISU_Tianle</strong></em>添加到<em><strong>Tianle_ISSG</strong></em>中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Edit Security Group<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2024/11/05/aUfKJlAkBnEd71p.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>在<em><strong>Integration System Users</strong></em>中添加<em><strong>ISU_Tianle</strong></em>即可。</p>
+<ol start="5">
+<li>分享Report给ISU或对应的Security Group</li>
+</ol>
+<p>此处示例选择将<em><strong>Tianle_Test_Report</strong></em>分享给<em><strong>ISU_Tianle</strong></em>。<br><img src="https://s2.loli.net/2024/11/05/IoBNtbyHSXG7dkE.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<h4 id="使用API调用Report"><a href="#使用API调用Report" class="headerlink" title="使用API调用Report"></a>使用API调用Report</h4><ol>
+<li>使用脚本获取JWT签名</li>
+</ol>
+<p>已经编写好了相关的脚本用于生成签名后的JWT，在此不做展示。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">由于JWT的签名过程需要使用私钥，这个过程不能直接在curl中完成。你需要先通过其他工具（如OpenSSL或专门的JWT库）生成签名后的JWT，然后再将其用于curl命令中。</span><br>JWT=&quot;eyJhbG...已签名的JWT令牌&quot;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>获取AccessToken</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">然后使用JWT获取access token</span><br>curl -X POST &quot;https://wd3-impl-services1.workday.com/ccx/oauth2/thoughtworks3/token&quot; \<br>  -H &quot;Content-Type: application/x-www-form-urlencoded&quot; \<br>  --data-urlencode &quot;grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&quot; \<br>  --data-urlencode &quot;assertion=$JWT&quot;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>调用API</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">ACCESS_TOKEN=&quot;Bearer eyJhbG...已获取的AccessToken&quot;<br>curl --request GET \<br>  --url &#x27;https://wd3-impl-services1.workday.com/ccx/service/customreport2/thoughtworks3/ISU_Tianle/Tianle_Test_Report?format=json&#x27; \<br>  --header &#x27;Authorization: $ACCESS_TOKEN&#x27; \<br>  --header &#x27;Content-Type: application/x-www-form-urlencoded&#x27; \<br>  --header &#x27;Cookie: TS012df9cf=010c505f0326e0d12675c372bdf463de84ec70e924ba431e80693628c766f8b8f81be1756c984a9637fc382c6502cae61156756dbc&#x27; \<br>  --header &#x27;User-Agent: insomnia/10.0.0&#x27; \<br>  --cookie TS012df9cf=010c505f03d906dfd1ca57ca907890d4afb487ad4ade09b1a4f6e0790fec225cdda4c0832fd11870ab4a99d950ede8ed5573bcd3a6 \<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>获取数据</li>
+</ol>
+<p>返回体如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs json"><br><span class="hljs-punctuation">&#123;</span><br>	<span class="hljs-attr">&quot;Report_Entry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>		<span class="hljs-punctuation">&#123;</span><br>			<span class="hljs-attr">&quot;Employee_Type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Regular&quot;</span><span class="hljs-punctuation">,</span><br>			<span class="hljs-attr">&quot;Employee_ID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;100xx&quot;</span><span class="hljs-punctuation">,</span><br>			<span class="hljs-attr">&quot;Worker&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Employee&quot;</span><br>		<span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">&#123;</span><br>			<span class="hljs-attr">&quot;Employee_Type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Regular&quot;</span><span class="hljs-punctuation">,</span><br>			<span class="hljs-attr">&quot;Employee_ID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;100xx&quot;</span><span class="hljs-punctuation">,</span><br>			<span class="hljs-attr">&quot;Worker&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Employee&quot;</span><br>		<span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">&#123;</span><br>			<span class="hljs-attr">&quot;Employee_ID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;13xxx&quot;</span><span class="hljs-punctuation">,</span><br>			<span class="hljs-attr">&quot;Worker&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Contingent Worker&quot;</span><br>		<span class="hljs-punctuation">&#125;</span><br>	<span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="使用注意事项"><a href="#使用注意事项" class="headerlink" title="使用注意事项"></a>使用注意事项</h4><ol>
+<li>报表类型必须为Advanced才能启用Web Service功能</li>
+<li>API Client需要具有相应的Function Area权限</li>
+<li>建议启用”Optimized for Performance”以提升性能</li>
+<li>定期检查报表访问权限设置</li>
+</ol>
+<h3 id="Web-Service集成"><a href="#Web-Service集成" class="headerlink" title="Web Service集成"></a>Web Service集成</h3><h4 id="概念-3"><a href="#概念-3" class="headerlink" title="概念"></a>概念</h4><p>Web Service集成是Workday提供的一种标准化接口服务，允许外部系统通过HTTP&#x2F;HTTPS协议与Workday进行数据交互，操作访问Workday中的数据。Workday支持多种Web Service类型，包括：</p>
+<ol>
+<li><p><strong>REST Web Services</strong></p>
+<ul>
+<li>基于REST架构风格</li>
+<li>使用JSON数据格式</li>
+<li>支持标准HTTP方法（GET、POST、PUT、DELETE等）</li>
+</ul>
+</li>
+<li><p><strong>SOAP Web Services</strong></p>
+<ul>
+<li>基于SOAP协议</li>
+<li>使用XML数据格式</li>
+<li>提供WSDL接口描述</li>
+</ul>
+</li>
+</ol>
+<p>以下段落来自于Workday官方文档:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Workday REST APIs exist alongside our public SOAP-based web services. For transferring large sets of data, use the SOAP web services. SOAP web services best support batch transactions for external enterprise applications.<br></code></pre></td></tr></table></figure>
+<p>Workday官方文档中提到，REST API与SOAP API并存，对于批量数据传输，建议使用SOAP API。并且在Workday中，SOAP API提供的资源访问更佳丰富，因此在本文中，主要示例为SOAP API。</p>
+<p>Notes: SOAP API可能并不常见，如果有兴趣的同学可以参考以下文档，可以简单地了解：<a target="_blank" rel="noopener" href="https://blog.postman.com/soap-api-definition/%EF%BC%8C%E5%9C%A8%E6%AD%A4%E4%B8%8D%E5%81%9A%E8%B5%98%E8%BF%B0%E3%80%82">https://blog.postman.com/soap-api-definition/，在此不做赘述。</a></p>
+<h4 id="前提条件-1"><a href="#前提条件-1" class="headerlink" title="前提条件"></a>前提条件</h4><ol>
+<li>已创建Integration System User (<em><strong>ISU_Tianle</strong></em>)</li>
+<li>已配置API Client(<em><strong>Tianle_Client</strong></em>)</li>
+<li>创建集成任务所需的Security Group(<em><strong>Tianle_ISSG</strong></em>)</li>
+</ol>
+<h4 id="认证方式"><a href="#认证方式" class="headerlink" title="认证方式"></a>认证方式</h4><p>Workday Web Service支持以下认证方式：</p>
+<ol>
+<li><p><strong>基本认证</strong></p>
+<ul>
+<li>使用用户名和密码</li>
+<li>适用于简单集成场景</li>
+<li>安全性相对较低</li>
+</ul>
+</li>
+<li><p><strong>OAuth 2.0</strong></p>
+<ul>
+<li>支持JWT授权流程</li>
+<li>提供更高的安全性</li>
+<li>支持访问令牌刷新</li>
+</ul>
+</li>
+</ol>
+<p>在此基于前文我们对于API Client的介绍，我们选择OAuth 2.0认证方式。</p>
+<h4 id="配置步骤-1"><a href="#配置步骤-1" class="headerlink" title="配置步骤"></a>配置步骤</h4><p>在此我们选择Get_Employee_Reviews作为示例, API文档:<a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/productionapi/Performance_Management/v43.0/Get_Employee_Reviews.html%E3%80%82">https://community.workday.com/sites/default/files/file-hosting/productionapi/Performance_Management/v43.0/Get_Employee_Reviews.html。</a></p>
+<ol>
+<li>确定API所需Security Policy</li>
+</ol>
+<p>使用以下任务来确定API所需的策略：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">View Security for Securable Item<br></code></pre></td></tr></table></figure>
+<p>输入API名称，例如<em><strong>Get Employee Reviews</strong></em>，点击<em><strong>OK</strong></em>按钮，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/NElhaTFKXWSy5DH.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>点击<em><strong>View Security</strong></em>按钮，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/kMmQWdIZbAgKVnL.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>由上图可知，<em><strong>Get Employee Reviews</strong></em>所需的Security Policy为<em><strong>Set Up: Employee Reviews</strong></em>，此Policy对应的Function Area为<em><strong>Performance Enablement</strong></em>。</p>
+<ol start="2">
+<li>启用API所需Function Area</li>
+</ol>
+<p>使用以下任务来启用API所需的Function Area：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Maintain Functional Areas<br></code></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2024/11/05/MOdt87N4Ggcjpf9.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>如图所示我们需要勾选<em><strong>Performance Enablement</strong></em>的Enabled勾选框，并点击<em><strong>OK</strong></em>按钮。</p>
+<p>如此便成功开启了<em><strong>Performance Enablement</strong></em> Function Area。</p>
+<ol start="3">
+<li>启用API所需Security Policy</li>
+</ol>
+<p>如下图所示方式可以开启相关的Security Policy。下图中为Disabled状态，是因为此Policy已经开启。<br><img src="https://s2.loli.net/2024/11/05/4XLEuaK5nOdVvqs.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<ol start="4">
+<li>授予Security Group相关资源的Security Policy</li>
+</ol>
+<p>在此处需要为<em><strong>Tianle_ISSG</strong></em>授予<em><strong>Set Up: Employee Reviews</strong></em>权限。</p>
+<p>使用以下任务来授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Set Up: Employee Reviews</strong></em>的权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Maintain Permissions for Security Group<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2024/11/05/IhDWtlmeo9CuNyc.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p><img src="https://s2.loli.net/2024/11/05/6kDVWdtxsZI72gf.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>此处遵循权限最小原则，仅授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Set Up: Employee Reviews</strong></em>的Get only权限。</p>
+<p>Important Notes:<br>设置完成后需要执行<em><strong>Activate Pending Security Policy Changes</strong></em>任务，激活安全策略变更。</p>
+<ol start="5">
+<li>为Security Group添加相关的Scope</li>
+</ol>
+<p>因为<em><strong>Get Employee Reviews</strong></em>需要使用<em><strong>Performance Enablement</strong></em> Function Area，因此需要将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中。</p>
+<p>使用以下任务来将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Edit Security Group<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2024/11/05/7i93jmUSGIBDTky.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>Important Notes:<br>在进行WWS集成时，要为Security Group加相关的Scope，否则会导致API调用失败。</p>
+<h3 id="调用API"><a href="#调用API" class="headerlink" title="调用API"></a>调用API</h3><ol>
+<li>生成AccessToken与前文相同，在此不做赘述。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ACCESS_TOKEN=&quot;Bearer eyJhbG...已获取的AccessToken&quot;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>调用API<br>url格式为：{Workday Instance URL}&#x2F;ccx&#x2F;service&#x2F;{Integration System ID}&#x2F;{Function Area}&#x2F;v{API Version}</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs shell">curl --request POST \<br>  --url https://wd3-impl-services1.workday.com/ccx/service/thoughtworks3/Performance_Management/v42.2 \<br>  --header &#x27;Authorization: $ACCESS_TOKEN&#x27; \<br>  --header &#x27;Content-Type: application/xml&#x27; \<br>  --header &#x27;User-Agent: insomnium/0.2.3&#x27; \<br>  --cookie TS012df9cf=010c505f03a660422d1a3ca204022bd286f06ca49f25ed1f9782f40cd27a7b2ba49b0cc50a0197d8a0be87ee7d8031f58ab398b13e \<br>  --data &#x27;&lt;env:Envelope xmlns:env=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:bsvc=&quot;urn:com.workday/bsvc&quot;&gt;<br>    &lt;env:Header&gt;<br>        &lt;bsvc:Workday_Common_Header&gt;<br>        &lt;/bsvc:Workday_Common_Header&gt;<br>    &lt;/env:Header&gt;<br>    &lt;env:Body&gt;<br>        &lt;bsvc:Get_Employee_Reviews_Request bsvc:version=&quot;v42.2&quot;&gt;<br>            &lt;bsvc:Response_Filter&gt;<br>                &lt;bsvc:Page&gt;1&lt;/bsvc:Page&gt;<br>                &lt;bsvc:Count&gt;1&lt;/bsvc:Count&gt;<br>            &lt;/bsvc:Response_Filter&gt;<br>        &lt;/bsvc:Get_Employee_Reviews_Request&gt;<br>    &lt;/env:Body&gt;<br>&lt;/env:Envelope&gt;&#x27;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>获取数据</li>
+</ol>
+<p>返回体如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">env:Envelope</span></span><br><span class="hljs-tag">	<span class="hljs-attr">xmlns:env</span>=<span class="hljs-string">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">env:Body</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">wd:Get_Employee_Reviews_Response</span></span><br><span class="hljs-tag">			<span class="hljs-attr">xmlns:wd</span>=<span class="hljs-string">&quot;urn:com.workday/bsvc&quot;</span> <span class="hljs-attr">wd:version</span>=<span class="hljs-string">&quot;v42.2&quot;</span>&gt;</span><br>			<span class="hljs-tag">&lt;<span class="hljs-name">wd:Response_Filter</span>&gt;</span><br>				<span class="hljs-tag">&lt;<span class="hljs-name">wd:Page</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Page</span>&gt;</span><br>				<span class="hljs-tag">&lt;<span class="hljs-name">wd:Count</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Count</span>&gt;</span><br>			<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Response_Filter</span>&gt;</span><br>			<span class="hljs-tag">&lt;<span class="hljs-name">wd:Response_Results</span>&gt;</span><br>				<span class="hljs-tag">&lt;<span class="hljs-name">wd:Total_Results</span>&gt;</span>940<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Total_Results</span>&gt;</span><br>				<span class="hljs-tag">&lt;<span class="hljs-name">wd:Total_Pages</span>&gt;</span>940<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Total_Pages</span>&gt;</span><br>				<span class="hljs-tag">&lt;<span class="hljs-name">wd:Page_Results</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Page_Results</span>&gt;</span><br>				<span class="hljs-tag">&lt;<span class="hljs-name">wd:Page</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Page</span>&gt;</span><br>			<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Response_Results</span>&gt;</span><br>			<span class="hljs-tag">&lt;<span class="hljs-name">wd:Response_Data</span>&gt;</span><br>				<span class="hljs-tag">&lt;<span class="hljs-name">wd:Employee_Review</span>&gt;</span><br>					<span class="hljs-tag">&lt;<span class="hljs-name">wd:Employee_Review_Reference</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>23ea88d95b091001e5275926c2710000<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_Review_ID&quot;</span>&gt;</span>PERFORMANCE_REVIEW-6-1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>					<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Employee_Review_Reference</span>&gt;</span><br>					<span class="hljs-tag">&lt;<span class="hljs-name">wd:Employee_Review_Data</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Employee_Review_ID</span>&gt;</span>PERFORMANCE_REVIEW-6-1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Employee_Review_ID</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Review_Completed</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Review_Completed</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Worker_Reference</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>59b22876019e01c0df7954e8db11c439<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_ID&quot;</span>&gt;</span>24214<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>						<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Worker_Reference</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Manager_Reference</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>59b22876019e01c0df7954e8db11c439<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_ID&quot;</span>&gt;</span>24214<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>						<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Manager_Reference</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>ee0323053a5e01998b2627e0a8601cc1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_ID&quot;</span>&gt;</span>15179<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>						<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Employee_Review_Template_Reference</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>c5d881f6c5761001e00cf06d11720000<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_Review_Template_ID&quot;</span>&gt;</span>EMPLOYEE_REVIEW_TEMPLATE-6-1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>						<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Employee_Review_Template_Reference</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Review_Initiation_Date</span>&gt;</span>2024-10-11T00:52:00.000-07:00<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Review_Initiation_Date</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Review_Period_Start_Date</span>&gt;</span>2024-01-01<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Review_Period_Start_Date</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Review_Period_End_Date</span>&gt;</span>2024-12-31<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Review_Period_End_Date</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Goals_Review_Section_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Review_Goal_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Goal</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p&gt;Test Goal<span class="hljs-symbol">&amp;lt;</span>/p&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Goal</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Description</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p&gt;Test Goal<span class="hljs-symbol">&amp;lt;</span>/p&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Description</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Category_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>e9fe5102f4c71001ea0952a413880001<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Goal_Category_ID&quot;</span>&gt;</span>GOAL_CATEGORY-6-3<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Category_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Category_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>e9fe5102f4c71001ea0952a413880000<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Goal_Category_ID&quot;</span>&gt;</span>GOAL_CATEGORY-6-2<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Category_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Evaluation_Data</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>										<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>ee0323053a5e01998b2627e0a8601cc1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>										<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_ID&quot;</span>&gt;</span>15179<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Evaluation_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Goal_Base_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>c5d881f6c5761001ed30f8f5190e0000<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Goal_Reference_ID&quot;</span>&gt;</span>GOAL-6-1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Goal_Base_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Goal_Archived</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Goal_Archived</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Review_Goal_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Section_Type_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>0605537220004d30b6a78dc862bd7c9c<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Section_Type_ID&quot;</span>&gt;</span>GOALS<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Section_Type_Reference</span>&gt;</span><br>						<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Goals_Review_Section_Data</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Questions_Review_Section_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Review_Question_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Question_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>c5d881f6c5761001e12a371d75ae0000<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Question_ID&quot;</span>&gt;</span>QUESTION-6-1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Question_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Evaluation_Data</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>										<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>ee0323053a5e01998b2627e0a8601cc1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>										<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_ID&quot;</span>&gt;</span>15179<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Review_Question_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Manager_Section_Evaluation_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Review_Rating_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>c5d881f6c5761001e0e8cdb80ce80000<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Review_Rating_ID&quot;</span>&gt;</span>REVIEW_RATING-6-2<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Review_Rating_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Manager_Section_Comment</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p&gt;Go ahead<span class="hljs-symbol">&amp;lt;</span>/p&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Manager_Section_Comment</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Manager_Section_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Employee_Section_Evaluation_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Review_Rating_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>c5d881f6c5761001e0e8cdb80ce80000<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Review_Rating_ID&quot;</span>&gt;</span>REVIEW_RATING-6-2<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Review_Rating_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Employee_Section_Comment</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p&gt;Blah blah blah<span class="hljs-symbol">&amp;lt;</span>/p&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Employee_Section_Comment</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Employee_Section_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Section_Evaluation_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>ee0323053a5e01998b2627e0a8601cc1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_ID&quot;</span>&gt;</span>15179<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Section_Comment</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p&gt;Looks good for promotion<span class="hljs-symbol">&amp;lt;</span>/p&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Section_Comment</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Section_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Section_Type_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>ae80836cfc75460683ea7d5e80003cc0<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Section_Type_ID&quot;</span>&gt;</span>QUESTIONS<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Section_Type_Reference</span>&gt;</span><br>						<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Questions_Review_Section_Data</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Supporting_Document_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Section_Evaluation_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>ee0323053a5e01998b2627e0a8601cc1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_ID&quot;</span>&gt;</span>15179<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Section_Comment</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p&gt;Looks good<span class="hljs-symbol">&amp;lt;</span>/p&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Section_Comment</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Section_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Section_Type_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>496973d1e0d0406aa7966e1b9015a825<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Section_Type_ID&quot;</span>&gt;</span>SUPPORTING-DOCUMENTS<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Section_Type_Reference</span>&gt;</span><br>						<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Supporting_Document_Evaluation_Data</span>&gt;</span><br>						<span class="hljs-tag">&lt;<span class="hljs-name">wd:Overall_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Manager_Overall_Evaluation_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Performance_Evaluation_Rating_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>c5d881f6c5761001e1e1e83d4d940000<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Review_Rating_ID&quot;</span>&gt;</span>REVIEW_RATING-6-3<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Performance_Evaluation_Rating_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Manager_Comment</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p&gt;<span class="hljs-symbol">&amp;lt;</span>i&gt;Blah blah good job<span class="hljs-symbol">&amp;lt;</span>/i&gt;<span class="hljs-symbol">&amp;lt;</span>/p&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Manager_Comment</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Manager_Overall_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Employee_Overall_Evaluation_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Performance_Evaluation_Rating_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>c5d881f6c5761001e1e1e83d4d940001<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Review_Rating_ID&quot;</span>&gt;</span>REVIEW_RATING-6-4<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Performance_Evaluation_Rating_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Employee_Comment</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p&gt;Blah Blah assessment sum<span class="hljs-symbol">&amp;lt;</span>/p&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Employee_Comment</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Employee_Overall_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Overall_Evaluation_Data</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>ee0323053a5e01998b2627e0a8601cc1<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>									<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Employee_ID&quot;</span>&gt;</span>15179<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:Additional_Manager_Comment</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p&gt;Additional manager overall summary<span class="hljs-symbol">&amp;lt;</span>/p&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Comment</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Additional_Manager_Overall_Evaluation_Data</span>&gt;</span><br>							<span class="hljs-tag">&lt;<span class="hljs-name">wd:Section_Type_Reference</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;WID&quot;</span>&gt;</span>d35755e188d94b1c82f19a0418253bd6<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>								<span class="hljs-tag">&lt;<span class="hljs-name">wd:ID</span> <span class="hljs-attr">wd:type</span>=<span class="hljs-string">&quot;Section_Type_ID&quot;</span>&gt;</span>OVERALL<span class="hljs-tag">&lt;/<span class="hljs-name">wd:ID</span>&gt;</span><br>							<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Section_Type_Reference</span>&gt;</span><br>						<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Overall_Evaluation_Data</span>&gt;</span><br>					<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Employee_Review_Data</span>&gt;</span><br>				<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Employee_Review</span>&gt;</span><br>			<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Response_Data</span>&gt;</span><br>		<span class="hljs-tag">&lt;/<span class="hljs-name">wd:Get_Employee_Reviews_Response</span>&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">env:Body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">env:Envelope</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="参考文档-2"><a href="#参考文档-2" class="headerlink" title="参考文档"></a>参考文档</h4><p>Soap API Derectionary: <a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/productionapi/versions/index.html">https://community.workday.com/sites/default/files/file-hosting/productionapi/versions/index.html</a><br>Rest API Derectionary: <a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/restapi/index.html">https://community.workday.com/sites/default/files/file-hosting/restapi/index.html</a></p>
+<h2 id="总结与思考"><a href="#总结与思考" class="headerlink" title="总结与思考"></a>总结与思考</h2><h3 id="集成要点总结"><a href="#集成要点总结" class="headerlink" title="集成要点总结"></a>集成要点总结</h3><p>通过对Workday集成的学习和实践，以下几个关键点值得注意：</p>
+<ol>
+<li><p><strong>权限管理至关重要</strong></p>
+<ul>
+<li>Security Group是权限管理的核心</li>
+<li>遵循最小权限原则</li>
+<li>权限变更需要及时激活</li>
+</ul>
+</li>
+<li><p><strong>认证机制的选择</strong></p>
+<ul>
+<li>OAuth 2.0 + JWT是推荐的认证方式</li>
+<li>需要妥善保管证书和密钥</li>
+<li>定期更新认证信息</li>
+</ul>
+</li>
+<li><p><strong>集成方式的选择</strong></p>
+<ul>
+<li>根据业务场景选择合适的集成方式</li>
+<li>RaaS适合需要自定义数据查询的场景</li>
+<li>Web Service适合复杂业务操作</li>
+</ul>
+</li>
+</ol>
+<p>掌握了本文中提到的两种集成方式，已经足以解决部分的集成问题。希望这篇文章能够帮助到同样需要进行Workday集成的同事。如果有任何问题，欢迎交流讨论。</p>
+<h3 id="实践经验"><a href="#实践经验" class="headerlink" title="实践经验"></a>实践经验</h3><p>在探索过程中，我们总结了以下一些实践经验，分享给大家：</p>
+<ul>
+<li>由于缺乏明确的官方学习路径和清晰的文档指引，学习曲线较为陡峭。在探索过程中需要投入大量时间和精力进行试错，并且要尽可能的通过实际操作进行验证。</li>
+<li>Workday官方文档内容时有欠缺，建议在搜索资料时善用AI工具辅助，这样可以提高知识整合的效率。</li>
+<li>推荐使用Workday Community平台，虽然上面的内容相对简略，但包含了大量实践经验分享，是很好的参考资料。</li>
+<li>Workday的集成任务通常需要多个步骤协同配合才能完成，因此在操作过程中需要保持耐心和细心。</li>
+</ul>
+<h3 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h3><p>Workday作为一个功能丰富且庞大的系统，要想真正掌握其集成能力并非易事。虽然通过自学和实践可以解决一些基础问题，但要深入了解这个领域，系统性的培训和课程学习一定是必不可少的。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Workday集成指南</div>
+      <div>http://example.com/2024/11/06/Workday集成指南/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Bakazhou</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 5, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/12/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B-%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="生产者消费者模型-线程池">
+                        <span class="hidden-mobile">生产者消费者模型-线程池</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="/" rel="nofollow noopener"><span>Bakazhou</span></a> <i class="iconfont icon-love"></i> <a href="/" target="_blank" rel="nofollow noopener"><span>Pcx</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
