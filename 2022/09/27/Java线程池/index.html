@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://p0.meituan.net/travelcube/90ea093549782945f2c968403fdc39d415386.png">
 <meta property="og:image" content="https://p0.meituan.net/travelcube/879edb4f06043d76cea27a3ff358cb1d45243.png">
 <meta property="article:published_time" content="2022-09-26T18:16:25.000Z">
-<meta property="article:modified_time" content="2022-09-27T07:54:36.694Z">
+<meta property="article:modified_time" content="2024-11-06T02:47:56.717Z">
 <meta property="article:author" content="Bakazhou">
 <meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
@@ -90,32 +90,40 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-shell-session.min.js"></script>
     <!-- One Dark Pro 主题样式 -->
     <style>
+      /* 基础代码块样式 */
       :not(pre) > code[class*="language-"],
       pre[class*="language-"] {
         color: #abb2bf !important;
         background: #282c34 !important;
         text-shadow: none !important;
-        -webkit-font-smoothing: antialiased !important;
-        -moz-osx-font-smoothing: grayscale !important;
-        font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+        -webkit-font-smoothing: subpixel-antialiased !important;
+        -moz-osx-font-smoothing: auto !important;
+        font-family: "SF Mono", Consolas, Monaco, "Andale Mono", monospace !important;
         font-size: 14px !important;
-        font-weight: normal !important;
+        font-weight: 400 !important;
+        font-feature-settings: normal !important;
         line-height: 1.6 !important;
         letter-spacing: normal !important;
         padding: 1em !important;
         margin: .5em 0 !important;
         border-radius: 6px !important;
         overflow: auto !important;
+        white-space: pre !important;
+        word-spacing: normal !important;
       }
 
+      /* 确保代码中的所有文本都使用相同的渲染设置 */
       pre[class*="language-"] * {
         text-shadow: none !important;
-        -webkit-font-smoothing: antialiased !important;
-        -moz-osx-font-smoothing: grayscale !important;
+        -webkit-font-smoothing: subpixel-antialiased !important;
+        -moz-osx-font-smoothing: auto !important;
       }
 
+      /* 通用语法高亮 - 适用于所有语言 */
       .token.comment,
       .token.prolog,
       .token.doctype,
@@ -124,7 +132,8 @@
         font-style: italic !important;
       }
 
-      .token.string {
+      .token.string,
+      .token.attr-value {
         color: #98c379 !important;          /* 字符串颜色 */
       }
 
@@ -138,7 +147,8 @@
       .token.number,
       .token.constant,
       .token.symbol,
-      .token.deleted {
+      .token.deleted,
+      .token.unit {
         color: #d19a66 !important;          /* 数字等颜色 */
       }
 
@@ -146,73 +156,56 @@
       .token.attr-name,
       .token.char,
       .token.builtin,
-      .token.inserted {
-        color: #e5c07b !important;          /* 选择器等颜色 */
+      .token.inserted,
+      .token.class-name {
+        color: #e5c07b !important;          /* 类名等颜色 */
       }
 
       .token.operator,
       .token.entity,
       .token.url,
-      .language-css .token.string,
-      .style .token.string,
-      .token.punctuation,
-      .token.operator {
-        color: #abb2bf !important;          /* 使用默认文本颜色 */
-        background: transparent !important;  /* 移除背景色 */
+      .token.variable,
+      .token.parameter {
+        color: #56b6c2 !important;          /* 操作符等颜色 */
+        background: transparent !important;
       }
 
       .token.atrule,
-      .token.attr-value,
-      .token.keyword {
+      .token.keyword,
+      .token.function-name {
         color: #c678dd !important;          /* 关键字颜色 */
       }
 
-      .token.function,
-      .token.class-name {
+      .token.function {
         color: #61afef !important;          /* 函数名颜色 */
       }
 
       .token.regex,
+      .token.important {
+        color: #c678dd !important;
+      }
+
       .token.important,
-      .token.variable {
-        color: #c678dd !important;          /* 变量颜色 */
+      .token.bold {
+        font-weight: bold !important;
       }
 
-      pre[class*="language-"].line-numbers {
-        position: relative;
-        padding-left: 3.8em !important;
+      .token.italic {
+        font-style: italic !important;
       }
 
-      /* 确保所有 token 都没有背景色 */
+      /* 确保所有 token 都没有背景色和特殊边框 */
       .token {
         background: transparent !important;
-      }
-
-      /* 移除所有 token 的特殊边框和阴影 */
-      [class*="language-"] .token {
         border: none !important;
         box-shadow: none !important;
         text-shadow: none !important;
       }
 
-      /* 为 text 类型的代码块设置特定颜色 */
+      /* text 类型的特殊处理 */
       code[class*="language-text"],
-      pre[class*="language-text"] {
-        color: #5bac4a !important;
-      }
-
+      pre[class*="language-text"],
       .language-text .token {
-        color: #5bac4a !important;
-      }
-
-      /* 确保 text 类型的所有 token 都使用相同的颜色 */
-      .language-text .token.operator,
-      .language-text .token.string,
-      .language-text .token.number,
-      .language-text .token.keyword,
-      .language-text .token.function,
-      .language-text .token.comment,
-      .language-text .token.punctuation {
         color: #5bac4a !important;
         background: transparent !important;
       }
@@ -227,13 +220,14 @@
         }
       });
     </script>
-    <!-- 确保以下语言支持在初始化脚本之前加载 -->
+    <!-- 确以下语言支持在初始化脚本之前加载 -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-shell-session.min.js"></script>
 <meta name="generator" content="Hexo 6.3.0"></head>
 
@@ -395,24 +389,24 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>案例输出</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">1</span>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Current thread id:12
+Current thread name:pool-1-thread-1
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">16</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">5</span>
+Current thread id:16
+Current thread name:pool-1-thread-5
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">13</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">2</span>
+Current thread id:13
+Current thread name:pool-1-thread-2
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">15</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">4</span>
+Current thread id:15
+Current thread name:pool-1-thread-4
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">14</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">3</span>
+Current thread id:14
+Current thread name:pool-1-thread-3
 
-<span class="token class-name">Current</span> thread is from cachedThreadPool：<span class="token boolean">true</span>
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">14</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Current thread is from cachedThreadPool：true
+Current thread id:14
+Current thread name:pool-1-thread-3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="实现源码"><a href="#实现源码" class="headerlink" title="实现源码"></a>实现源码</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">ExecutorService</span> <span class="token function">newCachedThreadPool</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token constant">MAX_VALUE</span><span class="token punctuation">,</span>
                                   <span class="token number">60L</span><span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span><span class="token constant">SECONDS</span><span class="token punctuation">,</span>
@@ -458,29 +452,29 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>案例输出</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">1</span>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Current thread id:12
+Current thread name:pool-1-thread-1
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">13</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">2</span>
+Current thread id:13
+Current thread name:pool-1-thread-2
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">14</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">3</span>
+Current thread id:14
+Current thread name:pool-1-thread-3
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">14</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">3</span>
+Current thread id:14
+Current thread name:pool-1-thread-3
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">13</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">2</span>
+Current thread id:13
+Current thread name:pool-1-thread-2
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">1</span>
+Current thread id:12
+Current thread name:pool-1-thread-1
 
-<span class="token class-name">Thread</span> pool size is<span class="token operator">:</span><span class="token number">3</span>
+Thread pool size is:3
 
-<span class="token class-name">Current</span> thread is from cachedThreadPool：<span class="token boolean">true</span>
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">14</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Current thread is from cachedThreadPool：true
+Current thread id:14
+Current thread name:pool-1-thread-3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="实现源码-1"><a href="#实现源码-1" class="headerlink" title="实现源码"></a>实现源码</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">ExecutorService</span> <span class="token function">newFixedThreadPool</span><span class="token punctuation">(</span><span class="token keyword">int</span> nThreads<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">(</span>nThreads<span class="token punctuation">,</span> nThreads<span class="token punctuation">,</span>
@@ -525,26 +519,26 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>案例输出</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">1</span>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Current thread id:12
+Current thread name:pool-1-thread-1
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">1</span>
+Current thread id:12
+Current thread name:pool-1-thread-1
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">1</span>
+Current thread id:12
+Current thread name:pool-1-thread-1
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">1</span>
+Current thread id:12
+Current thread name:pool-1-thread-1
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">1</span>
+Current thread id:12
+Current thread name:pool-1-thread-1
 
-<span class="token class-name">Thread</span> pool size is<span class="token operator">:</span><span class="token number">1</span>
+Thread pool size is:1
 
-<span class="token class-name">Current</span> thread is from cachedThreadPool：<span class="token boolean">true</span>
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Current</span> thread name<span class="token operator">:</span>pool<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>thread<span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Current thread is from cachedThreadPool：true
+Current thread id:12
+Current thread name:pool-1-thread-1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="实现源码-2"><a href="#实现源码-2" class="headerlink" title="实现源码"></a>实现源码</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">ExecutorService</span> <span class="token function">newSingleThreadExecutor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">FinalizableDelegatedExecutorService</span>
         <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0L</span><span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span><span class="token constant">MILLISECONDS</span><span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">LinkedBlockingQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Runnable</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -578,24 +572,24 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>案例输出</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Now</span> time is<span class="token operator">:</span><span class="token number">2022</span><span class="token operator">-</span><span class="token number">09</span><span class="token operator">-</span><span class="token number">26</span><span class="token constant">T15</span><span class="token operator">:</span><span class="token number">09</span><span class="token operator">:</span><span class="token number">44.237149</span>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Current thread id:12
+Now time is:2022-09-26T15:09:44.237149
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">13</span>
-<span class="token class-name">Now</span> time is<span class="token operator">:</span><span class="token number">2022</span><span class="token operator">-</span><span class="token number">09</span><span class="token operator">-</span><span class="token number">26</span><span class="token constant">T15</span><span class="token operator">:</span><span class="token number">09</span><span class="token operator">:</span><span class="token number">46.199538</span>
+Current thread id:13
+Now time is:2022-09-26T15:09:46.199538
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Now</span> time is<span class="token operator">:</span><span class="token number">2022</span><span class="token operator">-</span><span class="token number">09</span><span class="token operator">-</span><span class="token number">26</span><span class="token constant">T15</span><span class="token operator">:</span><span class="token number">09</span><span class="token operator">:</span><span class="token number">48.209985</span>
+Current thread id:12
+Now time is:2022-09-26T15:09:48.209985
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">14</span>
-<span class="token class-name">Now</span> time is<span class="token operator">:</span><span class="token number">2022</span><span class="token operator">-</span><span class="token number">09</span><span class="token operator">-</span><span class="token number">26</span><span class="token constant">T15</span><span class="token operator">:</span><span class="token number">09</span><span class="token operator">:</span><span class="token number">50.218799</span>
+Current thread id:14
+Now time is:2022-09-26T15:09:50.218799
 
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">13</span>
-<span class="token class-name">Now</span> time is<span class="token operator">:</span><span class="token number">2022</span><span class="token operator">-</span><span class="token number">09</span><span class="token operator">-</span><span class="token number">26</span><span class="token constant">T15</span><span class="token operator">:</span><span class="token number">09</span><span class="token operator">:</span><span class="token number">52.226608</span>
+Current thread id:13
+Now time is:2022-09-26T15:09:52.226608
 
-<span class="token class-name">Thread</span> pool size is<span class="token operator">:</span><span class="token number">3</span>
-<span class="token class-name">Current</span> thread id<span class="token operator">:</span><span class="token number">12</span>
-<span class="token class-name">Now</span> time is<span class="token operator">:</span><span class="token number">2022</span><span class="token operator">-</span><span class="token number">09</span><span class="token operator">-</span><span class="token number">26</span><span class="token constant">T15</span><span class="token operator">:</span><span class="token number">09</span><span class="token operator">:</span><span class="token number">54.236475</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Thread pool size is:3
+Current thread id:12
+Now time is:2022-09-26T15:09:54.236475<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="池模型-3"><a href="#池模型-3" class="headerlink" title="池模型"></a>池模型</h3><p><img src="https://logobakazhou.oss-cn-hangzhou.aliyuncs.com/2022/09/27/imgs/ScheduledThreadPool.png"></p>
 <h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p>从工作流程中可以看出，ScheduledThreadPool适用于需要单个后台线程执行周期任务，同时需要保证任务顺序执行的应用场景。</p>
 <h2 id="差异"><a href="#差异" class="headerlink" title="差异"></a>差异</h2><table>
@@ -811,22 +805,22 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>案例输出</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">user id<span class="token operator">:</span><span class="token number">0</span>
-user id<span class="token operator">:</span><span class="token number">1</span>
-user id<span class="token operator">:</span><span class="token number">2</span>
-user id<span class="token operator">:</span><span class="token number">3</span>
-user id<span class="token operator">:</span><span class="token number">4</span>
-user id<span class="token operator">:</span><span class="token number">5</span>
-user id<span class="token operator">:</span><span class="token number">6</span>
-user id<span class="token operator">:</span><span class="token number">7</span>
-user id<span class="token operator">:</span><span class="token number">8</span>
-user id<span class="token operator">:</span><span class="token number">9</span>
-user id<span class="token operator">:</span><span class="token number">10</span>
-user id<span class="token operator">:</span><span class="token number">11</span>
-user id<span class="token operator">:</span><span class="token number">12</span>
-user id<span class="token operator">:</span><span class="token number">13</span>
-user id<span class="token operator">:</span><span class="token number">14</span>
-单线程总耗时<span class="token operator">:</span><span class="token number">15</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">user id:0
+user id:1
+user id:2
+user id:3
+user id:4
+user id:5
+user id:6
+user id:7
+user id:8
+user id:9
+user id:10
+user id:11
+user id:12
+user id:13
+user id:14
+单线程总耗时:15s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="线程池优化方案"><a href="#线程池优化方案" class="headerlink" title="线程池优化方案"></a>线程池优化方案</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JucMain</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ExecutionException</span><span class="token punctuation">,</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
         <span class="token class-name">Object</span> lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -868,22 +862,22 @@ user id<span class="token operator">:</span><span class="token number">14</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>输出</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">user id<span class="token operator">:</span><span class="token number">0</span>
-user id<span class="token operator">:</span><span class="token number">1</span>
-user id<span class="token operator">:</span><span class="token number">2</span>
-user id<span class="token operator">:</span><span class="token number">3</span>
-user id<span class="token operator">:</span><span class="token number">4</span>
-user id<span class="token operator">:</span><span class="token number">5</span>
-user id<span class="token operator">:</span><span class="token number">6</span>
-user id<span class="token operator">:</span><span class="token number">7</span>
-user id<span class="token operator">:</span><span class="token number">8</span>
-user id<span class="token operator">:</span><span class="token number">9</span>
-user id<span class="token operator">:</span><span class="token number">10</span>
-user id<span class="token operator">:</span><span class="token number">11</span>
-user id<span class="token operator">:</span><span class="token number">12</span>
-user id<span class="token operator">:</span><span class="token number">13</span>
-user id<span class="token operator">:</span><span class="token number">14</span>
-多线程总耗时<span class="token operator">:</span><span class="token number">4</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">user id:0
+user id:1
+user id:2
+user id:3
+user id:4
+user id:5
+user id:6
+user id:7
+user id:8
+user id:9
+user id:10
+user id:11
+user id:12
+user id:13
+user id:14
+多线程总耗时:4s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h4><p>可以看到在使用了线程池后，效率得到了极大的提升，耗时从15s减少到了4s</p>
 

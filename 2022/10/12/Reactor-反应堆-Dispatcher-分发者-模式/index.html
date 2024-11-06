@@ -76,32 +76,40 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-shell-session.min.js"></script>
     <!-- One Dark Pro 主题样式 -->
     <style>
+      /* 基础代码块样式 */
       :not(pre) > code[class*="language-"],
       pre[class*="language-"] {
         color: #abb2bf !important;
         background: #282c34 !important;
         text-shadow: none !important;
-        -webkit-font-smoothing: antialiased !important;
-        -moz-osx-font-smoothing: grayscale !important;
-        font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+        -webkit-font-smoothing: subpixel-antialiased !important;
+        -moz-osx-font-smoothing: auto !important;
+        font-family: "SF Mono", Consolas, Monaco, "Andale Mono", monospace !important;
         font-size: 14px !important;
-        font-weight: normal !important;
+        font-weight: 400 !important;
+        font-feature-settings: normal !important;
         line-height: 1.6 !important;
         letter-spacing: normal !important;
         padding: 1em !important;
         margin: .5em 0 !important;
         border-radius: 6px !important;
         overflow: auto !important;
+        white-space: pre !important;
+        word-spacing: normal !important;
       }
 
+      /* 确保代码中的所有文本都使用相同的渲染设置 */
       pre[class*="language-"] * {
         text-shadow: none !important;
-        -webkit-font-smoothing: antialiased !important;
-        -moz-osx-font-smoothing: grayscale !important;
+        -webkit-font-smoothing: subpixel-antialiased !important;
+        -moz-osx-font-smoothing: auto !important;
       }
 
+      /* 通用语法高亮 - 适用于所有语言 */
       .token.comment,
       .token.prolog,
       .token.doctype,
@@ -110,7 +118,8 @@
         font-style: italic !important;
       }
 
-      .token.string {
+      .token.string,
+      .token.attr-value {
         color: #98c379 !important;          /* 字符串颜色 */
       }
 
@@ -124,7 +133,8 @@
       .token.number,
       .token.constant,
       .token.symbol,
-      .token.deleted {
+      .token.deleted,
+      .token.unit {
         color: #d19a66 !important;          /* 数字等颜色 */
       }
 
@@ -132,73 +142,56 @@
       .token.attr-name,
       .token.char,
       .token.builtin,
-      .token.inserted {
-        color: #e5c07b !important;          /* 选择器等颜色 */
+      .token.inserted,
+      .token.class-name {
+        color: #e5c07b !important;          /* 类名等颜色 */
       }
 
       .token.operator,
       .token.entity,
       .token.url,
-      .language-css .token.string,
-      .style .token.string,
-      .token.punctuation,
-      .token.operator {
-        color: #abb2bf !important;          /* 使用默认文本颜色 */
-        background: transparent !important;  /* 移除背景色 */
+      .token.variable,
+      .token.parameter {
+        color: #56b6c2 !important;          /* 操作符等颜色 */
+        background: transparent !important;
       }
 
       .token.atrule,
-      .token.attr-value,
-      .token.keyword {
+      .token.keyword,
+      .token.function-name {
         color: #c678dd !important;          /* 关键字颜色 */
       }
 
-      .token.function,
-      .token.class-name {
+      .token.function {
         color: #61afef !important;          /* 函数名颜色 */
       }
 
       .token.regex,
+      .token.important {
+        color: #c678dd !important;
+      }
+
       .token.important,
-      .token.variable {
-        color: #c678dd !important;          /* 变量颜色 */
+      .token.bold {
+        font-weight: bold !important;
       }
 
-      pre[class*="language-"].line-numbers {
-        position: relative;
-        padding-left: 3.8em !important;
+      .token.italic {
+        font-style: italic !important;
       }
 
-      /* 确保所有 token 都没有背景色 */
+      /* 确保所有 token 都没有背景色和特殊边框 */
       .token {
         background: transparent !important;
-      }
-
-      /* 移除所有 token 的特殊边框和阴影 */
-      [class*="language-"] .token {
         border: none !important;
         box-shadow: none !important;
         text-shadow: none !important;
       }
 
-      /* 为 text 类型的代码块设置特定颜色 */
+      /* text 类型的特殊处理 */
       code[class*="language-text"],
-      pre[class*="language-text"] {
-        color: #5bac4a !important;
-      }
-
+      pre[class*="language-text"],
       .language-text .token {
-        color: #5bac4a !important;
-      }
-
-      /* 确保 text 类型的所有 token 都使用相同的颜色 */
-      .language-text .token.operator,
-      .language-text .token.string,
-      .language-text .token.number,
-      .language-text .token.keyword,
-      .language-text .token.function,
-      .language-text .token.comment,
-      .language-text .token.punctuation {
         color: #5bac4a !important;
         background: transparent !important;
       }
@@ -213,13 +206,14 @@
         }
       });
     </script>
-    <!-- 确保以下语言支持在初始化脚本之前加载 -->
+    <!-- 确以下语言支持在初始化脚本之前加载 -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-shell-session.min.js"></script>
 <meta name="generator" content="Hexo 6.3.0"></head>
 
