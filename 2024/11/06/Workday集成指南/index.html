@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://s2.loli.net/2024/11/05/6kDVWdtxsZI72gf.png">
 <meta property="og:image" content="https://s2.loli.net/2024/11/05/7i93jmUSGIBDTky.png">
 <meta property="article:published_time" content="2024-11-06T00:46:32.000Z">
-<meta property="article:modified_time" content="2024-11-05T08:50:12.840Z">
+<meta property="article:modified_time" content="2024-11-06T02:37:49.850Z">
 <meta property="article:author" content="Bakazhou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png">
@@ -77,6 +77,163 @@
     
 <script src="/lib/jquery/jquery.min.js"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <!-- 添加行号支持 -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <!-- 添加常用语言支持 -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <!-- One Dark Pro 主题样式 -->
+    <style>
+      :not(pre) > code[class*="language-"],
+      pre[class*="language-"] {
+        color: #abb2bf !important;
+        background: #282c34 !important;
+        text-shadow: none !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+        font-size: 14px !important;
+        font-weight: normal !important;
+        line-height: 1.6 !important;
+        letter-spacing: normal !important;
+        padding: 1em !important;
+        margin: .5em 0 !important;
+        border-radius: 6px !important;
+        overflow: auto !important;
+      }
+
+      pre[class*="language-"] * {
+        text-shadow: none !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+      }
+
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #5c6370 !important;          /* 注释颜色 */
+        font-style: italic !important;
+      }
+
+      .token.string {
+        color: #98c379 !important;          /* 字符串颜色 */
+      }
+
+      .token.punctuation {
+        color: #abb2bf !important;          /* 标点符号颜色 */
+      }
+
+      .token.property,
+      .token.tag,
+      .token.boolean,
+      .token.number,
+      .token.constant,
+      .token.symbol,
+      .token.deleted {
+        color: #d19a66 !important;          /* 数字等颜色 */
+      }
+
+      .token.selector,
+      .token.attr-name,
+      .token.char,
+      .token.builtin,
+      .token.inserted {
+        color: #e5c07b !important;          /* 选择器等颜色 */
+      }
+
+      .token.operator,
+      .token.entity,
+      .token.url,
+      .language-css .token.string,
+      .style .token.string,
+      .token.punctuation,
+      .token.operator {
+        color: #abb2bf !important;          /* 使用默认文本颜色 */
+        background: transparent !important;  /* 移除背景色 */
+      }
+
+      .token.atrule,
+      .token.attr-value,
+      .token.keyword {
+        color: #c678dd !important;          /* 关键字颜色 */
+      }
+
+      .token.function,
+      .token.class-name {
+        color: #61afef !important;          /* 函数名颜色 */
+      }
+
+      .token.regex,
+      .token.important,
+      .token.variable {
+        color: #c678dd !important;          /* 变量颜色 */
+      }
+
+      pre[class*="language-"].line-numbers {
+        position: relative;
+        padding-left: 3.8em !important;
+      }
+
+      /* 确保所有 token 都没有背景色 */
+      .token {
+        background: transparent !important;
+      }
+
+      /* 移除所有 token 的特殊边框和阴影 */
+      [class*="language-"] .token {
+        border: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+
+      /* 为 text 类型的代码块设置特定颜色 */
+      code[class*="language-text"],
+      pre[class*="language-text"] {
+        color: #5bac4a !important;
+      }
+
+      .language-text .token {
+        color: #5bac4a !important;
+      }
+
+      /* 确保 text 类型的所有 token 都使用相同的颜色 */
+      .language-text .token.operator,
+      .language-text .token.string,
+      .language-text .token.number,
+      .language-text .token.keyword,
+      .language-text .token.function,
+      .language-text .token.comment,
+      .language-text .token.punctuation {
+        color: #5bac4a !important;
+        background: transparent !important;
+      }
+    </style>
+    <!-- 在已有的 prismjs 相关代码后添加以下内容 -->
+    <script>
+      // 等待文档加载完成后执行
+      document.addEventListener('DOMContentLoaded', (event) => {
+        // 手动触发 Prism 的高亮
+        if (typeof Prism !== 'undefined') {
+          Prism.highlightAll();
+        }
+      });
+    </script>
+    <!-- 确保以下语言支持在初始化脚本之前加载 -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-shell-session.min.js"></script>
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
@@ -244,12 +401,9 @@
 </li>
 </ol>
 <h4 id="创建步骤"><a href="#创建步骤" class="headerlink" title="创建步骤"></a>创建步骤</h4><p>使用下列Task在Workday创建Security Group</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Create Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>因为在我们的场景中，Security Group 需要用于集成，因此选择类型为<em><strong>Integration System Security Group (Unconstrained)<em><strong>，安全组名称按需求填写即可，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png" alt="alt text"><br>信息填写完毕后，点击</strong></em>OK</strong></em>按钮即可。<br>完成上述步骤后，便拥有了一个用于进行集成任务的Security Group名为<em><strong>Tianle_ISSG</strong></em>。</p>
-<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ol>
-<li>Security Group Concepts: <a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/dan1370797393239.html">https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/dan1370797393239.html</a></li>
-<li>Security Group Types: <a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/gyz1563919157019.html?toc=2.1.6">https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/gyz1563919157019.html?toc=2.1.6</a></li>
-</ol>
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><p><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/dan1370797393239.html" title="点击访问Security Group Concepts">Security Group Concepts Document</a><br><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/gyz1563919157019.html?toc=2.1.6" title="点击访问Security Group Types">Security Group Types Document</a></p>
 <h3 id="Integration-System-User"><a href="#Integration-System-User" class="headerlink" title="Integration System User"></a>Integration System User</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>Integration System User (ISU) 是Workday中专门用于系统集成的特殊用户类型。与普通用户不同，ISU主要用于系统间的自动化交互，而不是人工操作。ISU在Workday集成架构中扮演着重要角色，它作为连接Workday与外部系统的桥梁，确保系统间的安全通信。</p>
 <h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>ISU主要应用于以下场景：</p>
 <ol>
@@ -260,7 +414,7 @@
 </ol>
 <h4 id="创建步骤-1"><a href="#创建步骤-1" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
 <li><p>使用下列Task在Workday创建Security Group：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Create Integration System User<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Integration System User<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li><p>填写基本信息：</p>
 <ul>
@@ -281,7 +435,7 @@
 <li>数据同步与交换</li>
 </ol>
 <h4 id="创建步骤-2"><a href="#创建步骤-2" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
-<li>使用下列Task在Workday创建API Client：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Create API Client<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>使用下列Task在Workday创建API Client：<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create API Client<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li>填写基本信息：<ul>
 <li>客户端名称: 遵循命名规范</li>
 <li>认证方式: 选择JWT Bearer Grant</li>
@@ -301,7 +455,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 </ol>
 <p>信息填写完毕后，点击<em><strong>OK</strong></em>按钮即可。</p>
 <p>完成上述步骤后，便拥有了一个用于进行集成任务的API Client名为<em><strong>Tianle_Client</strong></em>。</p>
-<h4 id="参考文档-1"><a href="#参考文档-1" class="headerlink" title="参考文档"></a>参考文档</h4><p>API Client Registration: <a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/authentication/oauth/dan1370797831458.html">https://doc.workday.com/admin-guide/en-us/authentication-and-security/authentication/oauth/dan1370797831458.html</a></p>
+<h4 id="参考文档-1"><a href="#参考文档-1" class="headerlink" title="参考文档"></a>参考文档</h4><p><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/authentication/oauth/dan1370797831458.html" title="点击访问API Client Registration Document">API Client Registration Document</a></p>
 <h3 id="Report"><a href="#Report" class="headerlink" title="Report"></a>Report</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>Report是Workday平台中的核心功能之一，它提供了强大的数据处理和报表生成能力。通过Report，用户可以将分散的数据整合成有价值的数据集合，为决策提供数据支持。它不仅支持基础的数据提取功能，还能够处理复杂的业务场景，包括但不限于：</p>
 <ul>
 <li>自定义报表设计：支持灵活的字段选择</li>
@@ -319,7 +473,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>合规性报告生成</li>
 </ol>
 <h4 id="创建步骤-3"><a href="#创建步骤-3" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
-<li>使用下列Task在Workday创建Report：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Create Custom Report<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>使用下列Task在Workday创建Report：<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Custom Report<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li>填写基本信息：<ul>
 <li>报表名称: 遵循命名规范</li>
 <li>报表类型: 选择Advanced</li>
@@ -352,7 +506,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 </ol>
 <p>在完成第二步之后可以得到，Tianle_Test_Report所包含的三个字段Employee ID、Employee Type、Employee Name，他们分别对应的Domain policy都包含<em><strong>Worker Data: Current Staffing Information</strong></em>，因此需要将<em><strong>Tianle_ISSG</strong></em>授予<em><strong>Worker Data: Current Staffing Information</strong></em>的权限。</p>
 <p>运行下列Task在Workday中授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Worker Data: Current Staffing Information</strong></em>的权限：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Maintain Permissions <span class="token keyword">for</span> Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Maintain Permissions for Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/MND2Wkh8BclLnpd.png" alt="alt text"></p>
 <p><img src="https://s2.loli.net/2024/11/05/lZnc8hSMBJrkO4u.png" alt="alt text"></p>
@@ -362,7 +516,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>添加ISU到Security Group</li>
 </ol>
 <p>运行下列Task在Workday中将<em><strong>ISU_Tianle</strong></em>添加到<em><strong>Tianle_ISSG</strong></em>中：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Edit Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Edit Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/aUfKJlAkBnEd71p.png" alt="alt text"></p>
 <p>在<em><strong>Integration System Users</strong></em>中添加<em><strong>ISU_Tianle</strong></em>即可。</p>
@@ -446,7 +600,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 </li>
 </ol>
 <p>以下段落来自于Workday官方文档:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Workday REST APIs exist alongside our public SOAP-based web services. For transferring large sets of data, use the SOAP web services. SOAP web services best support batch transactions <span class="token keyword">for</span> external enterprise applications.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Workday REST APIs exist alongside our public SOAP-based web services. For transferring large sets of data, use the SOAP web services. SOAP web services best support batch transactions for external enterprise applications.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Workday官方文档中提到，REST API与SOAP API并存，对于批量数据传输，建议使用SOAP API。并且在Workday中，SOAP API提供的资源访问更佳丰富，因此在本文中，主要示例为SOAP API。</p>
 <p>Notes: SOAP API可能并不常见，如果有兴趣的同学可以参考以下文档，可以简单地了解：<a target="_blank" rel="noopener" href="https://blog.postman.com/soap-api-definition/%EF%BC%8C%E5%9C%A8%E6%AD%A4%E4%B8%8D%E5%81%9A%E8%B5%98%E8%BF%B0%E3%80%82">https://blog.postman.com/soap-api-definition/，在此不做赘述。</a></p>
 <h4 id="前提条件-1"><a href="#前提条件-1" class="headerlink" title="前提条件"></a>前提条件</h4><ol>
@@ -477,7 +631,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>确定API所需Security Policy</li>
 </ol>
 <p>使用以下任务来确定API所需的策略：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">View Security <span class="token keyword">for</span> Securable Item<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">View Security for Securable Item<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>输入API名称，例如<em><strong>Get Employee Reviews</strong></em>，点击<em><strong>OK</strong></em>按钮，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/NElhaTFKXWSy5DH.png" alt="alt text"></p>
 <p>点击<em><strong>View Security</strong></em>按钮，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/kMmQWdIZbAgKVnL.png" alt="alt text"></p>
 <p>由上图可知，<em><strong>Get Employee Reviews</strong></em>所需的Security Policy为<em><strong>Set Up: Employee Reviews</strong></em>，此Policy对应的Function Area为<em><strong>Performance Enablement</strong></em>。</p>
@@ -485,7 +639,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>启用API所需Function Area</li>
 </ol>
 <p>使用以下任务来启用API所需的Function Area：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Maintain Functional Areas<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Maintain Functional Areas<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://s2.loli.net/2024/11/05/MOdt87N4Ggcjpf9.png" alt="alt text"></p>
 <p>如图所示我们需要勾选<em><strong>Performance Enablement</strong></em>的Enabled勾选框，并点击<em><strong>OK</strong></em>按钮。</p>
 <p>如此便成功开启了<em><strong>Performance Enablement</strong></em> Function Area。</p>
@@ -497,8 +651,8 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>授予Security Group相关资源的Security Policy</li>
 </ol>
 <p>在此处需要为<em><strong>Tianle_ISSG</strong></em>授予<em><strong>Set Up: Employee Reviews</strong></em>权限。</p>
-<p>使用以下任务来授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Set Up: Employee Reviews</strong></em>的权限：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Maintain Permissions <span class="token keyword">for</span> Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>使用以下task来授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Set Up: Employee Reviews</strong></em>的权限：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Maintain Permissions for Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/IhDWtlmeo9CuNyc.png" alt="alt text"></p>
 <p><img src="https://s2.loli.net/2024/11/05/6kDVWdtxsZI72gf.png" alt="alt text"></p>
@@ -508,8 +662,8 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>为Security Group添加相关的Scope</li>
 </ol>
 <p>因为<em><strong>Get Employee Reviews</strong></em>需要使用<em><strong>Performance Enablement</strong></em> Function Area，因此需要将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中。</p>
-<p>使用以下任务来将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Edit Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>使用以下task来将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Edit Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/7i93jmUSGIBDTky.png" alt="alt text"></p>
 <p>Important Notes:<br>在进行WWS集成时，要为Security Group加相关的Scope，否则会导致API调用失败。</p>
@@ -705,7 +859,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">env:</span>Body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">env:</span>Envelope</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="参考文档-2"><a href="#参考文档-2" class="headerlink" title="参考文档"></a>参考文档</h4><p>Soap API Derectionary: <a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/productionapi/versions/index.html">https://community.workday.com/sites/default/files/file-hosting/productionapi/versions/index.html</a><br>Rest API Derectionary: <a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/restapi/index.html">https://community.workday.com/sites/default/files/file-hosting/restapi/index.html</a></p>
+<h4 id="参考文档-2"><a href="#参考文档-2" class="headerlink" title="参考文档"></a>参考文档</h4><p><a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/productionapi/versions/index.html" title="点击访问Soap API Derectionary">Soap API Derectionary</a><br><a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/restapi/index.html" title="点击访问Rest API Derectionary">Rest API Derectionary</a></p>
 <h2 id="总结与思考"><a href="#总结与思考" class="headerlink" title="总结与思考"></a>总结与思考</h2><h3 id="集成要点总结"><a href="#集成要点总结" class="headerlink" title="集成要点总结"></a>集成要点总结</h3><p>通过对Workday集成的学习和实践，以下几个关键点值得注意：</p>
 <ol>
 <li><p><strong>权限管理至关重要</strong></p>

@@ -69,6 +69,163 @@
     
 <script src="/lib/jquery/jquery.min.js"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <!-- 添加行号支持 -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <!-- 添加常用语言支持 -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <!-- One Dark Pro 主题样式 -->
+    <style>
+      :not(pre) > code[class*="language-"],
+      pre[class*="language-"] {
+        color: #abb2bf !important;
+        background: #282c34 !important;
+        text-shadow: none !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+        font-size: 14px !important;
+        font-weight: normal !important;
+        line-height: 1.6 !important;
+        letter-spacing: normal !important;
+        padding: 1em !important;
+        margin: .5em 0 !important;
+        border-radius: 6px !important;
+        overflow: auto !important;
+      }
+
+      pre[class*="language-"] * {
+        text-shadow: none !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+      }
+
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #5c6370 !important;          /* 注释颜色 */
+        font-style: italic !important;
+      }
+
+      .token.string {
+        color: #98c379 !important;          /* 字符串颜色 */
+      }
+
+      .token.punctuation {
+        color: #abb2bf !important;          /* 标点符号颜色 */
+      }
+
+      .token.property,
+      .token.tag,
+      .token.boolean,
+      .token.number,
+      .token.constant,
+      .token.symbol,
+      .token.deleted {
+        color: #d19a66 !important;          /* 数字等颜色 */
+      }
+
+      .token.selector,
+      .token.attr-name,
+      .token.char,
+      .token.builtin,
+      .token.inserted {
+        color: #e5c07b !important;          /* 选择器等颜色 */
+      }
+
+      .token.operator,
+      .token.entity,
+      .token.url,
+      .language-css .token.string,
+      .style .token.string,
+      .token.punctuation,
+      .token.operator {
+        color: #abb2bf !important;          /* 使用默认文本颜色 */
+        background: transparent !important;  /* 移除背景色 */
+      }
+
+      .token.atrule,
+      .token.attr-value,
+      .token.keyword {
+        color: #c678dd !important;          /* 关键字颜色 */
+      }
+
+      .token.function,
+      .token.class-name {
+        color: #61afef !important;          /* 函数名颜色 */
+      }
+
+      .token.regex,
+      .token.important,
+      .token.variable {
+        color: #c678dd !important;          /* 变量颜色 */
+      }
+
+      pre[class*="language-"].line-numbers {
+        position: relative;
+        padding-left: 3.8em !important;
+      }
+
+      /* 确保所有 token 都没有背景色 */
+      .token {
+        background: transparent !important;
+      }
+
+      /* 移除所有 token 的特殊边框和阴影 */
+      [class*="language-"] .token {
+        border: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+
+      /* 为 text 类型的代码块设置特定颜色 */
+      code[class*="language-text"],
+      pre[class*="language-text"] {
+        color: #5bac4a !important;
+      }
+
+      .language-text .token {
+        color: #5bac4a !important;
+      }
+
+      /* 确保 text 类型的所有 token 都使用相同的颜色 */
+      .language-text .token.operator,
+      .language-text .token.string,
+      .language-text .token.number,
+      .language-text .token.keyword,
+      .language-text .token.function,
+      .language-text .token.comment,
+      .language-text .token.punctuation {
+        color: #5bac4a !important;
+        background: transparent !important;
+      }
+    </style>
+    <!-- 在已有的 prismjs 相关代码后添加以下内容 -->
+    <script>
+      // 等待文档加载完成后执行
+      document.addEventListener('DOMContentLoaded', (event) => {
+        // 手动触发 Prism 的高亮
+        if (typeof Prism !== 'undefined') {
+          Prism.highlightAll();
+        }
+      });
+    </script>
+    <!-- 确保以下语言支持在初始化脚本之前加载 -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-shell-session.min.js"></script>
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
