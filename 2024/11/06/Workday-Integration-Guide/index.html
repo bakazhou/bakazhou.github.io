@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Workday集成指南前言近期因为项目需要，需要学习探索Workday系统的集成相关知识，因此有了此文。在此之前，对于Workday的了解仅限于它是全球最大的云HCM解决方案供应商之一，也是我司的供应商之一。对它的接触也仅限于入职阶段上传过一些必须资料而已。因此，此文更多的是基于自己的理解和实践，记录了探索Workday集成的一些过程和心得。 Workday集成概述集成类型总览Workday提供了">
+    <meta name="description" content="Workday Integration GuideIntroductionRecently, due to project requirements, I needed to learn and explore Workday system integration knowledge, which led to this article. Prior to this, my understandi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Workday集成指南">
-<meta property="og:url" content="http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:title" content="Workday Integration Guide">
+<meta property="og:url" content="http://example.com/2024/11/06/Workday-Integration-Guide/index.html">
 <meta property="og:site_name" content="Bakazhou Blog">
-<meta property="og:description" content="Workday集成指南前言近期因为项目需要，需要学习探索Workday系统的集成相关知识，因此有了此文。在此之前，对于Workday的了解仅限于它是全球最大的云HCM解决方案供应商之一，也是我司的供应商之一。对它的接触也仅限于入职阶段上传过一些必须资料而已。因此，此文更多的是基于自己的理解和实践，记录了探索Workday集成的一些过程和心得。 Workday集成概述集成类型总览Workday提供了">
+<meta property="og:description" content="Workday Integration GuideIntroductionRecently, due to project requirements, I needed to learn and explore Workday system integration knowledge, which led to this article. Prior to this, my understandi">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png">
 <meta property="og:image" content="https://s2.loli.net/2024/11/05/G7ZMBQ2IhtpJmWe.png">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://s2.loli.net/2024/11/05/6kDVWdtxsZI72gf.png">
 <meta property="og:image" content="https://s2.loli.net/2024/11/05/7i93jmUSGIBDTky.png">
 <meta property="article:published_time" content="2024-11-06T00:46:32.000Z">
-<meta property="article:modified_time" content="2024-11-07T01:44:42.681Z">
+<meta property="article:modified_time" content="2024-11-07T01:51:24.983Z">
 <meta property="article:author" content="Bakazhou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png">
@@ -56,7 +56,7 @@
         
     
     <!-- title -->
-    <title>Workday集成指南</title>
+    <title>Workday Integration Guide</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
@@ -339,10 +339,8 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2024/11/06/Workday-Integration-Guide/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
         
-        
-        <li><a class="icon" href="/2022/10/12/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B-%E7%BA%BF%E7%A8%8B%E6%B1%A0/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        <li><a class="icon" href="/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
         <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
@@ -355,21 +353,21 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&text=Workday集成指南"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&is_video=false&description=Workday集成指南"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Workday集成指南&body=Check out this article: http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&name=Workday集成指南&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/11/06/Workday-Integration-Guide/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/11/06/Workday-Integration-Guide/&text=Workday Integration Guide"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/11/06/Workday-Integration-Guide/&is_video=false&description=Workday Integration Guide"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Workday Integration Guide&body=Check out this article: http://example.com/2024/11/06/Workday-Integration-Guide/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/11/06/Workday-Integration-Guide/&name=Workday Integration Guide&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97"><span class="toc-number">1.</span> <span class="toc-text">Workday集成指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Workday%E9%9B%86%E6%88%90%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">Workday集成概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E7%B1%BB%E5%9E%8B%E6%80%BB%E8%A7%88"><span class="toc-number">1.2.1.</span> <span class="toc-text">集成类型总览</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Inbound-Integration%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%EF%BC%89"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1. Inbound Integration（数据导入）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Outbound-Integration%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA%EF%BC%89"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2. Outbound Integration（数据导出）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Real-time-Integration%EF%BC%88%E5%AE%9E%E6%97%B6%E9%9B%86%E6%88%90%EF%BC%89"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">3. Real-time Integration（实时集成）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Scheduled-Integration%EF%BC%88%E5%AE%9A%E6%97%B6%E9%9B%86%E6%88%90%EF%BC%89"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">4. Scheduled Integration（定时集成）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Event-driven-Integration%EF%BC%88%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%EF%BC%89"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">5. Event-driven Integration（事件驱动）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81"><span class="toc-number">1.2.2.</span> <span class="toc-text">本文内容概要</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">核心组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Security-Group"><span class="toc-number">1.3.1.</span> <span class="toc-text">Security Group</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%92%8C%E7%94%A8%E9%80%94"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">功能和用途</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">创建步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">参考文档</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Integration-System-User"><span class="toc-number">1.3.2.</span> <span class="toc-text">Integration System User</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A5%E9%AA%A4-1"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">创建步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API-Client"><span class="toc-number">1.3.3.</span> <span class="toc-text">API Client</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-2"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A5%E9%AA%A4-2"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">创建步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-1"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">参考文档</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Report"><span class="toc-number">1.3.4.</span> <span class="toc-text">Report</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A5%E9%AA%A4-3"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">创建步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E4%BB%BB%E5%8A%A1%E5%9C%BA%E6%99%AF"><span class="toc-number">1.4.</span> <span class="toc-text">集成任务场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Report-as-a-Service-RaaS-%E9%9B%86%E6%88%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">Report as a Service(RaaS)集成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">前提条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">配置步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8API%E8%B0%83%E7%94%A8Report"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">使用API调用Report</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">使用注意事项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Service%E9%9B%86%E6%88%90"><span class="toc-number">1.4.2.</span> <span class="toc-text">Web Service集成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-3"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6-1"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">前提条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">认证方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4-1"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">配置步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8API"><span class="toc-number">1.4.3.</span> <span class="toc-text">调用API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-2"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">参考文档</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E6%80%9D%E8%80%83"><span class="toc-number">1.5.</span> <span class="toc-text">总结与思考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E8%A6%81%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.1.</span> <span class="toc-text">集成要点总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%BB%8F%E9%AA%8C"><span class="toc-number">1.5.2.</span> <span class="toc-text">实践经验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="toc-number">1.5.3.</span> <span class="toc-text">未来展望</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Workday-Integration-Guide"><span class="toc-number">1.</span> <span class="toc-text">Workday Integration Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Workday-Integration-Overview"><span class="toc-number">1.2.</span> <span class="toc-text">Workday Integration Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Integration-Types-Overview"><span class="toc-number">1.2.1.</span> <span class="toc-text">Integration Types Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Inbound-Integration"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1. Inbound Integration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Outbound-Integration"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2. Outbound Integration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Real-time-Integration"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">3. Real-time Integration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Scheduled-Integration"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">4. Scheduled Integration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Event-driven-Integration"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">5. Event-driven Integration</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Content-Overview"><span class="toc-number">1.2.2.</span> <span class="toc-text">Content Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-Components"><span class="toc-number">1.3.</span> <span class="toc-text">Core Components</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Security-Group"><span class="toc-number">1.3.1.</span> <span class="toc-text">Security Group</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Concept"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Concept</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Functions-and-Uses"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">Functions and Uses</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Steps"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">Creation Steps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reference-Documentation"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">Reference Documentation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Integration-System-User"><span class="toc-number">1.3.2.</span> <span class="toc-text">Integration System User</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Concept-1"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">Concept</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Use-Cases"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">Use Cases</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Steps-1"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">Creation Steps</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API-Client"><span class="toc-number">1.3.3.</span> <span class="toc-text">API Client</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Concept-2"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">Concept</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Use-Cases-1"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">Use Cases</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Steps-2"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">Creation Steps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reference-Documentation-1"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">Reference Documentation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Report"><span class="toc-number">1.3.4.</span> <span class="toc-text">Report</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Overview"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Steps-3"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">Creation Steps</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Integration-Task-Scenarios"><span class="toc-number">1.4.</span> <span class="toc-text">Integration Task Scenarios</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Report-as-a-Service-RaaS-Integration"><span class="toc-number">1.4.1.</span> <span class="toc-text">Report as a Service(RaaS) Integration</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Overview-1"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Prerequisites"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configuration-Steps"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">Configuration Steps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Using-API-to-Call-Report"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">Using API to Call Report</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Usage-Notes"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">Usage Notes</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Service-Integration"><span class="toc-number">1.4.2.</span> <span class="toc-text">Web Service Integration</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Concept-3"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">Concept</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Prerequisites-1"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Authentication-Methods"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">Authentication Methods</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configuration-Steps-1"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">Configuration Steps</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Call-API"><span class="toc-number">1.4.3.</span> <span class="toc-text">Call API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Reference-Documentation-2"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">Reference Documentation</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-and-Reflections"><span class="toc-number">1.5.</span> <span class="toc-text">Summary and Reflections</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Key-Integration-Points-Summary"><span class="toc-number">1.5.1.</span> <span class="toc-text">Key Integration Points Summary</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Practical-Experience"><span class="toc-number">1.5.2.</span> <span class="toc-text">Practical Experience</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Future-Outlook"><span class="toc-number">1.5.3.</span> <span class="toc-text">Future Outlook</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -381,7 +379,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Workday集成指南
+        Workday Integration Guide
     </h1>
 
 
@@ -403,16 +401,16 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h1 id="Workday集成指南"><a href="#Workday集成指南" class="headerlink" title="Workday集成指南"></a>Workday集成指南</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近期因为项目需要，需要学习探索Workday系统的集成相关知识，因此有了此文。在此之前，对于Workday的了解仅限于它是全球最大的云HCM解决方案供应商之一，也是我司的供应商之一。对它的接触也仅限于入职阶段上传过一些必须资料而已。因此，此文更多的是基于自己的理解和实践，记录了探索Workday集成的一些过程和心得。</p>
-<h2 id="Workday集成概述"><a href="#Workday集成概述" class="headerlink" title="Workday集成概述"></a>Workday集成概述</h2><h3 id="集成类型总览"><a href="#集成类型总览" class="headerlink" title="集成类型总览"></a>集成类型总览</h3><p>Workday提供了多种集成方式，主要可以分为以下几类：</p>
-<h4 id="1-Inbound-Integration（数据导入）"><a href="#1-Inbound-Integration（数据导入）" class="headerlink" title="1. Inbound Integration（数据导入）"></a>1. Inbound Integration（数据导入）</h4><p>将外部数据导入Workday，如批量导入员工数据、更新组织结构等。主要通过EIB或Web Service实现，需要严格的数据验证。</p>
-<h4 id="2-Outbound-Integration（数据导出）"><a href="#2-Outbound-Integration（数据导出）" class="headerlink" title="2. Outbound Integration（数据导出）"></a>2. Outbound Integration（数据导出）</h4><p>从Workday导出数据到外部系统，常用于员工信息同步、财务数据导出等。可以使用RaaS（Report as a Service）实现，支持灵活的数据格式和过滤条件。</p>
-<h4 id="3-Real-time-Integration（实时集成）"><a href="#3-Real-time-Integration（实时集成）" class="headerlink" title="3. Real-time Integration（实时集成）"></a>3. Real-time Integration（实时集成）</h4><p>通过Web Service或REST API实现系统间的实时数据交换，适用于员工状态同步、实时审批等场景。需要考虑性能和系统可用性。</p>
-<h4 id="4-Scheduled-Integration（定时集成）"><a href="#4-Scheduled-Integration（定时集成）" class="headerlink" title="4. Scheduled Integration（定时集成）"></a>4. Scheduled Integration（定时集成）</h4><p>按计划执行的定期集成任务，适合处理大量数据，如每日数据同步、定期报表生成等。资源消耗可控，维护成本较低。此类型集成可以在外部系统执行定时任务实现，也可以在Workday中通过Integration System实现。Integration System目前正处于探索阶段。</p>
-<h4 id="5-Event-driven-Integration（事件驱动）"><a href="#5-Event-driven-Integration（事件驱动）" class="headerlink" title="5. Event-driven Integration（事件驱动）"></a>5. Event-driven Integration（事件驱动）</h4><p>基于特定业务事件触发的集成，如员工入职&#x2F;离职处理、组织变更通知等。支持复杂业务流程，需要配置事件订阅。与定时集成一样可以通过Integration System实现，目前正在探索阶段。</p>
-<h3 id="本文内容概要"><a href="#本文内容概要" class="headerlink" title="本文内容概要"></a>本文内容概要</h3><p>本文将重点介绍Inbound Integration和Outbound Integration两种集成方式。主要内容包括：</p>
+    <h1 id="Workday-Integration-Guide"><a href="#Workday-Integration-Guide" class="headerlink" title="Workday Integration Guide"></a>Workday Integration Guide</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Recently, due to project requirements, I needed to learn and explore Workday system integration knowledge, which led to this article. Prior to this, my understanding of Workday was limited to knowing it as one of the world’s largest cloud HCM solution providers and one of our company’s vendors. My interaction with it was also limited to uploading some required documents during the onboarding process. Therefore, this article is more based on my own understanding and practice, recording the process and insights of exploring Workday integration.</p>
+<h2 id="Workday-Integration-Overview"><a href="#Workday-Integration-Overview" class="headerlink" title="Workday Integration Overview"></a>Workday Integration Overview</h2><h3 id="Integration-Types-Overview"><a href="#Integration-Types-Overview" class="headerlink" title="Integration Types Overview"></a>Integration Types Overview</h3><p>Workday provides multiple integration methods, which can be mainly divided into the following categories:</p>
+<h4 id="1-Inbound-Integration"><a href="#1-Inbound-Integration" class="headerlink" title="1. Inbound Integration"></a>1. Inbound Integration</h4><p>Importing external data into Workday, such as batch importing employee data and updating organizational structures. Mainly implemented through EIB or Web Service, requiring strict data validation.</p>
+<h4 id="2-Outbound-Integration"><a href="#2-Outbound-Integration" class="headerlink" title="2. Outbound Integration"></a>2. Outbound Integration</h4><p>Exporting data from Workday to external systems, commonly used for employee information synchronization and financial data export. Can be implemented using RaaS (Report as a Service), supporting flexible data formats and filtering conditions.</p>
+<h4 id="3-Real-time-Integration"><a href="#3-Real-time-Integration" class="headerlink" title="3. Real-time Integration"></a>3. Real-time Integration</h4><p>Real-time data exchange between systems through Web Service or REST API, suitable for employee status synchronization, real-time approval, and other scenarios. Need to consider performance and system availability.</p>
+<h4 id="4-Scheduled-Integration"><a href="#4-Scheduled-Integration" class="headerlink" title="4. Scheduled Integration"></a>4. Scheduled Integration</h4><p>Scheduled periodic integration tasks, suitable for handling large amounts of data, such as daily data synchronization and periodic report generation. Resource consumption is controllable, and maintenance costs are relatively low. This type of integration can be implemented through scheduled tasks in external systems or through Integration System in Workday. Integration System is currently in the exploration phase.</p>
+<h4 id="5-Event-driven-Integration"><a href="#5-Event-driven-Integration" class="headerlink" title="5. Event-driven Integration"></a>5. Event-driven Integration</h4><p>Integration triggered by specific business events, such as employee onboarding&#x2F;offboarding processing, organizational change notifications, etc. Supports complex business processes and requires event subscription configuration. Like scheduled integration, it can be implemented through Integration System, which is currently in the exploration phase.</p>
+<h3 id="Content-Overview"><a href="#Content-Overview" class="headerlink" title="Content Overview"></a>Content Overview</h3><p>This article will focus on two integration methods: Inbound Integration and Outbound Integration. The main content includes:</p>
 <ul>
-<li><p>Workday核心组件介绍</p>
+<li><p>Workday Core Components Introduction</p>
 <ul>
 <li>Security Group</li>
 <li>Integration System User</li>
@@ -420,182 +418,182 @@
 <li>Report</li>
 </ul>
 </li>
-<li><p>集成任务实践</p>
+<li><p>Integration Task Practice</p>
 <ul>
-<li>Report as a Service集成</li>
-<li>Web Service集成</li>
+<li>Report as a Service Integration</li>
+<li>Web Service Integration</li>
 </ul>
 </li>
 </ul>
-<h2 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h2><h3 id="Security-Group"><a href="#Security-Group" class="headerlink" title="Security Group"></a>Security Group</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>Security Group（安全组）是Workday中权限管理的核心组件，它是一个用户集合，用于管理对Workday租户中可保护项目的访问权限。通过安全组，管理员可以集中管理和分配用户权限，实现对系统资源的精确控制。</p>
-<h4 id="功能和用途"><a href="#功能和用途" class="headerlink" title="功能和用途"></a>功能和用途</h4><p>安全组在Workday系统中主要提供以下功能：</p>
+<h2 id="Core-Components"><a href="#Core-Components" class="headerlink" title="Core Components"></a>Core Components</h2><h3 id="Security-Group"><a href="#Security-Group" class="headerlink" title="Security Group"></a>Security Group</h3><h4 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h4><p>Security Group is a core component of Workday’s permission management. It is a collection of users used to manage access to protectable items within the Workday tenant. Through security groups, administrators can centrally manage and assign user permissions, achieving precise control over system resources.</p>
+<h4 id="Functions-and-Uses"><a href="#Functions-and-Uses" class="headerlink" title="Functions and Uses"></a>Functions and Uses</h4><p>Security groups in Workday system mainly provide the following functions:</p>
 <ol>
-<li><p><strong>权限集中管理</strong></p>
+<li><p><strong>Centralized Permission Management</strong></p>
 <ul>
-<li>统一管理用户和角色的权限</li>
-<li>支持批量分配和撤销权限</li>
-<li>可以包含用户、角色和其他安全组</li>
+<li>Unified management of user and role permissions</li>
+<li>Support batch assignment and revocation of permissions</li>
+<li>Can include users, roles, and other security groups</li>
 </ul>
 </li>
-<li><p><strong>访问控制</strong></p>
+<li><p><strong>Access Control</strong></p>
 <ul>
-<li>控制对业务对象的访问权限</li>
-<li>管理功能和操作的使用权限</li>
-<li>限制数据查看和修改范围</li>
+<li>Control access permissions to business objects</li>
+<li>Manage function and operation usage permissions</li>
+<li>Restrict data viewing and modification scope</li>
 </ul>
 </li>
-<li><p><strong>系统集成授权</strong></p>
+<li><p><strong>System Integration Authorization</strong></p>
 <ul>
-<li>为集成系统提供必要的访问权限</li>
-<li>控制外部系统的接口调用权限</li>
-<li>管理API和Web Service的访问范围</li>
+<li>Provide necessary access permissions for integration systems</li>
+<li>Control interface call permissions for external systems</li>
+<li>Manage API and Web Service access scope</li>
 </ul>
 </li>
 </ol>
-<h4 id="创建步骤"><a href="#创建步骤" class="headerlink" title="创建步骤"></a>创建步骤</h4><p>使用下列Task在Workday创建Security Group</p>
+<h4 id="Creation-Steps"><a href="#Creation-Steps" class="headerlink" title="Creation Steps"></a>Creation Steps</h4><p>Use the following Task in Workday to create a Security Group</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>因为在我们的场景中，Security Group 需要用于集成，因此选择类型为<em><strong>Integration System Security Group (Unconstrained)<em><strong>，安全组名称按需求填写即可，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png" alt="alt text"><br>信息填写完毕后，点击</strong></em>OK</strong></em>按钮即可。<br>完成上述步骤后，便拥有了一个用于进行集成任务的Security Group名为<em><strong>Tianle_ISSG</strong></em>。</p>
-<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><p><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/dan1370797393239.html" title="点击访问Security Group Concepts">Security Group Concepts Document</a><br><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/gyz1563919157019.html?toc=2.1.6" title="点击访问Security Group Types">Security Group Types Document</a></p>
-<h3 id="Integration-System-User"><a href="#Integration-System-User" class="headerlink" title="Integration System User"></a>Integration System User</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>Integration System User (ISU) 是Workday中专门用于系统集成的特殊用户类型。与普通用户不同，ISU主要用于系统间的自动化交互，而不是人工操作。ISU在Workday集成架构中扮演着重要角色，它作为连接Workday与外部系统的桥梁，确保系统间的安全通信。</p>
-<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>ISU主要应用于以下场景：</p>
+<p>Since in our scenario, the Security Group needs to be used for integration, select the type <em><strong>Integration System Security Group (Unconstrained)</strong></em>, and fill in the security group name as needed, as shown below:<br><img src="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png" alt="alt text"><br>After filling in the information, click the <em><strong>OK</strong></em> button.<br>After completing the above steps, you will have a Security Group named <em><strong>Tianle_ISSG</strong></em> for integration tasks.</p>
+<h4 id="Reference-Documentation"><a href="#Reference-Documentation" class="headerlink" title="Reference Documentation"></a>Reference Documentation</h4><p><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/dan1370797393239.html" title="Click to visit Security Group Concepts">Security Group Concepts Document</a><br><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/gyz1563919157019.html?toc=2.1.6" title="Click to visit Security Group Types">Security Group Types Document</a></p>
+<h3 id="Integration-System-User"><a href="#Integration-System-User" class="headerlink" title="Integration System User"></a>Integration System User</h3><h4 id="Concept-1"><a href="#Concept-1" class="headerlink" title="Concept"></a>Concept</h4><p>Integration System User (ISU) is a special user type in Workday specifically designed for system integration. Unlike regular users, ISU is mainly used for automated interactions between systems rather than manual operations. ISU plays an important role in Workday’s integration architecture, serving as a bridge connecting Workday with external systems to ensure secure communication between systems.</p>
+<h4 id="Use-Cases"><a href="#Use-Cases" class="headerlink" title="Use Cases"></a>Use Cases</h4><p>ISU is mainly applied in the following scenarios:</p>
 <ol>
-<li>Web Service集成（包括但不限于REST、SOAP、XML等）</li>
-<li>Enterprise Interface Builder (EIB)导入&#x2F;导出</li>
-<li>报表自服务</li>
-<li>数据同步、数据处理</li>
+<li>Web Service integration (including but not limited to REST, SOAP, XML, etc.)</li>
+<li>Enterprise Interface Builder (EIB) import&#x2F;export</li>
+<li>Report self-service</li>
+<li>Data synchronization and processing</li>
 </ol>
-<h4 id="创建步骤-1"><a href="#创建步骤-1" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
-<li><p>使用下列Task在Workday创建Security Group：</p>
+<h4 id="Creation-Steps-1"><a href="#Creation-Steps-1" class="headerlink" title="Creation Steps"></a>Creation Steps</h4><ol>
+<li><p>Use the following Task in Workday to create an Integration System User:</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Integration System User<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>填写基本信息：</p>
+<li><p>Fill in basic information:</p>
 <ul>
-<li>用户名: 遵循命名规范</li>
-<li>密码: 符合安全策略</li>
+<li>Username: Follow naming conventions</li>
+<li>Password: Comply with security policy</li>
 </ul>
 </li>
 </ol>
 <p><img src="https://s2.loli.net/2024/11/05/G7ZMBQ2IhtpJmWe.png" alt="alt text"></p>
-<p>信息填写完毕后，点击<em><strong>OK</strong></em>按钮即可。</p>
-<p>完成上述步骤后，便拥有了一个用于进行集成任务的ISU名为<em><strong>ISU_Tianle</strong></em>。</p>
-<h3 id="API-Client"><a href="#API-Client" class="headerlink" title="API Client"></a>API Client</h3><h4 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h4><p>API Client是Workday中用于管理和控制API访问的重要组件。它作为应用程序与Workday API之间的接口，负责处理认证和授权。API Client通过JWT (JSON Web Token)等机制确保API调用的安全性。</p>
-<h4 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h4><p>API Client主要应用于以下场景：</p>
+<p>After filling in the information, click the <em><strong>OK</strong></em> button.</p>
+<p>After completing the above steps, you will have an ISU named <em><strong>ISU_Tianle</strong></em> for integration tasks.</p>
+<h3 id="API-Client"><a href="#API-Client" class="headerlink" title="API Client"></a>API Client</h3><h4 id="Concept-2"><a href="#Concept-2" class="headerlink" title="Concept"></a>Concept</h4><p>API Client is an important component in Workday used to manage and control API access. It serves as an interface between applications and Workday APIs, handling authentication and authorization. API Client ensures API call security through mechanisms such as JWT (JSON Web Token).</p>
+<h4 id="Use-Cases-1"><a href="#Use-Cases-1" class="headerlink" title="Use Cases"></a>Use Cases</h4><p>API Client is mainly applied in the following scenarios:</p>
 <ol>
-<li>外部应用程序访问Workday API</li>
-<li>系统集成开发</li>
-<li>自动化流程实现</li>
-<li>数据同步与交换</li>
+<li>External application access to Workday API</li>
+<li>System integration development</li>
+<li>Automation process implementation</li>
+<li>Data synchronization and exchange</li>
 </ol>
-<h4 id="创建步骤-2"><a href="#创建步骤-2" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
-<li>使用下列Task在Workday创建API Client：<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create API Client<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>填写基本信息：<ul>
-<li>客户端名称: 遵循命名规范</li>
-<li>认证方式: 选择JWT Bearer Grant</li>
-<li>X509证书: 上传生成的public_cert.pem文件(详见下方Notes)</li>
-<li>允许集成消息: 勾选</li>
-<li>授予管理员同意: 勾选</li>
-<li>Scope(Fucntion Areas): 选择必要的Fuction Area(<strong>Tenant Non-Configurable</strong>是必选项)<br><img src="https://s2.loli.net/2024/11/05/F1frpYM8XHoTA3m.png" alt="alt text"></li>
+<h4 id="Creation-Steps-2"><a href="#Creation-Steps-2" class="headerlink" title="Creation Steps"></a>Creation Steps</h4><ol>
+<li>Use the following Task in Workday to create an API Client:<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create API Client<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>Fill in basic information:<ul>
+<li>Client Name: Follow naming conventions</li>
+<li>Authentication Method: Select JWT Bearer Grant</li>
+<li>X509 Certificate: Upload the generated public_cert.pem file (see Notes below)</li>
+<li>Allow Integration Messages: Check</li>
+<li>Grant Admin Consent: Check</li>
+<li>Scope(Function Areas): Select necessary Function Areas (<strong>Tenant Non-Configurable</strong> is mandatory)<br><img src="https://s2.loli.net/2024/11/05/F1frpYM8XHoTA3m.png" alt="alt text"></li>
 </ul>
 </li>
 </ol>
 <p>Notes(Important):</p>
 <ol>
-<li>在创建API Client时，需要生成一个x509证书，生成方法如下：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl req <span class="token parameter variable">-x509</span> <span class="token parameter variable">-newkey</span> rsa:2048 <span class="token parameter variable">-keyout</span> private_key.pem <span class="token parameter variable">-out</span> public_cert.pem <span class="token parameter variable">-days</span> <span class="token number">365</span>
+<li>When creating an API Client, you need to generate an x509 certificate, the generation method is as follows:<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl req <span class="token parameter variable">-x509</span> <span class="token parameter variable">-newkey</span> rsa:2048 <span class="token parameter variable">-keyout</span> private_key.pem <span class="token parameter variable">-out</span> public_cert.pem <span class="token parameter variable">-days</span> <span class="token number">365</span>
 openssl rsa <span class="token parameter variable">-in</span> private_key.pem <span class="token parameter variable">-pubout</span> <span class="token parameter variable">-out</span> public_key.pem
 openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="token parameter variable">-inform</span> PEM <span class="token parameter variable">-outform</span> PEM <span class="token parameter variable">-nocrypt</span> <span class="token parameter variable">-in</span> private_key.pem <span class="token parameter variable">-out</span> private_key_pkcs8.pem <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li>生成证书后，将public_cert.pem的值填入Workday中。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> public_cert.pem<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>After generating the certificate, fill the value of public_cert.pem into Workday.<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> public_cert.pem<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ol>
-<p>信息填写完毕后，点击<em><strong>OK</strong></em>按钮即可。</p>
-<p>完成上述步骤后，便拥有了一个用于进行集成任务的API Client名为<em><strong>Tianle_Client</strong></em>。</p>
-<h4 id="参考文档-1"><a href="#参考文档-1" class="headerlink" title="参考文档"></a>参考文档</h4><p><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/authentication/oauth/dan1370797831458.html" title="点击访问API Client Registration Document">API Client Registration Document</a></p>
-<h3 id="Report"><a href="#Report" class="headerlink" title="Report"></a>Report</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>Report是Workday平台中的核心功能之一，它提供了强大的数据处理和报表生成能力。通过Report，用户可以将分散的数据整合成有价值的数据集合，为决策提供数据支持。它不仅支持基础的数据提取功能，还能够处理复杂的业务场景，包括但不限于：</p>
+<p>After filling in the information, click the <em><strong>OK</strong></em> button.</p>
+<p>After completing the above steps, you will have an API Client named <em><strong>Tianle_Client</strong></em> for integration tasks.</p>
+<h4 id="Reference-Documentation-1"><a href="#Reference-Documentation-1" class="headerlink" title="Reference Documentation"></a>Reference Documentation</h4><p><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/authentication/oauth/dan1370797831458.html" title="Click to visit API Client Registration Document">API Client Registration Document</a></p>
+<h3 id="Report"><a href="#Report" class="headerlink" title="Report"></a>Report</h3><h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>Report is a core functionality in the Workday platform that provides powerful data processing and report generation capabilities. Through Report, users can integrate scattered data into valuable data sets to provide data support for decision-making. It not only supports basic data extraction functions but can also handle complex business scenarios, including but not limited to:</p>
 <ul>
-<li>自定义报表设计：支持灵活的字段选择</li>
-<li>多数据源整合：可以从多个数据源中提取和关联数据</li>
-<li>高级计算功能：支持复杂的数据计算和统计分析(Calculated Fields)</li>
-<li>动态参数配置：允许用户设置动态过滤条件</li>
-<li>格式化输出：支持多种输出格式，如Excel、PDF等</li>
-<li>Web Service集成：可作为数据服务供其他系统调用</li>
+<li>Custom report design: Supports flexible field selection</li>
+<li>Multi-data source integration: Can extract and associate data from multiple data sources</li>
+<li>Advanced calculation functions: Supports complex data calculations and statistical analysis (Calculated Fields)</li>
+<li>Dynamic parameter configuration: Allows users to set dynamic filtering conditions</li>
+<li>Formatted output: Supports multiple output formats, such as Excel, PDF, etc.</li>
+<li>Web Service integration: Can be used as a data service for other systems to call</li>
 </ul>
-<p>作为Workday平台中不可或缺的数据管理工具，Report为企业提供了全方位的数据可视化和分析能力。<br>Report主要应用于以下业务场景：</p>
+<p>As an indispensable data management tool in the Workday platform, Report provides comprehensive data visualization and analysis capabilities for enterprises.<br>Report is mainly applied in the following business scenarios:</p>
 <ol>
-<li>数据分析和报表生成</li>
-<li>系统集成数据源</li>
-<li>业务监控和决策支持</li>
-<li>合规性报告生成</li>
+<li>Data analysis and report generation</li>
+<li>System integration data source</li>
+<li>Business monitoring and decision support</li>
+<li>Compliance report generation</li>
 </ol>
-<h4 id="创建步骤-3"><a href="#创建步骤-3" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
-<li>使用下列Task在Workday创建Report：<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Custom Report<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>填写基本信息：<ul>
-<li>报表名称: 遵循命名规范</li>
-<li>报表类型: 选择Advanced</li>
-<li>启用Web Service: 勾选</li>
-<li>优化性能: 勾选<br><img src="https://s2.loli.net/2024/11/05/7CaRJFxusoABMLN.png" alt="alt text"></li>
+<h4 id="Creation-Steps-3"><a href="#Creation-Steps-3" class="headerlink" title="Creation Steps"></a>Creation Steps</h4><ol>
+<li>Use the following Task in Workday to create a Report:<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Custom Report<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>Fill in basic information:<ul>
+<li>Report Name: Follow naming conventions</li>
+<li>Report Type: Select Advanced</li>
+<li>Enable Web Service: Check</li>
+<li>Optimize Performance: Check<br><img src="https://s2.loli.net/2024/11/05/7CaRJFxusoABMLN.png" alt="alt text"></li>
 </ul>
 </li>
 </ol>
-<p>信息填写完毕后，点击<em><strong>OK</strong></em>按钮即可。</p>
-<p>完成上述步骤后，便拥有了一个用于进行集成任务的Report名为<em><strong>Tianle_Test_Report</strong></em>。</p>
-<h2 id="集成任务场景"><a href="#集成任务场景" class="headerlink" title="集成任务场景"></a>集成任务场景</h2><h3 id="Report-as-a-Service-RaaS-集成"><a href="#Report-as-a-Service-RaaS-集成" class="headerlink" title="Report as a Service(RaaS)集成"></a>Report as a Service(RaaS)集成</h3><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>Report as a Service(RaaS)是Workday提供的一项重要集成服务，允许通过API调用获取报表数据。</p>
-<h4 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h4><ol>
-<li>已创建Integration System User (<em><strong>ISU_Tianle</strong></em>)</li>
-<li>已配置API Client(<em><strong>Tianle_Client</strong></em>)</li>
-<li>已创建自定义报表并启用Web Service功能(<em><strong>Tianle_Test_Report</strong></em>)</li>
-<li>创建集成任务所需的Security Group(<em><strong>Tianle_ISSG</strong></em>)</li>
+<p>After filling in the information, click the <em><strong>OK</strong></em> button.</p>
+<p>After completing the above steps, you will have a Report named <em><strong>Tianle_Test_Report</strong></em> for integration tasks.</p>
+<h2 id="Integration-Task-Scenarios"><a href="#Integration-Task-Scenarios" class="headerlink" title="Integration Task Scenarios"></a>Integration Task Scenarios</h2><h3 id="Report-as-a-Service-RaaS-Integration"><a href="#Report-as-a-Service-RaaS-Integration" class="headerlink" title="Report as a Service(RaaS) Integration"></a>Report as a Service(RaaS) Integration</h3><h4 id="Overview-1"><a href="#Overview-1" class="headerlink" title="Overview"></a>Overview</h4><p>Report as a Service(RaaS) is an important integration service provided by Workday that allows retrieving report data through API calls.</p>
+<h4 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h4><ol>
+<li>Created Integration System User (<em><strong>ISU_Tianle</strong></em>)</li>
+<li>Configured API Client(<em><strong>Tianle_Client</strong></em>)</li>
+<li>Created custom report and enabled Web Service functionality(<em><strong>Tianle_Test_Report</strong></em>)</li>
+<li>Created Security Group required for integration tasks(<em><strong>Tianle_ISSG</strong></em>)</li>
 </ol>
-<h4 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h4><ol>
-<li>配置Report的报表内容</li>
+<h4 id="Configuration-Steps"><a href="#Configuration-Steps" class="headerlink" title="Configuration Steps"></a>Configuration Steps</h4><ol>
+<li>Configure Report content</li>
 </ol>
 <p><img src="https://s2.loli.net/2024/11/05/C3FoGlXN6spSZdQ.png" alt="alt text"></p>
 <ol start="2">
-<li>确定Report中字段所需的Domain policy(以Employee Type为例)</li>
+<li>Determine the Domain policy required for fields in the Report (using Employee Type as an example)</li>
 </ol>
-<p>点击<em><strong>Employee Type</strong></em>段，在弹出的窗口中点击<em><strong>See in New type</strong></em><br><img src="https://s2.loli.net/2024/11/05/SpFyXtHevEn67oO.png" alt="alt text"></p>
-<p>点击下图中的<em><strong>View security</strong></em>按钮<br><img src="https://s2.loli.net/2024/11/05/8DPRt3aHoZucnfU.png" alt="alt text"></p>
-<p>下图表格中的<em><strong>Domain Security</strong></em>即为Employee Type字段所需的Domain policy<br><img src="https://s2.loli.net/2024/11/05/JqXRlWehympj9Po.png" alt="alt text"></p>
+<p>Click on <em><strong>Employee Type</strong></em> field, click <em><strong>See in New type</strong></em> in the popup window<br><img src="https://s2.loli.net/2024/11/05/SpFyXtHevEn67oO.png" alt="alt text"></p>
+<p>Click the <em><strong>View security</strong></em> button shown in the image below<br><img src="https://s2.loli.net/2024/11/05/8DPRt3aHoZucnfU.png" alt="alt text"></p>
+<p>The <em><strong>Domain Security</strong></em> in the table below is the Domain policy required for the Employee Type field<br><img src="https://s2.loli.net/2024/11/05/JqXRlWehympj9Po.png" alt="alt text"></p>
 <ol start="3">
-<li>授予Security Group相关资源的访问权限</li>
+<li>Grant Security Group access permissions to relevant resources</li>
 </ol>
-<p>在完成第二步之后可以得到，Tianle_Test_Report所包含的三个字段Employee ID、Employee Type、Employee Name，他们分别对应的Domain policy都包含<em><strong>Worker Data: Current Staffing Information</strong></em>，因此需要将<em><strong>Tianle_ISSG</strong></em>授予<em><strong>Worker Data: Current Staffing Information</strong></em>的权限。</p>
-<p>运行下列Task在Workday中授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Worker Data: Current Staffing Information</strong></em>的权限：</p>
+<p>After completing step 2, we can see that the three fields included in Tianle_Test_Report - Employee ID, Employee Type, and Employee Name - all correspond to Domain policy including <em><strong>Worker Data: Current Staffing Information</strong></em>, so we need to grant <em><strong>Tianle_ISSG</strong></em> permission for <em><strong>Worker Data: Current Staffing Information</strong></em>.</p>
+<p>Run the following Task in Workday to grant <em><strong>Tianle_ISSG</strong></em> permission to <em><strong>Worker Data: Current Staffing Information</strong></em>:</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Maintain Permissions for Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/MND2Wkh8BclLnpd.png" alt="alt text"></p>
 <p><img src="https://s2.loli.net/2024/11/05/lZnc8hSMBJrkO4u.png" alt="alt text"></p>
-<p>遵循权限最小原则，仅授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Worker Data: Current Staffing Information</strong></em>的View only权限。</p>
-<p>Important Notes:<br>设置完成后需要执行<em><strong>Activate Pending Security Policy Changes</strong></em>任务，激活安全策略变更。</p>
+<p>Following the principle of least privilege, only grant View only permission to <em><strong>Tianle_ISSG</strong></em> for <em><strong>Worker Data: Current Staffing Information</strong></em>.</p>
+<p>Important Notes:<br>After setting up, you need to execute the <em><strong>Activate Pending Security Policy Changes</strong></em> task to activate security policy changes.</p>
 <ol start="4">
-<li>添加ISU到Security Group</li>
+<li>Add ISU to Security Group</li>
 </ol>
-<p>运行下列Task在Workday中将<em><strong>ISU_Tianle</strong></em>添加到<em><strong>Tianle_ISSG</strong></em>中：</p>
+<p>Run the following Task in Workday to add <em><strong>ISU_Tianle</strong></em> to <em><strong>Tianle_ISSG</strong></em>:</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Edit Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/aUfKJlAkBnEd71p.png" alt="alt text"></p>
-<p>在<em><strong>Integration System Users</strong></em>中添加<em><strong>ISU_Tianle</strong></em>即可。</p>
+<p>Add <em><strong>ISU_Tianle</strong></em> in <em><strong>Integration System Users</strong></em>.</p>
 <ol start="5">
-<li>分享Report给ISU或对应的Security Group</li>
+<li>Share Report with ISU or corresponding Security Group</li>
 </ol>
-<p>此处示例选择将<em><strong>Tianle_Test_Report</strong></em>分享给<em><strong>ISU_Tianle</strong></em>。<br><img src="https://s2.loli.net/2024/11/05/IoBNtbyHSXG7dkE.png" alt="alt text"></p>
-<h4 id="使用API调用Report"><a href="#使用API调用Report" class="headerlink" title="使用API调用Report"></a>使用API调用Report</h4><ol>
-<li>使用脚本获取JWT签名</li>
+<p>In this example, we choose to share <em><strong>Tianle_Test_Report</strong></em> with <em><strong>ISU_Tianle</strong></em>.<br><img src="https://s2.loli.net/2024/11/05/IoBNtbyHSXG7dkE.png" alt="alt text"></p>
+<h4 id="Using-API-to-Call-Report"><a href="#Using-API-to-Call-Report" class="headerlink" title="Using API to Call Report"></a>Using API to Call Report</h4><ol>
+<li>Use script to get JWT signature</li>
 </ol>
-<p>已经编写好了相关的脚本用于生成签名后的JWT，在此不做展示。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 由于JWT的签名过程需要使用私钥，这个过程不能直接在curl中完成。你需要先通过其他工具（如OpenSSL或专门的JWT库）生成签名后的JWT，然后再将其用于curl命令中。</span>
-<span class="token assign-left variable">JWT</span><span class="token operator">=</span><span class="token string">"eyJhbG...已签名的JWT令牌"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>We have already written relevant scripts for generating signed JWT, which will not be shown here.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Since the JWT signing process needs to use the private key, this process cannot be done directly in curl. You need to first generate a signed JWT through other tools (such as OpenSSL or dedicated JWT libraries), and then use it in the curl command.</span>
+<span class="token assign-left variable">JWT</span><span class="token operator">=</span><span class="token string">"eyJhbG...signed JWT token"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <ol start="2">
-<li>获取AccessToken</li>
+<li>Get AccessToken</li>
 </ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 然后使用JWT获取access token</span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Then use JWT to get access token</span>
 <span class="token function">curl</span> <span class="token parameter variable">-X</span> POST <span class="token string">"https://wd3-impl-services1.workday.com/ccx/oauth2/thoughtworks3/token"</span> <span class="token punctuation">\</span>
   <span class="token parameter variable">-H</span> <span class="token string">"Content-Type: application/x-www-form-urlencoded"</span> <span class="token punctuation">\</span>
   --data-urlencode <span class="token string">"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"</span> <span class="token punctuation">\</span>
   --data-urlencode <span class="token string">"assertion=<span class="token variable">$JWT</span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="3">
-<li>调用API</li>
+<li>Call API</li>
 </ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">ACCESS_TOKEN</span><span class="token operator">=</span><span class="token string">"Bearer eyJhbG...已获取的AccessToken"</span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">ACCESS_TOKEN</span><span class="token operator">=</span><span class="token string">"Bearer eyJhbG...obtained AccessToken"</span>
 <span class="token function">curl</span> <span class="token parameter variable">--request</span> GET <span class="token punctuation">\</span>
   <span class="token parameter variable">--url</span> <span class="token string">'https://wd3-impl-services1.workday.com/ccx/service/customreport2/thoughtworks3/ISU_Tianle/Tianle_Test_Report?format=json'</span> <span class="token punctuation">\</span>
   <span class="token parameter variable">--header</span> <span class="token string">'Authorization: $ACCESS_TOKEN'</span> <span class="token punctuation">\</span>
@@ -605,11 +603,10 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
   <span class="token parameter variable">--cookie</span> <span class="token assign-left variable">TS012df9cf</span><span class="token operator">=</span>010c505f03d906dfd1ca57ca907890d4afb487ad4ade09b1a4f6e0790fec225cdda4c0832fd11870ab4a99d950ede8ed5573bcd3a6 <span class="token punctuation">\</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="4">
-<li>获取数据</li>
+<li>Get Data</li>
 </ol>
-<p>返回体如下：</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json">
-<span class="token punctuation">&#123;</span>
+<p>Response body as follows:</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
 	<span class="token property">"Report_Entry"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
 		<span class="token punctuation">&#123;</span>
 			<span class="token property">"Employee_Type"</span><span class="token operator">:</span> <span class="token string">"Regular"</span><span class="token punctuation">,</span>
@@ -626,106 +623,106 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 			<span class="token property">"Worker"</span><span class="token operator">:</span> <span class="token string">"Contingent Worker"</span>
 		<span class="token punctuation">&#125;</span>
 	<span class="token punctuation">]</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="使用注意事项"><a href="#使用注意事项" class="headerlink" title="使用注意事项"></a>使用注意事项</h4><ol>
-<li>报表类型必须为Advanced才能启用Web Service功能</li>
-<li>API Client需要具有相应的Function Area权限</li>
-<li>建议启用”Optimized for Performance”以提升性能</li>
-<li>定期检查报表访问权限设置</li>
+<h4 id="Usage-Notes"><a href="#Usage-Notes" class="headerlink" title="Usage Notes"></a>Usage Notes</h4><ol>
+<li>Report type must be Advanced to enable Web Service functionality</li>
+<li>API Client needs to have corresponding Function Area permissions</li>
+<li>Recommend enabling “Optimized for Performance” to improve performance</li>
+<li>Regularly check report access permission settings</li>
 </ol>
-<h3 id="Web-Service集成"><a href="#Web-Service集成" class="headerlink" title="Web Service集成"></a>Web Service集成</h3><h4 id="概念-3"><a href="#概念-3" class="headerlink" title="概念"></a>概念</h4><p>Web Service集成是Workday提供的一种标准化接口服务，允许外部系统通过HTTP&#x2F;HTTPS协议与Workday进行数据交互，操作访问Workday中的数据。Workday支持多种Web Service类型，包括：</p>
+<h3 id="Web-Service-Integration"><a href="#Web-Service-Integration" class="headerlink" title="Web Service Integration"></a>Web Service Integration</h3><h4 id="Concept-3"><a href="#Concept-3" class="headerlink" title="Concept"></a>Concept</h4><p>Web Service integration is a standardized interface service provided by Workday that allows external systems to interact with data in Workday through HTTP&#x2F;HTTPS protocol. Workday supports multiple types of Web Services, including:</p>
 <ol>
 <li><p><strong>REST Web Services</strong></p>
 <ul>
-<li>基于REST架构风格</li>
-<li>使用JSON数据格式</li>
-<li>支持标准HTTP方法（GET、POST、PUT、DELETE等）</li>
+<li>Based on REST architectural style</li>
+<li>Uses JSON data format</li>
+<li>Supports standard HTTP methods (GET, POST, PUT, DELETE, etc.)</li>
 </ul>
 </li>
 <li><p><strong>SOAP Web Services</strong></p>
 <ul>
-<li>基于SOAP协议</li>
-<li>使用XML数据格式</li>
-<li>提供WSDL接口描述</li>
+<li>Based on SOAP protocol</li>
+<li>Uses XML data format</li>
+<li>Provides WSDL interface description</li>
 </ul>
 </li>
 </ol>
-<p>以下段落来自于Workday官方文档:</p>
+<p>The following paragraph is from Workday official documentation:</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Workday REST APIs exist alongside our public SOAP-based web services. For transferring large sets of data, use the SOAP web services. SOAP web services best support batch transactions for external enterprise applications.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>Workday官方文档中提到，REST API与SOAP API并存，对于批量数据传输，建议使用SOAP API。并且在Workday中，SOAP API提供的资源访问更佳丰富，因此在本文中，主要示例为SOAP API。</p>
-<p>Notes: SOAP API可能并不常见，如果有兴趣的同学可以参考以下文档，可以简单地了解：<a target="_blank" rel="noopener" href="https://blog.postman.com/soap-api-definition/%EF%BC%8C%E5%9C%A8%E6%AD%A4%E4%B8%8D%E5%81%9A%E8%B5%98%E8%BF%B0%E3%80%82">https://blog.postman.com/soap-api-definition/，在此不做赘述。</a></p>
-<h4 id="前提条件-1"><a href="#前提条件-1" class="headerlink" title="前提条件"></a>前提条件</h4><ol>
-<li>已创建Integration System User (<em><strong>ISU_Tianle</strong></em>)</li>
-<li>已配置API Client(<em><strong>Tianle_Client</strong></em>)</li>
-<li>创建集成任务所需的Security Group(<em><strong>Tianle_ISSG</strong></em>)</li>
+<p>As mentioned in Workday official documentation, REST API coexists with SOAP API, and for batch data transfer, it is recommended to use SOAP API. Moreover, in Workday, SOAP API provides richer resource access, so in this article, the main example is SOAP API.</p>
+<p>Notes: SOAP API might not be common, if you’re interested, you can refer to the following documentation for a basic understanding: <a target="_blank" rel="noopener" href="https://blog.postman.com/soap-api-definition/">https://blog.postman.com/soap-api-definition/</a>, which won’t be elaborated here.</p>
+<h4 id="Prerequisites-1"><a href="#Prerequisites-1" class="headerlink" title="Prerequisites"></a>Prerequisites</h4><ol>
+<li>Created Integration System User (<em><strong>ISU_Tianle</strong></em>)</li>
+<li>Configured API Client(<em><strong>Tianle_Client</strong></em>)</li>
+<li>Created Security Group required for integration tasks(<em><strong>Tianle_ISSG</strong></em>)</li>
 </ol>
-<h4 id="认证方式"><a href="#认证方式" class="headerlink" title="认证方式"></a>认证方式</h4><p>Workday Web Service支持以下认证方式：</p>
+<h4 id="Authentication-Methods"><a href="#Authentication-Methods" class="headerlink" title="Authentication Methods"></a>Authentication Methods</h4><p>Workday Web Service supports the following authentication methods:</p>
 <ol>
-<li><p><strong>基本认证</strong></p>
+<li><p><strong>Basic Authentication</strong></p>
 <ul>
-<li>使用用户名和密码</li>
-<li>适用于简单集成场景</li>
-<li>安全性相对较低</li>
+<li>Uses username and password</li>
+<li>Suitable for simple integration scenarios</li>
+<li>Relatively low security</li>
 </ul>
 </li>
 <li><p><strong>OAuth 2.0</strong></p>
 <ul>
-<li>支持JWT授权流程</li>
-<li>提供更高的安全性</li>
-<li>支持访问令牌刷新</li>
+<li>Supports JWT authorization flow</li>
+<li>Provides higher security</li>
+<li>Supports access token refresh</li>
 </ul>
 </li>
 </ol>
-<p>在此基于前文我们对于API Client的介绍，我们选择OAuth 2.0认证方式。</p>
-<h4 id="配置步骤-1"><a href="#配置步骤-1" class="headerlink" title="配置步骤"></a>配置步骤</h4><p>在此我们选择Get_Employee_Reviews作为示例, API文档:<a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/productionapi/Performance_Management/v43.0/Get_Employee_Reviews.html%E3%80%82">https://community.workday.com/sites/default/files/file-hosting/productionapi/Performance_Management/v43.0/Get_Employee_Reviews.html。</a></p>
+<p>Based on our previous introduction to API Client, we choose OAuth 2.0 authentication method.</p>
+<h4 id="Configuration-Steps-1"><a href="#Configuration-Steps-1" class="headerlink" title="Configuration Steps"></a>Configuration Steps</h4><p>Here we choose Get_Employee_Reviews as an example, API documentation: <a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/productionapi/Performance_Management/v43.0/Get_Employee_Reviews.html">https://community.workday.com/sites/default/files/file-hosting/productionapi/Performance_Management/v43.0/Get_Employee_Reviews.html</a>.</p>
 <ol>
-<li>确定API所需Security Policy</li>
+<li>Determine Required Security Policy for API</li>
 </ol>
-<p>使用以下任务来确定API所需的策略：</p>
+<p>Use the following task to determine the required policy:</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">View Security for Securable Item<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>输入API名称，例如<em><strong>Get Employee Reviews</strong></em>，点击<em><strong>OK</strong></em>按钮，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/NElhaTFKXWSy5DH.png" alt="alt text"></p>
-<p>点击<em><strong>View Security</strong></em>按钮，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/kMmQWdIZbAgKVnL.png" alt="alt text"></p>
-<p>由上图可知，<em><strong>Get Employee Reviews</strong></em>所需的Security Policy为<em><strong>Set Up: Employee Reviews</strong></em>，此Policy对应的Function Area为<em><strong>Performance Enablement</strong></em>。</p>
+<p>Enter API name, for example <em><strong>Get Employee Reviews</strong></em>, click <em><strong>OK</strong></em> button, as shown below:<br><img src="https://s2.loli.net/2024/11/05/NElhaTFKXWSy5DH.png" alt="alt text"></p>
+<p>Click <em><strong>View Security</strong></em> button, as shown below:<br><img src="https://s2.loli.net/2024/11/05/kMmQWdIZbAgKVnL.png" alt="alt text"></p>
+<p>From the above image, we can see that the Security Policy required for <em><strong>Get Employee Reviews</strong></em> is <em><strong>Set Up: Employee Reviews</strong></em>, and the Function Area corresponding to this Policy is <em><strong>Performance Enablement</strong></em>.</p>
 <ol start="2">
-<li>启用API所需Function Area</li>
+<li>Enable Required Function Area for API</li>
 </ol>
-<p>使用以下任务来启用API所需的Function Area：</p>
+<p>Use the following task to enable the required Function Area:</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Maintain Functional Areas<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://s2.loli.net/2024/11/05/MOdt87N4Ggcjpf9.png" alt="alt text"></p>
-<p>如图所示我们需要勾选<em><strong>Performance Enablement</strong></em>的Enabled勾选框，并点击<em><strong>OK</strong></em>按钮。</p>
-<p>如此便成功开启了<em><strong>Performance Enablement</strong></em> Function Area。</p>
+<p>As shown in the image, we need to check the Enabled checkbox for <em><strong>Performance Enablement</strong></em> and click the <em><strong>OK</strong></em> button.</p>
+<p>This successfully enables the <em><strong>Performance Enablement</strong></em> Function Area.</p>
 <ol start="3">
-<li>启用API所需Security Policy</li>
+<li>Enable Required Security Policy for API</li>
 </ol>
-<p>如下图所示方式可以开启相关的Security Policy。下图中为Disabled状态，是因为此Policy已经开启。<br><img src="https://s2.loli.net/2024/11/05/4XLEuaK5nOdVvqs.png" alt="alt text"></p>
+<p>The method to enable related Security Policy is shown in the image below. The Disabled status shown in the image is because this Policy has already been enabled.<br><img src="https://s2.loli.net/2024/11/05/4XLEuaK5nOdVvqs.png" alt="alt text"></p>
 <ol start="4">
-<li>授予Security Group相关资源的Security Policy</li>
+<li>Grant Security Group Access to Related Security Policy</li>
 </ol>
-<p>在此处需要为<em><strong>Tianle_ISSG</strong></em>授予<em><strong>Set Up: Employee Reviews</strong></em>权限。</p>
-<p>使用以下task来授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Set Up: Employee Reviews</strong></em>的权限：</p>
+<p>Here we need to grant <em><strong>Set Up: Employee Reviews</strong></em> permission to <em><strong>Tianle_ISSG</strong></em>.</p>
+<p>Use the following task to grant <em><strong>Tianle_ISSG</strong></em> permission to <em><strong>Set Up: Employee Reviews</strong></em>:</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Maintain Permissions for Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/IhDWtlmeo9CuNyc.png" alt="alt text"></p>
 <p><img src="https://s2.loli.net/2024/11/05/6kDVWdtxsZI72gf.png" alt="alt text"></p>
-<p>此处遵循权限最小原则，仅授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Set Up: Employee Reviews</strong></em>的Get only权限。</p>
-<p>Important Notes:<br>设置完成后需要执行<em><strong>Activate Pending Security Policy Changes</strong></em>任务，激活安全策略变更。</p>
+<p>Following the principle of least privilege, only grant Get only permission to <em><strong>Tianle_ISSG</strong></em> for <em><strong>Set Up: Employee Reviews</strong></em>.</p>
+<p>Important Notes:<br>After setting up, you need to execute the <em><strong>Activate Pending Security Policy Changes</strong></em> task to activate security policy changes.</p>
 <ol start="5">
-<li>为Security Group添加相关的Scope</li>
+<li>Add Related Scope for Security Group</li>
 </ol>
-<p>因为<em><strong>Get Employee Reviews</strong></em>需要使用<em><strong>Performance Enablement</strong></em> Function Area，因此需要将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中。</p>
-<p>使用以下task来将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中：</p>
+<p>Since <em><strong>Get Employee Reviews</strong></em> needs to use <em><strong>Performance Enablement</strong></em> Function Area, we need to add <em><strong>Tianle_ISSG</strong></em> to <em><strong>Performance Enablement</strong></em>.</p>
+<p>Use the following task to add <em><strong>Tianle_ISSG</strong></em> to <em><strong>Performance Enablement</strong></em>:</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Edit Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/7i93jmUSGIBDTky.png" alt="alt text"></p>
-<p>Important Notes:<br>在进行WWS集成时，要为Security Group加相关的Scope，否则会导致API调用失败。</p>
-<h3 id="调用API"><a href="#调用API" class="headerlink" title="调用API"></a>调用API</h3><ol>
-<li>生成AccessToken与前文相同，在此不做赘述。</li>
+<p>Important Notes:<br>When performing WWS integration, you need to add related Scope for Security Group, otherwise API calls will fail.</p>
+<h3 id="Call-API"><a href="#Call-API" class="headerlink" title="Call API"></a>Call API</h3><ol>
+<li>Generating AccessToken is the same as before, won’t be repeated here.</li>
 </ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">ACCESS_TOKEN</span><span class="token operator">=</span><span class="token string">"Bearer eyJhbG...已获取的AccessToken"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">ACCESS_TOKEN</span><span class="token operator">=</span><span class="token string">"Bearer eyJhbG...obtained AccessToken"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ol start="2">
-<li>调用API<br>url格式为：{Workday Instance URL}&#x2F;ccx&#x2F;service&#x2F;{Integration System ID}&#x2F;{Function Area}&#x2F;v{API Version}</li>
+<li>Call API<br>URL format is: {Workday Instance URL}&#x2F;ccx&#x2F;service&#x2F;{Integration System ID}&#x2F;{Function Area}&#x2F;v{API Version}</li>
 </ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">--request</span> POST <span class="token punctuation">\</span>
   <span class="token parameter variable">--url</span> https://wd3-impl-services1.workday.com/ccx/service/thoughtworks3/Performance_Management/v42.2 <span class="token punctuation">\</span>
@@ -749,9 +746,9 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 &lt;/env:Envelope>'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="3">
-<li>获取数据</li>
+<li>Get Data</li>
 </ol>
-<p>返回体如下：</p>
+<p>Response body as follows:</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version='1.0' encoding='UTF-8'?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">env:</span>Envelope</span>
 	<span class="token attr-name"><span class="token namespace">xmlns:</span>env</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.xmlsoap.org/soap/envelope/<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -911,40 +908,40 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">env:</span>Body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">env:</span>Envelope</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="参考文档-2"><a href="#参考文档-2" class="headerlink" title="参考文档"></a>参考文档</h4><p><a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/productionapi/versions/index.html" title="点击访问Soap API Derectionary">Soap API Derectionary</a><br><a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/restapi/index.html" title="点击访问Rest API Derectionary">Rest API Derectionary</a></p>
-<h2 id="总结与思考"><a href="#总结与思考" class="headerlink" title="总结与思考"></a>总结与思考</h2><h3 id="集成要点总结"><a href="#集成要点总结" class="headerlink" title="集成要点总结"></a>集成要点总结</h3><p>通过对Workday集成的学习和实践，以下几个关键点值得注意：</p>
+<h4 id="Reference-Documentation-2"><a href="#Reference-Documentation-2" class="headerlink" title="Reference Documentation"></a>Reference Documentation</h4><p><a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/productionapi/versions/index.html" title="Click to visit Soap API Directory">Soap API Directory</a><br><a target="_blank" rel="noopener" href="https://community.workday.com/sites/default/files/file-hosting/restapi/index.html" title="Click to visit Rest API Directory">Rest API Directory</a></p>
+<h2 id="Summary-and-Reflections"><a href="#Summary-and-Reflections" class="headerlink" title="Summary and Reflections"></a>Summary and Reflections</h2><h3 id="Key-Integration-Points-Summary"><a href="#Key-Integration-Points-Summary" class="headerlink" title="Key Integration Points Summary"></a>Key Integration Points Summary</h3><p>Through learning and practicing Workday integration, the following key points are worth noting:</p>
 <ol>
-<li><p><strong>权限管理至关重要</strong></p>
+<li><p><strong>Permission Management is Critical</strong></p>
 <ul>
-<li>Security Group是权限管理的核心</li>
-<li>遵循最小权限原则</li>
-<li>权限变更需要及时激活</li>
+<li>Security Group is the core of permission management</li>
+<li>Follow the principle of least privilege</li>
+<li>Permission changes need to be activated promptly</li>
 </ul>
 </li>
-<li><p><strong>认证机制的选择</strong></p>
+<li><p><strong>Authentication Mechanism Selection</strong></p>
 <ul>
-<li>OAuth 2.0 + JWT是推荐的认证方式</li>
-<li>需要妥善保管证书和密钥</li>
-<li>定期更新认证信息</li>
+<li>OAuth 2.0 + JWT is the recommended authentication method</li>
+<li>Certificates and keys need to be properly safeguarded</li>
+<li>Regularly update authentication information</li>
 </ul>
 </li>
-<li><p><strong>集成方式的选择</strong></p>
+<li><p><strong>Integration Method Selection</strong></p>
 <ul>
-<li>根据业务场景选择合适的集成方式</li>
-<li>RaaS适合需要自定义数据查询的场景</li>
-<li>Web Service适合复杂业务操作</li>
+<li>Choose appropriate integration methods based on business scenarios</li>
+<li>RaaS is suitable for scenarios requiring custom data queries</li>
+<li>Web Service is suitable for complex business operations</li>
 </ul>
 </li>
 </ol>
-<p>掌握了本文中提到的两种集成方式，已经足以解决部分的集成问题。希望这篇文章能够帮助到同样需要进行Workday集成的同事。如果有任何问题，欢迎交流讨论。</p>
-<h3 id="实践经验"><a href="#实践经验" class="headerlink" title="实践经验"></a>实践经验</h3><p>在探索过程中，我们总结了以下一些实践经验，分享给大家：</p>
+<p>Mastering the two integration methods mentioned in this article is sufficient to solve some integration problems. I hope this article can help colleagues who also need to integrate with Workday. If you have any questions, feel free to discuss.</p>
+<h3 id="Practical-Experience"><a href="#Practical-Experience" class="headerlink" title="Practical Experience"></a>Practical Experience</h3><p>During the exploration process, we summarized the following practical experiences to share:</p>
 <ul>
-<li>由于缺乏明确的官方学习路径和清晰的文档指引，学习曲线较为陡峭。在探索过程中需要投入大量时间和精力进行试错，并且要尽可能的通过实际操作进行验证。</li>
-<li>Workday官方文档内容时有欠缺，建议在搜索资料时善用AI工具辅助，这样可以提高知识整合的效率。</li>
-<li>推荐使用Workday Community平台，虽然上面的内容相对简略，但包含了大量实践经验分享，是很好的参考资料。</li>
-<li>Workday的集成任务通常需要多个步骤协同配合才能完成，因此在操作过程中需要保持耐心和细心。</li>
+<li>Due to the lack of clear official learning paths and documentation guidance, the learning curve is relatively steep. During exploration, significant time and effort need to be invested in trial and error, and verification through practical operations is essential whenever possible.</li>
+<li>Workday official documentation is sometimes incomplete. It is recommended to utilize AI tools for assistance when searching for materials, which can improve the efficiency of knowledge integration.</li>
+<li>The Workday Community platform is recommended. Although the content is relatively brief, it contains extensive sharing of practical experiences and serves as good reference material.</li>
+<li>Workday integration tasks usually require multiple steps working together to complete, so patience and attention to detail are needed during the operation.</li>
 </ul>
-<h3 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h3><p>Workday作为一个功能丰富且庞大的系统，要想真正掌握其集成能力并非易事。虽然通过自学和实践可以解决一些基础问题，但要深入了解这个领域，系统性的培训和课程学习一定是必不可少的。</p>
+<h3 id="Future-Outlook"><a href="#Future-Outlook" class="headerlink" title="Future Outlook"></a>Future Outlook</h3><p>As a feature-rich and extensive system, truly mastering Workday’s integration capabilities is no easy task. While self-study and practice can solve some basic problems, systematic training and course learning are undoubtedly essential to gain a deeper understanding of this field.</p>
 
   </div>
 </article>
@@ -971,21 +968,21 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97"><span class="toc-number">1.</span> <span class="toc-text">Workday集成指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Workday%E9%9B%86%E6%88%90%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">Workday集成概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E7%B1%BB%E5%9E%8B%E6%80%BB%E8%A7%88"><span class="toc-number">1.2.1.</span> <span class="toc-text">集成类型总览</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Inbound-Integration%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%EF%BC%89"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1. Inbound Integration（数据导入）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Outbound-Integration%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA%EF%BC%89"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2. Outbound Integration（数据导出）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Real-time-Integration%EF%BC%88%E5%AE%9E%E6%97%B6%E9%9B%86%E6%88%90%EF%BC%89"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">3. Real-time Integration（实时集成）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Scheduled-Integration%EF%BC%88%E5%AE%9A%E6%97%B6%E9%9B%86%E6%88%90%EF%BC%89"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">4. Scheduled Integration（定时集成）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Event-driven-Integration%EF%BC%88%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%EF%BC%89"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">5. Event-driven Integration（事件驱动）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81"><span class="toc-number">1.2.2.</span> <span class="toc-text">本文内容概要</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">核心组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Security-Group"><span class="toc-number">1.3.1.</span> <span class="toc-text">Security Group</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%92%8C%E7%94%A8%E9%80%94"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">功能和用途</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">创建步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">参考文档</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Integration-System-User"><span class="toc-number">1.3.2.</span> <span class="toc-text">Integration System User</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A5%E9%AA%A4-1"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">创建步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API-Client"><span class="toc-number">1.3.3.</span> <span class="toc-text">API Client</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-2"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A5%E9%AA%A4-2"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">创建步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-1"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">参考文档</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Report"><span class="toc-number">1.3.4.</span> <span class="toc-text">Report</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A5%E9%AA%A4-3"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">创建步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E4%BB%BB%E5%8A%A1%E5%9C%BA%E6%99%AF"><span class="toc-number">1.4.</span> <span class="toc-text">集成任务场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Report-as-a-Service-RaaS-%E9%9B%86%E6%88%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">Report as a Service(RaaS)集成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">前提条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">配置步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8API%E8%B0%83%E7%94%A8Report"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">使用API调用Report</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">使用注意事项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Service%E9%9B%86%E6%88%90"><span class="toc-number">1.4.2.</span> <span class="toc-text">Web Service集成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-3"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6-1"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">前提条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">认证方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4-1"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">配置步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8API"><span class="toc-number">1.4.3.</span> <span class="toc-text">调用API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-2"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">参考文档</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E6%80%9D%E8%80%83"><span class="toc-number">1.5.</span> <span class="toc-text">总结与思考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E8%A6%81%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.1.</span> <span class="toc-text">集成要点总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%BB%8F%E9%AA%8C"><span class="toc-number">1.5.2.</span> <span class="toc-text">实践经验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="toc-number">1.5.3.</span> <span class="toc-text">未来展望</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Workday-Integration-Guide"><span class="toc-number">1.</span> <span class="toc-text">Workday Integration Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Workday-Integration-Overview"><span class="toc-number">1.2.</span> <span class="toc-text">Workday Integration Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Integration-Types-Overview"><span class="toc-number">1.2.1.</span> <span class="toc-text">Integration Types Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Inbound-Integration"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1. Inbound Integration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Outbound-Integration"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2. Outbound Integration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Real-time-Integration"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">3. Real-time Integration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Scheduled-Integration"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">4. Scheduled Integration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Event-driven-Integration"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">5. Event-driven Integration</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Content-Overview"><span class="toc-number">1.2.2.</span> <span class="toc-text">Content Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-Components"><span class="toc-number">1.3.</span> <span class="toc-text">Core Components</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Security-Group"><span class="toc-number">1.3.1.</span> <span class="toc-text">Security Group</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Concept"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Concept</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Functions-and-Uses"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">Functions and Uses</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Steps"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">Creation Steps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reference-Documentation"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">Reference Documentation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Integration-System-User"><span class="toc-number">1.3.2.</span> <span class="toc-text">Integration System User</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Concept-1"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">Concept</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Use-Cases"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">Use Cases</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Steps-1"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">Creation Steps</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API-Client"><span class="toc-number">1.3.3.</span> <span class="toc-text">API Client</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Concept-2"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">Concept</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Use-Cases-1"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">Use Cases</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Steps-2"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">Creation Steps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reference-Documentation-1"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">Reference Documentation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Report"><span class="toc-number">1.3.4.</span> <span class="toc-text">Report</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Overview"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Steps-3"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">Creation Steps</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Integration-Task-Scenarios"><span class="toc-number">1.4.</span> <span class="toc-text">Integration Task Scenarios</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Report-as-a-Service-RaaS-Integration"><span class="toc-number">1.4.1.</span> <span class="toc-text">Report as a Service(RaaS) Integration</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Overview-1"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Prerequisites"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configuration-Steps"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">Configuration Steps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Using-API-to-Call-Report"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">Using API to Call Report</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Usage-Notes"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">Usage Notes</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Service-Integration"><span class="toc-number">1.4.2.</span> <span class="toc-text">Web Service Integration</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Concept-3"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">Concept</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Prerequisites-1"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Authentication-Methods"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">Authentication Methods</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configuration-Steps-1"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">Configuration Steps</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Call-API"><span class="toc-number">1.4.3.</span> <span class="toc-text">Call API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Reference-Documentation-2"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">Reference Documentation</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-and-Reflections"><span class="toc-number">1.5.</span> <span class="toc-text">Summary and Reflections</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Key-Integration-Points-Summary"><span class="toc-number">1.5.1.</span> <span class="toc-text">Key Integration Points Summary</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Practical-Experience"><span class="toc-number">1.5.2.</span> <span class="toc-text">Practical Experience</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Future-Outlook"><span class="toc-number">1.5.3.</span> <span class="toc-text">Future Outlook</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&text=Workday集成指南"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&is_video=false&description=Workday集成指南"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Workday集成指南&body=Check out this article: http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&title=Workday集成指南"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/&name=Workday集成指南&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/11/06/Workday-Integration-Guide/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/11/06/Workday-Integration-Guide/&text=Workday Integration Guide"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/11/06/Workday-Integration-Guide/&is_video=false&description=Workday Integration Guide"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Workday Integration Guide&body=Check out this article: http://example.com/2024/11/06/Workday-Integration-Guide/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/11/06/Workday-Integration-Guide/&title=Workday Integration Guide"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/11/06/Workday-Integration-Guide/&name=Workday Integration Guide&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
