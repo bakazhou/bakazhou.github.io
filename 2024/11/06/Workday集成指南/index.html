@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://s2.loli.net/2024/11/05/6kDVWdtxsZI72gf.png">
 <meta property="og:image" content="https://s2.loli.net/2024/11/05/7i93jmUSGIBDTky.png">
 <meta property="article:published_time" content="2024-11-06T00:46:32.000Z">
-<meta property="article:modified_time" content="2024-11-26T01:55:32.579Z">
+<meta property="article:modified_time" content="2024-11-26T02:10:00.066Z">
 <meta property="article:author" content="Bakazhou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png">
@@ -339,10 +339,8 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2024/11/06/Workday-Integration-Guide/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
         
-        
-        <li><a class="icon" href="/2022/10/12/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B-%E7%BA%BF%E7%A8%8B%E6%B1%A0/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        <li><a class="icon" href="/2024/11/06/Workday-Integration-Guide/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
         <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
@@ -452,7 +450,7 @@
 </ul>
 </li>
 </ol>
-<h4 id="创建步骤"><a href="#创建步骤" class="headerlink" title="创建步骤"></a>创建步骤</h4><p>使用下列Task在Workday创建Security Group</p>
+<h4 id="创建步骤"><a href="#创建步骤" class="headerlink" title="创建步骤"></a>创建步骤</h4><p>使用下列<strong>Task</strong>在Workday创建Security Group</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>因为在我们的场景中，Security Group 需要用于集成，因此选择类型为<em><strong>Integration System Security Group (Unconstrained)<em><strong>，安全组名称按需求填写即可，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/97XMjGViYdvoJhS.png" alt="alt text"><br>信息填写完毕后，点击</strong></em>OK</strong></em>按钮即可。<br>完成上述步骤后，便拥有了一个用于进行集成任务的Security Group名为<em><strong>Tianle_ISSG</strong></em>。</p>
 <h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><p><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/dan1370797393239.html" title="点击访问Security Group Concepts">Security Group Concepts Document</a><br><a target="_blank" rel="noopener" href="https://doc.workday.com/admin-guide/en-us/authentication-and-security/configurable-security/security-group-basics/gyz1563919157019.html?toc=2.1.6" title="点击访问Security Group Types">Security Group Types Document</a></p>
@@ -465,7 +463,7 @@
 <li>数据同步、数据处理</li>
 </ol>
 <h4 id="创建步骤-1"><a href="#创建步骤-1" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
-<li><p>使用下列Task在Workday创建Security Group：</p>
+<li><p>使用下列<strong>Task</strong>在Workday创建Security Group：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Integration System User<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li><p>填写基本信息：</p>
@@ -487,7 +485,7 @@
 <li>数据同步与交换</li>
 </ol>
 <h4 id="创建步骤-2"><a href="#创建步骤-2" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
-<li>使用下列Task在Workday创建API Client：<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create API Client<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>使用下列<strong>Task</strong>在Workday创建API Client：<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create API Client<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li>填写基本信息：<ul>
 <li>客户端名称: 遵循命名规范</li>
 <li>认证方式: 选择JWT Bearer Grant</li>
@@ -525,7 +523,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>合规性报告生成</li>
 </ol>
 <h4 id="创建步骤-3"><a href="#创建步骤-3" class="headerlink" title="创建步骤"></a>创建步骤</h4><ol>
-<li>使用下列Task在Workday创建Report：<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Custom Report<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>使用下列<strong>Task</strong>在Workday创建Report：<pre class="line-numbers language-text" data-language="text"><code class="language-text">Create Custom Report<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li>填写基本信息：<ul>
 <li>报表名称: 遵循命名规范</li>
 <li>报表类型: 选择Advanced</li>
@@ -561,7 +559,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>授予Security Group相关资源的访问权限</li>
 </ol>
 <p>使用第二步中的操作对Tianle_Test_Report所包含的三个字段Employee ID、Employee Type、Employee Name进行Security Policy检查，最终发现它们的Security policy都包含<em><strong>Worker Data: Current Staffing Information</strong></em>，因此需要将<em><strong>Tianle_ISSG</strong></em>授予<em><strong>Worker Data: Current Staffing Information</strong></em>的权限。</p>
-<p>运行下列Task在Workday中授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Worker Data: Current Staffing Information</strong></em>的权限：</p>
+<p>运行下列<strong>Task</strong>在Workday中授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Worker Data: Current Staffing Information</strong></em>的权限：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Maintain Permissions for Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/MND2Wkh8BclLnpd.png" alt="alt text"></p>
@@ -571,7 +569,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <ol start="4">
 <li>添加ISU到Security Group</li>
 </ol>
-<p>运行下列Task在Workday中将<em><strong>ISU_Tianle</strong></em>添加到<em><strong>Tianle_ISSG</strong></em>中：</p>
+<p>运行下列<strong>Task</strong>在Workday中将<em><strong>ISU_Tianle</strong></em>添加到<em><strong>Tianle_ISSG</strong></em>中：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Edit Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/aUfKJlAkBnEd71p.png" alt="alt text"></p>
@@ -686,7 +684,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <ol>
 <li>确定API所需Security Policy</li>
 </ol>
-<p>使用以下Task来确定API所需的Security policy：</p>
+<p>使用以下<strong>Task</strong>来确定API所需的Security policy：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">View Security for Securable Item<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>输入API名称，例如<em><strong>Get Employee Reviews</strong></em>，点击<em><strong>OK</strong></em>按钮，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/NElhaTFKXWSy5DH.png" alt="alt text"></p>
 <p>点击<em><strong>View Security</strong></em>按钮，如下图所示：<br><img src="https://s2.loli.net/2024/11/05/kMmQWdIZbAgKVnL.png" alt="alt text"></p>
@@ -694,7 +692,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <ol start="2">
 <li>启用API所需Function Area</li>
 </ol>
-<p>使用以下Task来启用API所需的Function Area：</p>
+<p>使用以下<strong>Task</strong>来启用API所需的Function Area：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Maintain Functional Areas<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://s2.loli.net/2024/11/05/MOdt87N4Ggcjpf9.png" alt="alt text"></p>
 <p>如图所示我们需要勾选<em><strong>Performance Enablement</strong></em>的Enabled勾选框，并点击<em><strong>OK</strong></em>按钮。</p>
@@ -707,7 +705,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>授予Security Group相关资源的Security Policy</li>
 </ol>
 <p>在此处需要为<em><strong>Tianle_ISSG</strong></em>授予<em><strong>Set Up: Employee Reviews</strong></em>权限。</p>
-<p>使用以下task来授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Set Up: Employee Reviews</strong></em>的权限：</p>
+<p>使用以下<strong>Task</strong>来授予<em><strong>Tianle_ISSG</strong></em>对<em><strong>Set Up: Employee Reviews</strong></em>的权限：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Maintain Permissions for Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/IhDWtlmeo9CuNyc.png" alt="alt text"></p>
@@ -718,7 +716,7 @@ openssl pkcs8 <span class="token parameter variable">-topk8</span> <span class="
 <li>为Security Group添加相关的Scope</li>
 </ol>
 <p>因为<em><strong>Get Employee Reviews</strong></em>需要使用<em><strong>Performance Enablement</strong></em> Function Area，因此需要将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中。</p>
-<p>使用以下Task来将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中：</p>
+<p>使用以下<strong>Task</strong>来将<em><strong>Tianle_ISSG</strong></em>添加到<em><strong>Performance Enablement</strong></em>中：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Edit Security Group<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://s2.loli.net/2024/11/05/7i93jmUSGIBDTky.png" alt="alt text"></p>
