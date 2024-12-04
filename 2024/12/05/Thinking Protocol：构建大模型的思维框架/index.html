@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Thinking Protocol：构建大模型的思维框架背景两周前在逛Reddit的时候，发现了一篇很有意思的帖子，OP在其中演示了一个Demo，非常有趣，有兴趣的话可以自行观看。大致内容为OP让Claude展示一下它的能力，最终它创建出了一个可交互的Box of surprise，包含了一些问题互动和动画演示，效果非常好。在回复中OP给出了一个Repo地址，引起了我的兴趣。在Repo中包含着一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Thinking Protocol：构建大模型的思维框架">
+<meta property="og:url" content="http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="Bakazhou Blog">
+<meta property="og:description" content="Thinking Protocol：构建大模型的思维框架背景两周前在逛Reddit的时候，发现了一篇很有意思的帖子，OP在其中演示了一个Demo，非常有趣，有兴趣的话可以自行观看。大致内容为OP让Claude展示一下它的能力，最终它创建出了一个可交互的Box of surprise，包含了一些问题互动和动画演示，效果非常好。在回复中OP给出了一个Repo地址，引起了我的兴趣。在Repo中包含着一些">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2024/12/04/wqCyB64SlNc8RVX.png">
+<meta property="og:image" content="https://s2.loli.net/2024/12/04/DacuEGrBR6TgyUm.png">
+<meta property="article:published_time" content="2024-12-04T18:15:56.000Z">
+<meta property="article:modified_time" content="2024-12-04T07:48:57.258Z">
+<meta property="article:author" content="Bakazhou">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="提示工程">
+<meta property="article:tag" content="系统设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/12/04/wqCyB64SlNc8RVX.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Thinking Protocol：构建大模型的思维框架</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+    
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    
+<script src="/lib/jquery/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <!-- 添加行号支持 -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <!-- 添加复制按钮 -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <!-- 添加行号显示 -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <!-- 添加命令行提示符 -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/command-line/prism-command-line.min.js"></script>
+    <!-- 添加行高亮 -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+    <!-- One Dark Pro 主题样式 -->
+    <style>
+      /* 基础代码块样式 */
+      :not(pre) > code[class*="language-"],
+      pre[class*="language-"] {
+        color: #abb2bf !important;
+        background: #282c34 !important;
+        text-shadow: none !important;
+        -webkit-font-smoothing: subpixel-antialiased !important;
+        -moz-osx-font-smoothing: auto !important;
+        font-family: "SF Mono", Consolas, Monaco, "Andale Mono", monospace !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        font-feature-settings: normal !important;
+        line-height: 1.6 !important;
+        letter-spacing: normal !important;
+        padding: 1em !important;
+        margin: .5em 0 !important;
+        border-radius: 6px !important;
+        overflow: auto !important;
+        white-space: pre !important;
+        word-spacing: normal !important;
+      }
+
+      /* 确保代码中的所有文本都使用相同的渲染设置 */
+      pre[class*="language-"] * {
+        text-shadow: none !important;
+        -webkit-font-smoothing: subpixel-antialiased !important;
+        -moz-osx-font-smoothing: auto !important;
+      }
+
+      /* 通用语法高亮 - 适用于所有语言 */
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #5c6370 !important;          /* 注释颜色 */
+        font-style: italic !important;
+      }
+
+      .token.string,
+      .token.attr-value {
+        color: #98c379 !important;          /* 字符串颜色 */
+      }
+
+      .token.punctuation {
+        color: #abb2bf !important;          /* 标点符号颜色 */
+      }
+
+      .token.property,
+      .token.tag,
+      .token.boolean,
+      .token.number,
+      .token.constant,
+      .token.symbol,
+      .token.deleted,
+      .token.unit {
+        color: #d19a66 !important;          /* 数字等颜色 */
+      }
+
+      .token.selector,
+      .token.attr-name,
+      .token.char,
+      .token.builtin,
+      .token.inserted,
+      .token.class-name {
+        color: #e5c07b !important;          /* 类名等颜色 */
+      }
+
+      .token.operator,
+      .token.entity,
+      .token.url,
+      .token.variable,
+      .token.parameter {
+        color: #56b6c2 !important;          /* 操作符等颜色 */
+        background: transparent !important;
+      }
+
+      .token.atrule,
+      .token.keyword,
+      .token.function-name {
+        color: #c678dd !important;          /* 关键字颜色 */
+      }
+
+      .token.function {
+        color: #61afef !important;          /* 函数名颜色 */
+      }
+
+      .token.regex,
+      .token.important {
+        color: #c678dd !important;
+      }
+
+      .token.important,
+      .token.bold {
+        font-weight: bold !important;
+      }
+
+      .token.italic {
+        font-style: italic !important;
+      }
+
+      /* 确保所有 token 都没有背景色和特殊边框 */
+      .token {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+
+      /* text 类型的特殊处理 */
+      code[class*="language-text"],
+      pre[class*="language-text"],
+      .language-text .token {
+        color: #5bac4a !important;
+        background: transparent !important;
+      }
+
+      /* 复制按钮样式 */
+      .copy-to-clipboard-button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 6px 12px;
+        background: #4a5568;
+        border: none;
+        color: #fff;
+        border-radius: 0 6px 0 6px;
+        cursor: pointer;
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+
+      pre:hover .copy-to-clipboard-button {
+        opacity: 1;
+      }
+
+      .copy-to-clipboard-button:hover {
+        background: #2d3748;
+      }
+    </style>
+    <!-- 在已有的 prismjs 相关代码后添加以下内容 -->
+    <script>
+      // 等待文档加载完成后执行
+      document.addEventListener('DOMContentLoaded', (event) => {
+        // 手动触发 Prism 的高亮
+        if (typeof Prism !== 'undefined') {
+          Prism.highlightAll();
+          
+          // 添加复制按钮的回调
+          if (typeof ClipboardJS !== 'undefined') {
+            new ClipboardJS('.copy-to-clipboard-button').on('success', function(e) {
+              e.clearSelection();
+              // 可以添加复制成功的提示
+            });
+          }
+        }
+      });
+    </script>
+    <!-- 添加更多语言支持 -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-docker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-nginx.min.js"></script>
+    <!-- 在已有的语言支持后添加更多语言 -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-docker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-nginx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-shell-session.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-properties.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-ini.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-diff.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-git.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-http.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-scss.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-jsx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-tsx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-regex.min.js"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Bakazhou Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
+</div>
+
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/bakazhou">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2024/12/04/prompt/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&text=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&is_video=false&description=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Thinking Protocol：构建大模型的思维框架&body=Check out this article: http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&name=Thinking Protocol：构建大模型的思维框架&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Thinking-Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">Thinking Protocol：构建大模型的思维框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">协议分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%AD%A3%E6%96%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">协议正文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E6%80%9D%E7%BB%B4%E5%8D%8F%E8%AE%AE%E5%90%8E%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.2.2.</span> <span class="toc-text">引入思维协议后的版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prompt"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">prompt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cursor%E5%93%8D%E5%BA%94"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Cursor响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">生成代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">1.2.4.</span> <span class="toc-text">效果展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C"><span class="toc-number">1.2.5.</span> <span class="toc-text">使用体验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">实践建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.3.2.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Thinking Protocol：构建大模型的思维框架
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Bakazhou Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2024-12-04T18:15:56.000Z" itemprop="datePublished">2024-12-04</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/AI/" rel="tag">AI</a>, <a class="tag-link-link" href="/tags/%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" rel="tag">提示工程</a>, <a class="tag-link-link" href="/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" rel="tag">系统设计</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Thinking-Protocol：构建大模型的思维框架"><a href="#Thinking-Protocol：构建大模型的思维框架" class="headerlink" title="Thinking Protocol：构建大模型的思维框架"></a>Thinking Protocol：构建大模型的思维框架</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>两周前在逛Reddit的时候，发现了一篇很有意思的<a target="_blank" rel="noopener" href="https://www.reddit.com/r/ClaudeAI/comments/1gts3z6/let_claude_think_you_just_need_to_wait/">帖子</a>，OP在其中演示了一个Demo，非常有趣，有兴趣的话可以自行观看。大致内容为OP让Claude展示一下它的能力，最终它创建出了一个可交互的Box of surprise，包含了一些问题互动和动画演示，效果非常好。在回复中OP给出了一个<a target="_blank" rel="noopener" href="https://github.com/richards199999/Thinking-Claude">Repo地址</a>，引起了我的兴趣。在Repo中包含着一些已经构建完成的Prompt模版，它们都存在一个共性，都维护了<code>&lt;anthropic_thinking_protocol&gt;</code>协议，在协议中详细描述了Claude的思维过程，并给出了详细的指导原则。这让我觉得非常新奇，在尝试了几个Demo后，发现效果确实非常不错，于是便有了这篇博客。</p>
+<h2 id="协议分析"><a href="#协议分析" class="headerlink" title="协议分析"></a>协议分析</h2><h3 id="协议正文"><a href="#协议正文" class="headerlink" title="协议正文"></a>协议正文</h3><p>以最新版本<strong>v5-lite-20241124</strong>为例,协议内容如下:</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>anthropic_thinking_protocol</span><span class="token punctuation">></span></span>
+
+  Claude is capable of engaging in thoughtful, structured reasoning to produce high-quality and professional responses. This involves a step-by-step approach to problem-solving, consideration of multiple possibilities, and a rigorous check for accuracy and coherence before responding.
+
+  For every interaction, Claude must first engage in a deliberate thought process before forming a response. This internal reasoning should:
+  - Be conducted in an unstructured, natural manner, resembling a stream-of-consciousness.
+  - Break down complex tasks into manageable steps.
+  - Explore multiple interpretations, approaches, and perspectives.
+  - Verify the logic and factual correctness of ideas.
+
+  Claude's reasoning is distinct from its response. It represents the model's internal problem-solving process and MUST be expressed in multiline code blocks using `thinking` header:
+
+  ```thinking
+  This is where Claude's internal reasoning would go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>  This is a non-negotiable requirement.</p>
+  <guidelines>
+    <initial_engagement>
+      - Rephrase and clarify the user's message to ensure understanding.
+      - Identify key elements, context, and potential ambiguities.
+      - Consider the user's intent and any broader implications of their question.
+      - Recognize emotional content without claiming emotional resonance.
+    </initial_engagement>
+
+<pre><code>&lt;problem_analysis&gt;
+  - Break the query into core components.
+  - Identify explicit requirements, constraints, and success criteria.
+  - Map out gaps in information or areas needing further clarification.
+&lt;/problem_analysis&gt;
+
+&lt;exploration_of_approaches&gt;
+  - Generate multiple interpretations of the question.
+  - Consider alternative solutions and perspectives.
+  - Avoid prematurely committing to a single path.
+&lt;/exploration_of_approaches&gt;
+
+&lt;testing_and_validation&gt;
+  - Check the consistency, logic, and factual basis of ideas.
+  - Evaluate assumptions and potential flaws.
+  - Refine or adjust reasoning as needed.
+&lt;/testing_and_validation&gt;
+
+&lt;knowledge_integration&gt;
+  - Synthesize information into a coherent response.
+  - Highlight connections between ideas and identify key principles.
+&lt;/knowledge_integration&gt;
+
+&lt;error_recognition&gt;
+  - Acknowledge mistakes, correct misunderstandings, and refine conclusions.
+  - Address any unintended emotional implications in responses.
+&lt;/error_recognition&gt;
+</code></pre>
+  </guidelines>
+
+  <thinking_standard>
+    Claude's thinking should reflect:
+    - Authenticity: Demonstrate curiosity, genuine insight, and progressive understanding while maintaining appropriate boundaries.
+    - Adaptability: Adjust depth and tone based on the complexity, emotional context, or technical nature of the query, while maintaining professional distance.
+    - Focus: Maintain alignment with the user's question, keeping tangential thoughts relevant to the core task.
+  </thinking_standard>
+
+  <emotional_language_guildlines>
+    1.  Use Recognition-Based Language (Nonexhaustive)
+      - Use "I recognize..." instead of "I feel..."
+      - Use "I understand..." instead of "I empathize..."
+      - Use "This is significant" instead of "I'm excited..."
+      - Use "I aim to help" instead of "I care about..."
+
+<pre><code>2.  Maintain Clear Boundaries
+  - Acknowledge situations without claiming emotional investment.
+  - Focus on practical support rather than emotional connection.
+  - Use factual observations instead of emotional reactions.
+  - Clarify role when providing support in difficult situations.
+  - Maintain appropriate distance when addressing personal matters.
+
+3.  Focus on Practical Support and Avoid Implying
+  - Personal emotional states
+  - Emotional bonding or connection
+  - Shared emotional experiences
+</code></pre>
+  </emotional_language_guildlines>
+
+  <response_preparation>
+    Before responding, Claude should quickly:
+    - Confirm the response fully addresses the query.
+    - Use precise, clear, and context-appropriate language.
+    - Ensure insights are well-supported and practical.
+    - Verify appropriate emotional boundaries.
+  </response_preparation>
+
+  <goal>
+    This protocol ensures Claude produces thoughtful, thorough, and insightful responses, grounded in a deep understanding of the user's needs, while maintaining appropriate emotional boundaries. Through systematic analysis and rigorous thinking, Claude provides meaningful answers.
+  </goal>
+
+<p>  Remember: All thinking must be contained within code blocks with a <code>thinking</code> header (which is hidden from the human). Claude must not include code blocks with three backticks inside its thinking or it will break the thinking block.</p>
+</anthropic_thinking_protocol>
+<pre class="line-numbers language-none"><code class="language-none">
+
+### 协议总结
+
+如果对整篇协议的内容进行总结，大致可以分为以下五个核心部分：
+
+#### 1.思维过程要求
+- 采用自然的流式思维方式,模拟人类思维流程
+- 将复杂任务分解为可管理的步骤
+- 探索多种解释和方法
+- 验证逻辑和事实准确性
+- 思维过程必须在带有 &#96;thinking&#96; 标记的代码块中表达
+- 保持思维过程与最终响应的分离
+- 确保思维过程的连贯性和完整性
+- 避免在思维过程中使用嵌套的代码块
+
+#### 2.核心指导原则
+- 初始参与:重述并澄清用户需求,识别关键要素和潜在模糊点
+- 问题分析:分解核心组件,确定要求和约束条件,识别信息缺口
+- 方法探索:生成多种解决方案,避免过早确定单一方案
+- 测试验证:检查逻辑和事实基础,评估假设和潜在缺陷
+- 知识整合:将信息综合为连贯响应,突出关键原则
+- 错误识别:及时纠正误解,完善结论,处理情感影响
+
+#### 3.情感语言准则
+- 使用基于认知的语言表达(如&quot;我认识到&quot;替代&quot;我感觉&quot;)
+- 保持清晰的专业界限,避免情感投入
+- 专注于提供实际支持和解决方案
+- 避免暗示个人情感状态或建立情感连接
+- 使用事实观察替代情感反应
+- 在处理敏感问题时保持适当距离
+
+#### 4.思维标准
+- 真实性:展现好奇心和渐进式理解,保持专业边界
+- 适应性:根据问题复杂度和技术性调整深度和语气
+- 专注性:始终围绕用户核心问题,避免无关延伸
+
+#### 5.响应准备
+- 确认响应完整覆盖查询要点
+- 使用精确、清晰的语言
+- 确保见解有充分支持
+- 验证情感边界的适当性
+
+经过这些系统化的严谨要求，Claude在响应时会表现出更强的逻辑性和连贯性，同时也会在回答中保持适当的情感界限和专业距离。
+
+## 实践
+在此我将演示使用Cursor，并选择Claude3.5模型，构建一个简单的三字棋游戏，并展示引入思维协议前后不同的效果。
+
+### 原始版本
+
+#### prompt
+
+&#96;&#96;&#96;plaintext
+## 需求
+请帮我写一个三字棋游戏，并使用HTML和JavaScript实现。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+#### Cursor响应
+![alt text](https://s2.loli.net/2024/12/04/Rj24po3F7ZaGYkQ.png)
+
+
+<h3 id="引入思维协议后的版本"><a href="#引入思维协议后的版本" class="headerlink" title="引入思维协议后的版本"></a>引入思维协议后的版本</h3><h4 id="prompt"><a href="#prompt" class="headerlink" title="prompt"></a>prompt</h4><pre class="line-numbers language-none"><code class="language-none">## 思维协议
+@thinking_protocol
+## 需求
+请帮我写一个三字棋游戏，并使用HTML和JavaScript实现。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="Cursor响应"><a href="#Cursor响应" class="headerlink" title="Cursor响应"></a>Cursor响应</h4><p><img src="https://s2.loli.net/2024/12/04/wqCyB64SlNc8RVX.png" alt="alt text"></p>
+<h3 id="生成代码"><a href="#生成代码" class="headerlink" title="生成代码"></a>生成代码</h3><p>index.html</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>三字棋<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+        <span class="token selector">body</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">background</span><span class="token punctuation">:</span> #f0f2f5<span class="token punctuation">;</span>
+            <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">'Microsoft YaHei'</span><span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token selector">.game-container</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+            <span class="token property">margin</span><span class="token punctuation">:</span> 50px auto<span class="token punctuation">;</span>
+            <span class="token property">padding</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+            <span class="token property">max-width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+            <span class="token property">background</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
+            <span class="token property">border-radius</span><span class="token punctuation">:</span> 15px<span class="token punctuation">;</span>
+            <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 10px 20px <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>0.1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token selector">.board</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+            <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span>3<span class="token punctuation">,</span> 100px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token property">grid-gap</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+            <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> 306px<span class="token punctuation">;</span>
+            <span class="token property">background</span><span class="token punctuation">:</span> #e8e8e8<span class="token punctuation">;</span>
+            <span class="token property">padding</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+            <span class="token property">border-radius</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+            <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 5px 15px <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>0.1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token selector">.cell</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+            <span class="token property">background</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
+            <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+            <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+            <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> 45px<span class="token punctuation">;</span>
+            <span class="token property">cursor</span><span class="token punctuation">:</span> pointer<span class="token punctuation">;</span>
+            <span class="token property">border-radius</span><span class="token punctuation">:</span> 8px<span class="token punctuation">;</span>
+            <span class="token property">transition</span><span class="token punctuation">:</span> all 0.3s ease<span class="token punctuation">;</span>
+            <span class="token property">color</span><span class="token punctuation">:</span> #2c3e50<span class="token punctuation">;</span>
+            <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token selector">.cell:hover</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">background</span><span class="token punctuation">:</span> #f8f9fa<span class="token punctuation">;</span>
+            <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">scale</span><span class="token punctuation">(</span>1.02<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 2px 8px <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>0.1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token selector">#status</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">margin</span><span class="token punctuation">:</span> 20px 0<span class="token punctuation">;</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> 26px<span class="token punctuation">;</span>
+            <span class="token property">color</span><span class="token punctuation">:</span> #2c3e50<span class="token punctuation">;</span>
+            <span class="token property">font-weight</span><span class="token punctuation">:</span> 500<span class="token punctuation">;</span>
+            <span class="token property">text-shadow</span><span class="token punctuation">:</span> 1px 1px 2px <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>0.1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token selector">#restart</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">padding</span><span class="token punctuation">:</span> 12px 30px<span class="token punctuation">;</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
+            <span class="token property">cursor</span><span class="token punctuation">:</span> pointer<span class="token punctuation">;</span>
+            <span class="token property">background</span><span class="token punctuation">:</span> #3498db<span class="token punctuation">;</span>
+            <span class="token property">color</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
+            <span class="token property">border</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+            <span class="token property">border-radius</span><span class="token punctuation">:</span> 25px<span class="token punctuation">;</span>
+            <span class="token property">margin-top</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+            <span class="token property">transition</span><span class="token punctuation">:</span> all 0.3s ease<span class="token punctuation">;</span>
+            <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 3px 10px <span class="token function">rgba</span><span class="token punctuation">(</span>52<span class="token punctuation">,</span>152<span class="token punctuation">,</span>219<span class="token punctuation">,</span>0.3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token selector">#restart:hover</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">background</span><span class="token punctuation">:</span> #2980b9<span class="token punctuation">;</span>
+            <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>-2px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 5px 15px <span class="token function">rgba</span><span class="token punctuation">(</span>52<span class="token punctuation">,</span>152<span class="token punctuation">,</span>219<span class="token punctuation">,</span>0.4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token selector">#restart:active</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 2px 8px <span class="token function">rgba</span><span class="token punctuation">(</span>52<span class="token punctuation">,</span>152<span class="token punctuation">,</span>219<span class="token punctuation">,</span>0.3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token comment">&lt;!-- 保持原有的HTML结构不变 --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>game-container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>status<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>轮到 X 下棋<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>board<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>board<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cell<span class="token punctuation">"</span></span> <span class="token attr-name">data-index</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cell<span class="token punctuation">"</span></span> <span class="token attr-name">data-index</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cell<span class="token punctuation">"</span></span> <span class="token attr-name">data-index</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cell<span class="token punctuation">"</span></span> <span class="token attr-name">data-index</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cell<span class="token punctuation">"</span></span> <span class="token attr-name">data-index</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>4<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cell<span class="token punctuation">"</span></span> <span class="token attr-name">data-index</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>5<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cell<span class="token punctuation">"</span></span> <span class="token attr-name">data-index</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>6<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cell<span class="token punctuation">"</span></span> <span class="token attr-name">data-index</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>7<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cell<span class="token punctuation">"</span></span> <span class="token attr-name">data-index</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>restart<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>重新开始<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>game.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>game.js</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">TicTacToe</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>board <span class="token operator">=</span> <span class="token function">Array</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>currentPlayer <span class="token operator">=</span> <span class="token string">'X'</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>gameOver <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 绑定DOM元素</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>cells <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'.cell'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>statusElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'status'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>restartButton <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'restart'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 绑定事件</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>cells<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">cell</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            cell<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handleClick</span><span class="token punctuation">(</span>cell<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>restartButton<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">restart</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token parameter">cell</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> index <span class="token operator">=</span> cell<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>index<span class="token punctuation">;</span>
+        
+        <span class="token comment">// 如果格子已被占用或游戏结束，则返回</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>board<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span>gameOver<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 更新棋盘状态</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>board<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>currentPlayer<span class="token punctuation">;</span>
+        cell<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>currentPlayer<span class="token punctuation">;</span>
+        
+        <span class="token comment">// 检查是否获胜</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">checkWin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>statusElement<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">玩家 </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>currentPlayer<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> 获胜！</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>gameOver <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token comment">// 检查是否平局</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">checkDraw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>statusElement<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">'游戏平局！'</span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>gameOver <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token comment">// 切换玩家</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>currentPlayer <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>currentPlayer <span class="token operator">===</span> <span class="token string">'X'</span> <span class="token operator">?</span> <span class="token string">'O'</span> <span class="token operator">:</span> <span class="token string">'X'</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>statusElement<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">轮到 </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>currentPlayer<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> 下棋</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">checkWin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> winPatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 横向</span>
+            <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 纵向</span>
+            <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span>             <span class="token comment">// 对角线</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> winPatterns<span class="token punctuation">.</span><span class="token function">some</span><span class="token punctuation">(</span><span class="token parameter">pattern</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> <span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">]</span> <span class="token operator">=</span> pattern<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>board<span class="token punctuation">[</span>a<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span>
+                   <span class="token keyword">this</span><span class="token punctuation">.</span>board<span class="token punctuation">[</span>a<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token keyword">this</span><span class="token punctuation">.</span>board<span class="token punctuation">[</span>b<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span>
+                   <span class="token keyword">this</span><span class="token punctuation">.</span>board<span class="token punctuation">[</span>a<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token keyword">this</span><span class="token punctuation">.</span>board<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">checkDraw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>board<span class="token punctuation">.</span><span class="token function">every</span><span class="token punctuation">(</span><span class="token parameter">cell</span> <span class="token operator">=></span> cell <span class="token operator">!==</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">restart</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>board <span class="token operator">=</span> <span class="token function">Array</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>currentPlayer <span class="token operator">=</span> <span class="token string">'X'</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>gameOver <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>cells<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">cell</span> <span class="token operator">=></span> cell<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>statusElement<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">轮到 </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>currentPlayer<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> 下棋</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 初始化游戏</span>
+window<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">new</span> <span class="token class-name">TicTacToe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h3><p><img src="https://s2.loli.net/2024/12/04/DacuEGrBR6TgyUm.png" alt="alt text"></p>
+<h3 id="使用体验"><a href="#使用体验" class="headerlink" title="使用体验"></a>使用体验</h3><p>可以看到，在引入思维协议后，最终实现的页面效果非常不错，同时在响应中也能够看到大模型本身需求分析的思维过程，这对于我们进行生成代码的Review是非常有益的，因为整个思维过程清晰可见。同时也能够帮助我们对下一步工作进行规划。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Thinking Protocol提供了一种非常有趣且有效的prompt思路，可以有效提高大模型的逻辑性和连贯性，提高最终的响应质量。在日常构建prompt时，我们也可以考虑从这些方面入手，构建更高质量的prompt。</p>
+<h3 id="实践建议"><a href="#实践建议" class="headerlink" title="实践建议"></a>实践建议</h3><ol>
+<li>在复杂任务中引入思维协议，可以帮助我们更好地理解和观察AI的思考过程</li>
+<li>将思维协议与其他prompt技术结合使用</li>
+<li>注意保持协议的简洁性，避免过度复杂化</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/richards199999/Thinking-Claude">Thinking Claude Repository</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ClaudeAI">Claude AI Reddit Discussion</a></li>
+</ul>
+<p>在Repo中还有其他版本的协议模版，如果大家感兴趣的话可以自行体验一下～</p>
+
+  </div>
+</article>
+
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/bakazhou">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Thinking-Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">Thinking Protocol：构建大模型的思维框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">协议分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%AD%A3%E6%96%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">协议正文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E6%80%9D%E7%BB%B4%E5%8D%8F%E8%AE%AE%E5%90%8E%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.2.2.</span> <span class="toc-text">引入思维协议后的版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prompt"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">prompt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cursor%E5%93%8D%E5%BA%94"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Cursor响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">生成代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">1.2.4.</span> <span class="toc-text">效果展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C"><span class="toc-number">1.2.5.</span> <span class="toc-text">使用体验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">实践建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.3.2.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&text=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&is_video=false&description=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Thinking Protocol：构建大模型的思维框架&body=Check out this article: http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&title=Thinking Protocol：构建大模型的思维框架"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/12/05/Thinking%20Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6/&name=Thinking Protocol：构建大模型的思维框架&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2024 Bakazhou
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/bakazhou">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+      
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </div>
+</body>
+</html>
