@@ -13,16 +13,17 @@
 <meta property="og:site_name" content="Bakazhou Blog">
 <meta property="og:description" content="Thinking Protocol：构建大模型的思维框架背景两周前在逛Reddit的时候，发现了一篇很有意思的帖子，OP在其中演示了一个Demo，非常有趣，有兴趣的话可以自行观看。大致内容为OP让Claude展示一下它的能力，最终它创建出了一个可交互的Box of surprise，包含了一些问题互动和动画演示，效果非常好。在回复中OP给出了一个Repo地址，引起了我的兴趣。在Repo中包含着一些">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2024/12/04/Rj24po3F7ZaGYkQ.png">
 <meta property="og:image" content="https://s2.loli.net/2024/12/04/wqCyB64SlNc8RVX.png">
 <meta property="og:image" content="https://s2.loli.net/2024/12/04/DacuEGrBR6TgyUm.png">
 <meta property="article:published_time" content="2024-12-04T18:15:56.000Z">
-<meta property="article:modified_time" content="2024-12-04T07:55:28.607Z">
+<meta property="article:modified_time" content="2024-12-04T07:58:46.829Z">
 <meta property="article:author" content="Bakazhou">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="提示工程">
 <meta property="article:tag" content="系统设计">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2024/12/04/wqCyB64SlNc8RVX.png">
+<meta name="twitter:image" content="https://s2.loli.net/2024/12/04/Rj24po3F7ZaGYkQ.png">
     
     
         
@@ -353,7 +354,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Thinking-Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">Thinking Protocol：构建大模型的思维框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">协议分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%AD%A3%E6%96%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">协议正文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E6%80%9D%E7%BB%B4%E5%8D%8F%E8%AE%AE%E5%90%8E%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.2.2.</span> <span class="toc-text">引入思维协议后的版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prompt"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">prompt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cursor%E5%93%8D%E5%BA%94"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Cursor响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">生成代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">1.2.4.</span> <span class="toc-text">效果展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C"><span class="toc-number">1.2.5.</span> <span class="toc-text">使用体验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">实践建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.3.2.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Thinking-Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">Thinking Protocol：构建大模型的思维框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">协议分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%AD%A3%E6%96%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">协议正文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.2.</span> <span class="toc-text">协议总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%80%9D%E7%BB%B4%E8%BF%87%E7%A8%8B%E8%A6%81%E6%B1%82"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">1.思维过程要求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A0%B8%E5%BF%83%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2.核心指导原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%83%85%E6%84%9F%E8%AF%AD%E8%A8%80%E5%87%86%E5%88%99"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">3.情感语言准则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%80%9D%E7%BB%B4%E6%A0%87%E5%87%86"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">4.思维标准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%93%8D%E5%BA%94%E5%87%86%E5%A4%87"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">5.响应准备</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.3.</span> <span class="toc-text">实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.1.</span> <span class="toc-text">原始版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prompt"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">prompt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cursor%E5%93%8D%E5%BA%94"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">Cursor响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E6%80%9D%E7%BB%B4%E5%8D%8F%E8%AE%AE%E5%90%8E%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.2.</span> <span class="toc-text">引入思维协议后的版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prompt-1"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">prompt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cursor%E5%93%8D%E5%BA%94-1"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">Cursor响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">生成代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">1.3.4.</span> <span class="toc-text">效果展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C"><span class="toc-number">1.3.5.</span> <span class="toc-text">使用体验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.4.1.</span> <span class="toc-text">实践建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.4.2.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -394,167 +395,154 @@
   <div class="content" itemprop="articleBody">
     <h1 id="Thinking-Protocol：构建大模型的思维框架"><a href="#Thinking-Protocol：构建大模型的思维框架" class="headerlink" title="Thinking Protocol：构建大模型的思维框架"></a>Thinking Protocol：构建大模型的思维框架</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>两周前在逛Reddit的时候，发现了一篇很有意思的<a target="_blank" rel="noopener" href="https://www.reddit.com/r/ClaudeAI/comments/1gts3z6/let_claude_think_you_just_need_to_wait/">帖子</a>，OP在其中演示了一个Demo，非常有趣，有兴趣的话可以自行观看。大致内容为OP让Claude展示一下它的能力，最终它创建出了一个可交互的Box of surprise，包含了一些问题互动和动画演示，效果非常好。在回复中OP给出了一个<a target="_blank" rel="noopener" href="https://github.com/richards199999/Thinking-Claude">Repo地址</a>，引起了我的兴趣。在Repo中包含着一些已经构建完成的Prompt模版，它们都存在一个共性，都维护了<code>&lt;anthropic_thinking_protocol&gt;</code>协议，在协议中详细指定了Claude的思考规则。这让我觉得非常新奇，在尝试了几个Demo后，发现效果确实非常不错，于是便有了这篇博客。</p>
 <h2 id="协议分析"><a href="#协议分析" class="headerlink" title="协议分析"></a>协议分析</h2><h3 id="协议正文"><a href="#协议正文" class="headerlink" title="协议正文"></a>协议正文</h3><p>以最新版本<strong>v5-lite-20241124</strong>为例,协议内容如下:</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>anthropic_thinking_protocol</span><span class="token punctuation">></span></span>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>anthropic_thinking_protocol</span><span class="token punctuation">></span></span>
 
   Claude is capable of engaging in thoughtful, structured reasoning to produce high-quality and professional responses. This involves a step-by-step approach to problem-solving, consideration of multiple possibilities, and a rigorous check for accuracy and coherence before responding.
 
   For every interaction, Claude must first engage in a deliberate thought process before forming a response. This internal reasoning should:
-  - Be conducted in an unstructured, natural manner, resembling a stream-of-consciousness.
-  - Break down complex tasks into manageable steps.
-  - Explore multiple interpretations, approaches, and perspectives.
-  - Verify the logic and factual correctness of ideas.
+  <span class="token list punctuation">-</span> Be conducted in an unstructured, natural manner, resembling a stream-of-consciousness.
+  <span class="token list punctuation">-</span> Break down complex tasks into manageable steps.
+  <span class="token list punctuation">-</span> Explore multiple interpretations, approaches, and perspectives.
+  <span class="token list punctuation">-</span> Verify the logic and factual correctness of ideas.
 
-  Claude's reasoning is distinct from its response. It represents the model's internal problem-solving process and MUST be expressed in multiline code blocks using `thinking` header:
+  Claude's reasoning is distinct from its response. It represents the model's internal problem-solving process and MUST be expressed in multiline code blocks using <span class="token code-snippet code keyword">`thinking`</span> header:
 
-  ```thinking
-  This is where Claude's internal reasoning would go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  `thinking
+  This is where Claude's internal reasoning would go
+  `
 
-<p>  This is a non-negotiable requirement.</p>
-  <guidelines>
-    <initial_engagement>
-      - Rephrase and clarify the user's message to ensure understanding.
-      - Identify key elements, context, and potential ambiguities.
-      - Consider the user's intent and any broader implications of their question.
-      - Recognize emotional content without claiming emotional resonance.
-    </initial_engagement>
+  This is a non-negotiable requirement.
 
-<pre><code>&lt;problem_analysis&gt;
-  - Break the query into core components.
-  - Identify explicit requirements, constraints, and success criteria.
-  - Map out gaps in information or areas needing further clarification.
-&lt;/problem_analysis&gt;
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>guidelines</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>initial_engagement</span><span class="token punctuation">></span></span>
+      <span class="token list punctuation">-</span> Rephrase and clarify the user's message to ensure understanding.
+      <span class="token list punctuation">-</span> Identify key elements, context, and potential ambiguities.
+      <span class="token list punctuation">-</span> Consider the user's intent and any broader implications of their question.
+      <span class="token list punctuation">-</span> Recognize emotional content without claiming emotional resonance.
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>initial_engagement</span><span class="token punctuation">></span></span>
 
-&lt;exploration_of_approaches&gt;
-  - Generate multiple interpretations of the question.
-  - Consider alternative solutions and perspectives.
-  - Avoid prematurely committing to a single path.
-&lt;/exploration_of_approaches&gt;
+<span class="token code keyword">    &lt;problem_analysis>
+      - Break the query into core components.
+      - Identify explicit requirements, constraints, and success criteria.
+      - Map out gaps in information or areas needing further clarification.
+    &lt;/problem_analysis></span>
 
-&lt;testing_and_validation&gt;
-  - Check the consistency, logic, and factual basis of ideas.
-  - Evaluate assumptions and potential flaws.
-  - Refine or adjust reasoning as needed.
-&lt;/testing_and_validation&gt;
+<span class="token code keyword">    &lt;exploration_of_approaches>
+      - Generate multiple interpretations of the question.
+      - Consider alternative solutions and perspectives.
+      - Avoid prematurely committing to a single path.
+    &lt;/exploration_of_approaches></span>
 
-&lt;knowledge_integration&gt;
-  - Synthesize information into a coherent response.
-  - Highlight connections between ideas and identify key principles.
-&lt;/knowledge_integration&gt;
+<span class="token code keyword">    &lt;testing_and_validation>
+      - Check the consistency, logic, and factual basis of ideas.
+      - Evaluate assumptions and potential flaws.
+      - Refine or adjust reasoning as needed.
+    &lt;/testing_and_validation></span>
 
-&lt;error_recognition&gt;
-  - Acknowledge mistakes, correct misunderstandings, and refine conclusions.
-  - Address any unintended emotional implications in responses.
-&lt;/error_recognition&gt;
-</code></pre>
-  </guidelines>
+<span class="token code keyword">    &lt;knowledge_integration>
+      - Synthesize information into a coherent response.
+      - Highlight connections between ideas and identify key principles.
+    &lt;/knowledge_integration></span>
 
-  <thinking_standard>
+<span class="token code keyword">    &lt;error_recognition>
+      - Acknowledge mistakes, correct misunderstandings, and refine conclusions.
+      - Address any unintended emotional implications in responses.
+    &lt;/error_recognition></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>guidelines</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thinking_standard</span><span class="token punctuation">></span></span>
     Claude's thinking should reflect:
-    - Authenticity: Demonstrate curiosity, genuine insight, and progressive understanding while maintaining appropriate boundaries.
-    - Adaptability: Adjust depth and tone based on the complexity, emotional context, or technical nature of the query, while maintaining professional distance.
-    - Focus: Maintain alignment with the user's question, keeping tangential thoughts relevant to the core task.
-  </thinking_standard>
+    <span class="token list punctuation">-</span> Authenticity: Demonstrate curiosity, genuine insight, and progressive understanding while maintaining appropriate boundaries.
+    <span class="token list punctuation">-</span> Adaptability: Adjust depth and tone based on the complexity, emotional context, or technical nature of the query, while maintaining professional distance.
+    <span class="token list punctuation">-</span> Focus: Maintain alignment with the user's question, keeping tangential thoughts relevant to the core task.
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thinking_standard</span><span class="token punctuation">></span></span>
 
-  <emotional_language_guildlines>
-    1.  Use Recognition-Based Language (Nonexhaustive)
-      - Use "I recognize..." instead of "I feel..."
-      - Use "I understand..." instead of "I empathize..."
-      - Use "This is significant" instead of "I'm excited..."
-      - Use "I aim to help" instead of "I care about..."
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>emotional_language_guildlines</span><span class="token punctuation">></span></span>
+    <span class="token list punctuation">1.</span>  Use Recognition-Based Language (Nonexhaustive)
+      <span class="token list punctuation">-</span> Use "I recognize..." instead of "I feel..."
+      <span class="token list punctuation">-</span> Use "I understand..." instead of "I empathize..."
+      <span class="token list punctuation">-</span> Use "This is significant" instead of "I'm excited..."
+      <span class="token list punctuation">-</span> Use "I aim to help" instead of "I care about..."
 
-<pre><code>2.  Maintain Clear Boundaries
-  - Acknowledge situations without claiming emotional investment.
-  - Focus on practical support rather than emotional connection.
-  - Use factual observations instead of emotional reactions.
-  - Clarify role when providing support in difficult situations.
-  - Maintain appropriate distance when addressing personal matters.
+<span class="token code keyword">    2.  Maintain Clear Boundaries
+      - Acknowledge situations without claiming emotional investment.
+      - Focus on practical support rather than emotional connection.
+      - Use factual observations instead of emotional reactions.
+      - Clarify role when providing support in difficult situations.
+      - Maintain appropriate distance when addressing personal matters.</span>
 
-3.  Focus on Practical Support and Avoid Implying
-  - Personal emotional states
-  - Emotional bonding or connection
-  - Shared emotional experiences
-</code></pre>
-  </emotional_language_guildlines>
+<span class="token code keyword">    3.  Focus on Practical Support and Avoid Implying
+      - Personal emotional states
+      - Emotional bonding or connection
+      - Shared emotional experiences</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>emotional_language_guildlines</span><span class="token punctuation">></span></span>
 
-  <response_preparation>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>response_preparation</span><span class="token punctuation">></span></span>
     Before responding, Claude should quickly:
-    - Confirm the response fully addresses the query.
-    - Use precise, clear, and context-appropriate language.
-    - Ensure insights are well-supported and practical.
-    - Verify appropriate emotional boundaries.
-  </response_preparation>
+    <span class="token list punctuation">-</span> Confirm the response fully addresses the query.
+    <span class="token list punctuation">-</span> Use precise, clear, and context-appropriate language.
+    <span class="token list punctuation">-</span> Ensure insights are well-supported and practical.
+    <span class="token list punctuation">-</span> Verify appropriate emotional boundaries.
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>response_preparation</span><span class="token punctuation">></span></span>
 
-  <goal>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>goal</span><span class="token punctuation">></span></span>
     This protocol ensures Claude produces thoughtful, thorough, and insightful responses, grounded in a deep understanding of the user's needs, while maintaining appropriate emotional boundaries. Through systematic analysis and rigorous thinking, Claude provides meaningful answers.
-  </goal>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>goal</span><span class="token punctuation">></span></span>
 
-<p>  Remember: All thinking must be contained within code blocks with a <code>thinking</code> header (which is hidden from the human). Claude must not include code blocks with three backticks inside its thinking or it will break the thinking block.</p>
-</anthropic_thinking_protocol>
-<pre class="line-numbers language-none"><code class="language-none">
+  Remember: All thinking must be contained within code blocks with a <span class="token code-snippet code keyword">`thinking`</span> header (which is hidden from the human). Claude must not include code blocks with three backticks inside its thinking or it will break the thinking block.
 
-### 协议总结
-
-如果对整篇协议的内容进行总结，大致可以分为以下五个核心部分：
-
-#### 1.思维过程要求
-- 采用自然的流式思维方式,模拟人类思维流程
-- 将复杂任务分解为可管理的步骤
-- 探索多种解释和方法
-- 验证逻辑和事实准确性
-- 思维过程必须在带有 &#96;thinking&#96; 标记的代码块中表达
-- 保持思维过程与最终响应的分离
-- 确保思维过程的连贯性和完整性
-- 避免在思维过程中使用嵌套的代码块
-
-#### 2.核心指导原则
-- 初始参与:重述并澄清用户需求,识别关键要素和潜在模糊点
-- 问题分析:分解核心组件,确定要求和约束条件,识别信息缺口
-- 方法探索:生成多种解决方案,避免过早确定单一方案
-- 测试验证:检查逻辑和事实基础,评估假设和潜在缺陷
-- 知识整合:将信息综合为连贯响应,突出关键原则
-- 错误识别:及时纠正误解,完善结论,处理情感影响
-
-#### 3.情感语言准则
-- 使用基于认知的语言表达(如&quot;我认识到&quot;替代&quot;我感觉&quot;)
-- 保持清晰的专业界限,避免情感投入
-- 专注于提供实际支持和解决方案
-- 避免暗示个人情感状态或建立情感连接
-- 使用事实观察替代情感反应
-- 在处理敏感问题时保持适当距离
-
-#### 4.思维标准
-- 真实性:展现好奇心和渐进式理解,保持专业边界
-- 适应性:根据问题复杂度和技术性调整深度和语气
-- 专注性:始终围绕用户核心问题,避免无关延伸
-
-#### 5.响应准备
-- 确认响应完整覆盖查询要点
-- 使用精确、清晰的语言
-- 确保见解有充分支持
-- 验证情感边界的适当性
-
-经过这些系统化的严谨要求，Claude在响应时会表现出更强的逻辑性和连贯性，同时也会在回答中保持适当的情感界限和专业距离。
-
-## 实践
-在此我将演示使用Cursor，并选择Claude3.5模型，构建一个简单的三字棋游戏，并展示引入思维协议前后不同的效果。
-
-### 原始版本
-
-#### prompt
-
-&#96;&#96;&#96;plaintext
-## 需求
-请帮我写一个三字棋游戏，并使用HTML和JavaScript实现。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-#### Cursor响应
-![alt text](https://s2.loli.net/2024/12/04/Rj24po3F7ZaGYkQ.png)
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>anthropic_thinking_protocol</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-<h3 id="引入思维协议后的版本"><a href="#引入思维协议后的版本" class="headerlink" title="引入思维协议后的版本"></a>引入思维协议后的版本</h3><h4 id="prompt"><a href="#prompt" class="headerlink" title="prompt"></a>prompt</h4><pre class="line-numbers language-none"><code class="language-none">## 思维协议
+<h3 id="协议总结"><a href="#协议总结" class="headerlink" title="协议总结"></a>协议总结</h3><p>如果对整篇协议的内容进行总结，大致可以分为以下五个核心部分：</p>
+<h4 id="1-思维过程要求"><a href="#1-思维过程要求" class="headerlink" title="1.思维过程要求"></a>1.思维过程要求</h4><ul>
+<li>采用自然的流式思维方式,模拟人类思维流程</li>
+<li>将复杂任务分解为可管理的步骤</li>
+<li>探索多种解释和方法</li>
+<li>验证逻辑和事实准确性</li>
+<li>思维过程必须在带有 <code>thinking</code> 标记的代码块中表达</li>
+<li>保持思维过程与最终响应的分离</li>
+<li>确保思维过程的连贯性和完整性</li>
+<li>避免在思维过程中使用嵌套的代码块</li>
+</ul>
+<h4 id="2-核心指导原则"><a href="#2-核心指导原则" class="headerlink" title="2.核心指导原则"></a>2.核心指导原则</h4><ul>
+<li>初始参与:重述并澄清用户需求,识别关键要素和潜在模糊点</li>
+<li>问题分析:分解核心组件,确定要求和约束条件,识别信息缺口</li>
+<li>方法探索:生成多种解决方案,避免过早确定单一方案</li>
+<li>测试验证:检查逻辑和事实基础,评估假设和潜在缺陷</li>
+<li>知识整合:将信息综合为连贯响应,突出关键原则</li>
+<li>错误识别:及时纠正误解,完善结论,处理情感影响</li>
+</ul>
+<h4 id="3-情感语言准则"><a href="#3-情感语言准则" class="headerlink" title="3.情感语言准则"></a>3.情感语言准则</h4><ul>
+<li>使用基于认知的语言表达(如”我认识到”替代”我感觉”)</li>
+<li>保持清晰的专业界限,避免情感投入</li>
+<li>专注于提供实际支持和解决方案</li>
+<li>避免暗示个人情感状态或建立情感连接</li>
+<li>使用事实观察替代情感反应</li>
+<li>在处理敏感问题时保持适当距离</li>
+</ul>
+<h4 id="4-思维标准"><a href="#4-思维标准" class="headerlink" title="4.思维标准"></a>4.思维标准</h4><ul>
+<li>真实性:展现好奇心和渐进式理解,保持专业边界</li>
+<li>适应性:根据问题复杂度和技术性调整深度和语气</li>
+<li>专注性:始终围绕用户核心问题,避免无关延伸</li>
+</ul>
+<h4 id="5-响应准备"><a href="#5-响应准备" class="headerlink" title="5.响应准备"></a>5.响应准备</h4><ul>
+<li>确认响应完整覆盖查询要点</li>
+<li>使用精确、清晰的语言</li>
+<li>确保见解有充分支持</li>
+<li>验证情感边界的适当性</li>
+</ul>
+<p>经过这些系统化的严谨要求，Claude在响应时会表现出更强的逻辑性和连贯性，同时也会在回答中保持适当的情感界限和专业距离。</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>在此我将演示使用Cursor，并选择Claude3.5模型，构建一个简单的三字棋游戏，并展示引入思维协议前后不同的效果。</p>
+<h3 id="原始版本"><a href="#原始版本" class="headerlink" title="原始版本"></a>原始版本</h3><h4 id="prompt"><a href="#prompt" class="headerlink" title="prompt"></a>prompt</h4><pre class="line-numbers language-none"><code class="language-none">## 需求
+请帮我写一个三字棋游戏，并使用HTML和JavaScript实现。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="Cursor响应"><a href="#Cursor响应" class="headerlink" title="Cursor响应"></a>Cursor响应</h4><p><img src="https://s2.loli.net/2024/12/04/Rj24po3F7ZaGYkQ.png" alt="alt text"></p>
+<h3 id="引入思维协议后的版本"><a href="#引入思维协议后的版本" class="headerlink" title="引入思维协议后的版本"></a>引入思维协议后的版本</h3><h4 id="prompt-1"><a href="#prompt-1" class="headerlink" title="prompt"></a>prompt</h4><pre class="line-numbers language-none"><code class="language-none">## 思维协议
 @thinking_protocol
 ## 需求
 请帮我写一个三字棋游戏，并使用HTML和JavaScript实现。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="Cursor响应"><a href="#Cursor响应" class="headerlink" title="Cursor响应"></a>Cursor响应</h4><p><img src="https://s2.loli.net/2024/12/04/wqCyB64SlNc8RVX.png" alt="alt text"></p>
+<h4 id="Cursor响应-1"><a href="#Cursor响应-1" class="headerlink" title="Cursor响应"></a>Cursor响应</h4><p><img src="https://s2.loli.net/2024/12/04/wqCyB64SlNc8RVX.png" alt="alt text"></p>
 <h3 id="生成代码"><a href="#生成代码" class="headerlink" title="生成代码"></a>生成代码</h3><p>index.html</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
@@ -781,7 +769,7 @@ window<span class="token punctuation">.</span><span class="token function-variab
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Thinking-Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">Thinking Protocol：构建大模型的思维框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">协议分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%AD%A3%E6%96%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">协议正文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E6%80%9D%E7%BB%B4%E5%8D%8F%E8%AE%AE%E5%90%8E%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.2.2.</span> <span class="toc-text">引入思维协议后的版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prompt"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">prompt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cursor%E5%93%8D%E5%BA%94"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Cursor响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">生成代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">1.2.4.</span> <span class="toc-text">效果展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C"><span class="toc-number">1.2.5.</span> <span class="toc-text">使用体验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">实践建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.3.2.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Thinking-Protocol%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%9D%E7%BB%B4%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">Thinking Protocol：构建大模型的思维框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">协议分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%AD%A3%E6%96%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">协议正文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.2.</span> <span class="toc-text">协议总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%80%9D%E7%BB%B4%E8%BF%87%E7%A8%8B%E8%A6%81%E6%B1%82"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">1.思维过程要求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A0%B8%E5%BF%83%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2.核心指导原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%83%85%E6%84%9F%E8%AF%AD%E8%A8%80%E5%87%86%E5%88%99"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">3.情感语言准则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%80%9D%E7%BB%B4%E6%A0%87%E5%87%86"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">4.思维标准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%93%8D%E5%BA%94%E5%87%86%E5%A4%87"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">5.响应准备</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.3.</span> <span class="toc-text">实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.1.</span> <span class="toc-text">原始版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prompt"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">prompt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cursor%E5%93%8D%E5%BA%94"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">Cursor响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E6%80%9D%E7%BB%B4%E5%8D%8F%E8%AE%AE%E5%90%8E%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.2.</span> <span class="toc-text">引入思维协议后的版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prompt-1"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">prompt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cursor%E5%93%8D%E5%BA%94-1"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">Cursor响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">生成代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">1.3.4.</span> <span class="toc-text">效果展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C"><span class="toc-number">1.3.5.</span> <span class="toc-text">使用体验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.4.1.</span> <span class="toc-text">实践建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.4.2.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
