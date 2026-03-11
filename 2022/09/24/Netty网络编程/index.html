@@ -1843,6 +1843,22 @@ TianLe Zhou\r\n<span aria-hidden="true" class="line-numbers-rows"><span></span><
 
 <script src="/js/main.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var codeBlocks = document.querySelectorAll('code.language-mermaid');
+        if (codeBlocks.length === 0) return;
+        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+        codeBlocks.forEach(function (code) {
+            var pre = code.parentElement;
+            var div = document.createElement('div');
+            div.className = 'mermaid';
+            div.textContent = code.textContent;
+            pre.parentNode.replaceChild(div, pre);
+        });
+        mermaid.run();
+    });
+</script>
 <!-- Google Analytics -->
 
 <!-- Disqus Comments -->

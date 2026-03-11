@@ -321,7 +321,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2024/11/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        <li><a class="icon" href="/2024/11/06/Workday-Integration-Guide/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
         
         
         <li><a class="icon" href="/2022/10/12/Reactor-%E5%8F%8D%E5%BA%94%E5%A0%86-Dispatcher-%E5%88%86%E5%8F%91%E8%80%85-%E6%A8%A1%E5%BC%8F/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
@@ -471,6 +471,22 @@
 
 <script src="/js/main.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var codeBlocks = document.querySelectorAll('code.language-mermaid');
+        if (codeBlocks.length === 0) return;
+        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+        codeBlocks.forEach(function (code) {
+            var pre = code.parentElement;
+            var div = document.createElement('div');
+            div.className = 'mermaid';
+            div.textContent = code.textContent;
+            pre.parentNode.replaceChild(div, pre);
+        });
+        mermaid.run();
+    });
+</script>
 <!-- Google Analytics -->
 
 <!-- Disqus Comments -->
