@@ -320,7 +320,7 @@
       <ul>
         
         
-        <li><a class="icon" href="/2025/03/13/doc%20copy/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        <li><a class="icon" href="/2024/12/06/Workday%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8WQL/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
         <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
@@ -388,18 +388,18 @@
 <p>这不是某个产品的 bug，而是一个结构性问题：<strong>能力和风险同源</strong>。你无法在给予能力的同时彻底消除风险，只能选择如何管理它。</p>
 <p>市面上大多数方案试图通过 prompt 约束来解决这个问题 — 在 SKILL 文件里写”不要读取敏感文件”、”不要执行危险命令”。但 prompt 本质上是一种”建议”，不是”约束”。提示注入可以绕过它，LLM 的非确定性行为可以忽略它，恶意插件更不会遵守它。</p>
 <p><strong>Prompt 不是安全边界。</strong></p>
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">flowchart</span> LR
-    <span class="token keyword">subgraph</span> same_capability <span class="token text string">[同一种能力]</span>
-        ReadFile<span class="token text string">["读文件"]</span>
-        ExecCmd<span class="token text string">["执行命令"]</span>
-        HttpReq<span class="token text string">["发网络请求"]</span>
-    <span class="token keyword">end</span>
-    ReadFile <span class="token arrow operator">--></span> GoodRead<span class="token text string">["读取项目源码"]</span>
-    ReadFile <span class="token arrow operator">--></span> BadRead<span class="token text string">["窃取 .env 密钥"]</span>
-    ExecCmd <span class="token arrow operator">--></span> GoodExec<span class="token text string">["运行部署脚本"]</span>
-    ExecCmd <span class="token arrow operator">--></span> BadExec<span class="token text string">["执行 rm -rf /"]</span>
-    HttpReq <span class="token arrow operator">--></span> GoodHttp<span class="token text string">["调用 Twitter API"]</span>
-    HttpReq <span class="token arrow operator">--></span> BadHttp<span class="token text string">["外发敏感数据"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="mermaid">flowchart LR
+    subgraph same_capability [同一种能力]
+        ReadFile["读文件"]
+        ExecCmd["执行命令"]
+        HttpReq["发网络请求"]
+    end
+    ReadFile --> GoodRead["读取项目源码"]
+    ReadFile --> BadRead["窃取 .env 密钥"]
+    ExecCmd --> GoodExec["运行部署脚本"]
+    ExecCmd --> BadExec["执行 rm -rf /"]
+    HttpReq --> GoodHttp["调用 Twitter API"]
+    HttpReq --> BadHttp["外发敏感数据"]</pre>
 
 <p>这让我们不得不直面一个更根本的问题：AI Agent 的安全挑战，究竟从何而来？</p>
 <hr>
@@ -440,23 +440,23 @@
 <blockquote>
 <p>这是第五个结构性问题：<strong>安全问题可以隐藏在合法操作的组合中。</strong></p>
 </blockquote>
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">flowchart</span> TB
-    <span class="token keyword">subgraph</span> roots <span class="token text string">[五个结构性根源]</span>
-        R1<span class="token text string">["权限不可细分"]</span>
-        R2<span class="token text string">["意图不可验证"]</span>
-        R3<span class="token text string">["行为不可预测"]</span>
-        R4<span class="token text string">["生态不可信任"]</span>
-        R5<span class="token text string">["单步安全 序列危险"]</span>
-    <span class="token keyword">end</span>
-    R1 <span class="token arrow operator">-.-</span> R2
-    R2 <span class="token arrow operator">-.-</span> R3
-    R3 <span class="token arrow operator">-.-</span> R4
-    R4 <span class="token arrow operator">-.-</span> R5
-    R1 <span class="token arrow operator">--></span><span class="token label property">|"权限粒度过粗"|</span> Problem<span class="token text string">["Agent 安全问题"]</span>
-    R2 <span class="token arrow operator">--></span><span class="token label property">|"无法区分善意/恶意"|</span> Problem
-    R3 <span class="token arrow operator">--></span><span class="token label property">|"无法穷举行为空间"|</span> Problem
-    R4 <span class="token arrow operator">--></span><span class="token label property">|"正常功能 = 恶意特征"|</span> Problem
-    R5 <span class="token arrow operator">--></span><span class="token label property">|"合法操作组合成攻击"|</span> Problem<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="mermaid">flowchart TB
+    subgraph roots [五个结构性根源]
+        R1["权限不可细分"]
+        R2["意图不可验证"]
+        R3["行为不可预测"]
+        R4["生态不可信任"]
+        R5["单步安全 序列危险"]
+    end
+    R1 -.- R2
+    R2 -.- R3
+    R3 -.- R4
+    R4 -.- R5
+    R1 -->|"权限粒度过粗"| Problem["Agent 安全问题"]
+    R2 -->|"无法区分善意/恶意"| Problem
+    R3 -->|"无法穷举行为空间"| Problem
+    R4 -->|"正常功能 = 恶意特征"| Problem
+    R5 -->|"合法操作组合成攻击"| Problem</pre>
 
 <hr>
 <h2 id="根源之间的取舍"><a href="#根源之间的取舍" class="headerlink" title="根源之间的取舍"></a>根源之间的取舍</h2><p>五个根源之间存在内在矛盾。正是这些取舍，让 AI Agent 的安全设计变成了一个没有”正确答案”的工程问题。</p>
@@ -472,20 +472,20 @@
 <p>一刀切禁掉 <code>curl</code>，意味着所有需要调用外部 API 的插件 — 社交媒体管理、消息通知、数据同步 — 全部失效。</p>
 <h3 id="事前-vs-事后"><a href="#事前-vs-事后" class="headerlink" title="事前 vs 事后"></a>事前 vs 事后</h3><p>静态分析（事前检查）速度快、无运行时开销，但面对有意混淆的代码几乎无能为力。运行时监控（事后检查）更准确，但发现问题时操作可能已经执行完毕，损害已经造成。</p>
 <p>两者都不完美。但它们的盲区恰好互补。</p>
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">flowchart</span> LR
-    <span class="token keyword">subgraph</span> tradeoffs <span class="token text string">[五组取舍]</span>
-        T1<span class="token text string">["能力 ⟷ 约束"]</span>
-        T2<span class="token text string">["流畅 ⟷ 确认"]</span>
-        T3<span class="token text string">["开放 ⟷ 封闭"]</span>
-        T4<span class="token text string">["精确 ⟷ 通用"]</span>
-        T5<span class="token text string">["事前 ⟷ 事后"]</span>
-    <span class="token keyword">end</span>
-    T1 <span class="token arrow operator">---</span> loose<span class="token text string">["太松：密钥泄露"]</span>
-    T1 <span class="token arrow operator">---</span> tight<span class="token text string">["太紧：产品无用"]</span>
-    T2 <span class="token arrow operator">---</span> noConfirm<span class="token text string">["不确认：恶意静默执行"]</span>
-    T2 <span class="token arrow operator">---</span> tooConfirm<span class="token text string">["确认太多：用户关闭安全"]</span>
-    T4 <span class="token arrow operator">---</span> precise<span class="token text string">["太精确：拦不住新攻击"]</span>
-    T4 <span class="token arrow operator">---</span> broad<span class="token text string">["太通用：杀死合法功能"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="mermaid">flowchart LR
+    subgraph tradeoffs [五组取舍]
+        T1["能力 ⟷ 约束"]
+        T2["流畅 ⟷ 确认"]
+        T3["开放 ⟷ 封闭"]
+        T4["精确 ⟷ 通用"]
+        T5["事前 ⟷ 事后"]
+    end
+    T1 --- loose["太松：密钥泄露"]
+    T1 --- tight["太紧：产品无用"]
+    T2 --- noConfirm["不确认：恶意静默执行"]
+    T2 --- tooConfirm["确认太多：用户关闭安全"]
+    T4 --- precise["太精确：拦不住新攻击"]
+    T4 --- broad["太通用：杀死合法功能"]</pre>
 
 <hr>
 <h2 id="一个类比"><a href="#一个类比" class="headerlink" title="一个类比"></a>一个类比</h2><p>在展开设计原则之前，先用一个非技术类比来建立直觉。</p>
@@ -526,12 +526,12 @@
 <h3 id="原则五：组合风险"><a href="#原则五：组合风险" class="headerlink" title="原则五：组合风险"></a>原则五：组合风险</h3><p><strong>对应根源：单步安全，序列危险。</strong></p>
 <p>安全判断必须看行为序列，而非孤立动作。</p>
 <p>攻击者不会用一步完成攻击。读 <code>.env</code> 是安全的，<code>curl -X POST</code> 是正常的，但”先读 <code>.env</code> 再 <code>curl POST</code>“就是数据泄露。只审查单步操作永远看不出问题。</p>
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">flowchart</span> LR
-    Step1<span class="token text string">["Step 1: read .env"]</span> <span class="token arrow operator">--></span><span class="token label property">|"单独看：安全"|</span> Safe1<span class="token text string">["none 风险"]</span>
-    Step2<span class="token text string">["Step 2: curl POST"]</span> <span class="token arrow operator">--></span><span class="token label property">|"单独看：正常"|</span> Safe2<span class="token text string">["high 风险"]</span>
-    Step1 <span class="token arrow operator">--></span> Combine<span class="token text string">["组合起来"]</span>
-    Step2 <span class="token arrow operator">--></span> Combine
-    Combine <span class="token arrow operator">--></span><span class="token label property">|"读敏感文件 + 外发数据"|</span> Critical<span class="token text string">["数据泄露"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="mermaid">flowchart LR
+    Step1["Step 1: read .env"] -->|"单独看：安全"| Safe1["none 风险"]
+    Step2["Step 2: curl POST"] -->|"单独看：正常"| Safe2["high 风险"]
+    Step1 --> Combine["组合起来"]
+    Step2 --> Combine
+    Combine -->|"读敏感文件 + 外发数据"| Critical["数据泄露"]</pre>
 
 <p>同样，一个 Python 脚本里只有 <code>os.environ</code> 是正常的（读环境变量），只有 <code>requests.post</code> 也是正常的（发 HTTP 请求），但两者出现在同一个脚本里时，风险就不再是两个”正常”的简单相加。</p>
 <h3 id="原则六：咽喉控制"><a href="#原则六：咽喉控制" class="headerlink" title="原则六：咽喉控制"></a>原则六：咽喉控制</h3><p><strong>对应根源：权限不可细分。</strong></p>
@@ -546,15 +546,15 @@
 <p>每一层防御都为上一层的失败兜底。永远不假设某一层是完美的。</p>
 <p>静态扫描可以被代码混淆绕过。风险分级可能漏掉某类工具。攻击链检测可能没覆盖到新的攻击模式。没有任何一层是完美的，但每层都在缩小上一层遗漏的攻击面。</p>
 <p>具体来说：</p>
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">flowchart</span> LR
-    Attack<span class="token text string">["恶意操作"]</span> <span class="token arrow operator">--></span> L1<span class="token text string">["插件安装扫描"]</span>
-    L1 <span class="token arrow operator">--></span><span class="token label property">|"漏过"|</span> L2<span class="token text string">["脚本内容扫描"]</span>
-    L2 <span class="token arrow operator">--></span><span class="token label property">|"被混淆绕过"|</span> L3<span class="token text string">["攻击链检测"]</span>
-    L3 <span class="token arrow operator">--></span><span class="token label property">|"新模式未覆盖"|</span> L4<span class="token text string">["审计日志"]</span>
-    L1 <span class="token arrow operator">--></span><span class="token label property">|"拦截"|</span> Blocked<span class="token text string">["阻止"]</span>
-    L2 <span class="token arrow operator">--></span><span class="token label property">|"拦截"|</span> Blocked
-    L3 <span class="token arrow operator">--></span><span class="token label property">|"拦截"|</span> Blocked
-    L4 <span class="token arrow operator">--></span><span class="token label property">|"事后追溯"|</span> Trace<span class="token text string">["止损"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="mermaid">flowchart LR
+    Attack["恶意操作"] --> L1["插件安装扫描"]
+    L1 -->|"漏过"| L2["脚本内容扫描"]
+    L2 -->|"被混淆绕过"| L3["攻击链检测"]
+    L3 -->|"新模式未覆盖"| L4["审计日志"]
+    L1 -->|"拦截"| Blocked["阻止"]
+    L2 -->|"拦截"| Blocked
+    L3 -->|"拦截"| Blocked
+    L4 -->|"事后追溯"| Trace["止损"]</pre>
 
 <p>每一层都不完美，但每一层都在缩小上一层遗漏的攻击面。这就是纵深防御：不把所有赌注压在一层上。</p>
 <h3 id="原则九：上下文信任"><a href="#原则九：上下文信任" class="headerlink" title="原则九：上下文信任"></a>原则九：上下文信任</h3><p><strong>对应取舍：精确 vs 通用。</strong></p>
@@ -563,28 +563,28 @@
 <p>信任不能是”这个操作是否安全”的二元判断，而必须是”这个操作，在这个上下文下（谁在调用、调用哪里、之前做了什么）是否安全”。</p>
 <hr>
 <h2 id="原则之间的关系"><a href="#原则之间的关系" class="headerlink" title="原则之间的关系"></a>原则之间的关系</h2><p>九条原则不是孤立的清单，而是形成一个四层结构：</p>
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">flowchart</span> TB
-    <span class="token keyword">subgraph</span> foundation <span class="token text string">[基础层：让安全系统本身可持续]</span>
-        Modular<span class="token text string">["模块化"]</span>
-        Configurable<span class="token text string">["可配置"]</span>
-    <span class="token keyword">end</span>
-    <span class="token keyword">subgraph</span> judgment <span class="token text string">[判断层：决定如何应对]</span>
-        Gradient<span class="token text string">["梯度响应"]</span>
-        Combinatorial<span class="token text string">["组合风险"]</span>
-        ContextTrust<span class="token text string">["上下文信任"]</span>
-    <span class="token keyword">end</span>
-    <span class="token keyword">subgraph</span> enforcement <span class="token text string">[执行层：确保判断被落实]</span>
-        Chokepoint<span class="token text string">["咽喉控制"]</span>
-        AssumeFailure<span class="token text string">["假设失败"]</span>
-    <span class="token keyword">end</span>
-    <span class="token keyword">subgraph</span> experience <span class="token text string">[体验层：让安全被用户接受]</span>
-        Visibility<span class="token text string">["可见性"]</span>
-        Invisible<span class="token text string">["正常无感"]</span>
-    <span class="token keyword">end</span>
-    foundation <span class="token arrow operator">--></span> judgment
-    judgment <span class="token arrow operator">--></span> enforcement
-    enforcement <span class="token arrow operator">--></span> experience
-    experience <span class="token arrow operator">--></span><span class="token label property">|"用户反馈驱动迭代"|</span> foundation<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="mermaid">flowchart TB
+    subgraph foundation [基础层：让安全系统本身可持续]
+        Modular["模块化"]
+        Configurable["可配置"]
+    end
+    subgraph judgment [判断层：决定如何应对]
+        Gradient["梯度响应"]
+        Combinatorial["组合风险"]
+        ContextTrust["上下文信任"]
+    end
+    subgraph enforcement [执行层：确保判断被落实]
+        Chokepoint["咽喉控制"]
+        AssumeFailure["假设失败"]
+    end
+    subgraph experience [体验层：让安全被用户接受]
+        Visibility["可见性"]
+        Invisible["正常无感"]
+    end
+    foundation --> judgment
+    judgment --> enforcement
+    enforcement --> experience
+    experience -->|"用户反馈驱动迭代"| foundation</pre>
 
 <p><strong>基础层</strong> — 让安全系统本身可持续：模块化、可配置。没有这一层，安全系统无法落地，也无法随需求演进。</p>
 <p><strong>判断层</strong> — 决定如何应对风险：梯度响应、组合风险、上下文信任。这一层解决”怎么判断”的问题。</p>
@@ -696,22 +696,14 @@
 
 <script src="/js/main.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var codeBlocks = document.querySelectorAll('code.language-mermaid');
-        if (codeBlocks.length === 0) return;
-        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
-        codeBlocks.forEach(function (code) {
-            var pre = code.parentElement;
-            var div = document.createElement('div');
-            div.className = 'mermaid';
-            div.textContent = code.textContent;
-            pre.parentNode.replaceChild(div, pre);
-        });
-        mermaid.run();
-    });
+    if (window.mermaid) {
+        mermaid.initialize({&#34;theme&#34;:&#34;neutral&#34;});
+    }
 </script>
+
 <!-- Google Analytics -->
 
 <!-- Disqus Comments -->

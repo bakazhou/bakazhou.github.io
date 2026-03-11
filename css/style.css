@@ -2161,3 +2161,12 @@ pre code {
   border-color: #fff;
   font-weight: 100;
 }
+pre.mermaid {
+  background: #f4f4f5;
+  border-radius: 8px;
+  padding: 24px 16px;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border: none;
+  font-family: "Menlo", monospace;
+}
